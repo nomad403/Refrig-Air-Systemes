@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Font Face Definitions */
+@font-face {
+  font-family: 'Orbit';
+  src: url('/fonts/orbit/Orbit-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* New color palette for Refrig'Air Systèmes */
+  --background: #181823; /* Bleu-noir profond - fond principal */
+  --foreground: #E9F8F9; /* Quasi blanc polaire - texte principal */
+  --card: #C0EEF2; /* Bleu glacé - fonds clairs */
+  --card-foreground: #181823; /* Texte sur fond clair */
+  --popover: #E9F8F9; /* Blanc polaire pour popovers */
+  --popover-foreground: #181823; /* Texte sur popover */
+  --primary: #537FE7; /* Bleu électrique - accent corporate */
+  --primary-foreground: #E9F8F9; /* Texte sur accent */
+  --secondary: #C0EEF2; /* Bleu glacé - éléments secondaires */
+  --secondary-foreground: #181823; /* Texte sur secondaire */
+  --muted: #537FE7; /* Bleu électrique pour éléments muted */
+  --muted-foreground: #C0EEF2; /* Texte muted */
+  --accent: #537FE7; /* Bleu électrique pour interactions */
+  --accent-foreground: #E9F8F9; /* Texte sur accent */
+  --destructive: #537FE7; /* Bleu électrique pour actions destructives */
+  --destructive-foreground: #E9F8F9; /* Texte sur destructive */
+  --border: #537FE7; /* Bleu électrique pour bordures */
+  --input: #C0EEF2; /* Bleu glacé pour inputs */
+  --ring: #537FE7; /* Bleu électrique pour focus rings */
+  --chart-1: #537FE7; /* Bleu électrique */
+  --chart-2: #C0EEF2; /* Bleu glacé */
+  --chart-3: #E9F8F9; /* Blanc polaire */
+  --chart-4: #181823; /* Bleu-noir profond */
+  --chart-5: #537FE7; /* Bleu électrique */
+  --radius: 0.5rem; /* Softer rounded corners */
+  --sidebar: #181823; /* Bleu-noir profond pour sidebar */
+  --sidebar-foreground: #E9F8F9; /* Blanc polaire pour texte sidebar */
+  --sidebar-primary: #537FE7; /* Bleu électrique pour primary sidebar */
+  --sidebar-primary-foreground: #E9F8F9; /* Texte sur primary sidebar */
+  --sidebar-accent: #C0EEF2; /* Bleu glacé pour accent sidebar */
+  --sidebar-accent-foreground: #181823; /* Texte sur accent sidebar */
+  --sidebar-border: #537FE7; /* Bleu électrique pour bordures sidebar */
+  --sidebar-ring: #537FE7; /* Bleu électrique pour focus sidebar */
+  --font-orbit: "Orbit", sans-serif; /* Orbit font for headings */
+  --font-satoshi: "Satoshi", sans-serif; /* Satoshi font for body text */
+  --font-orbit: "Orbit", sans-serif; /* Orbit font for headings */
+  --font-satoshi: "Satoshi", sans-serif; /* Satoshi font for body text */
+  --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
+  /* Added Figtree as the primary font variable */
+  --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+}
+
+.dark {
+  /* Dark mode uses the same blue palette with slight variations */
+  --background: #181823;
+  --foreground: #E9F8F9;
+  --card: #C0EEF2;
+  --card-foreground: #181823;
+  --popover: #E9F8F9;
+  --popover-foreground: #181823;
+  --primary: #537FE7;
+  --primary-foreground: #E9F8F9;
+  --secondary: #C0EEF2;
+  --secondary-foreground: #181823;
+  --muted: #537FE7;
+  --muted-foreground: #C0EEF2;
+  --accent: #537FE7;
+  --accent-foreground: #E9F8F9;
+  --destructive: #537FE7;
+  --destructive-foreground: #E9F8F9;
+  --border: #537FE7;
+  --input: #C0EEF2;
+  --ring: #537FE7;
+  --chart-1: #537FE7;
+  --chart-2: #C0EEF2;
+  --chart-3: #E9F8F9;
+  --chart-4: #181823;
+  --chart-5: #537FE7;
+  --sidebar: #181823;
+  --sidebar-foreground: #E9F8F9;
+  --sidebar-primary: #537FE7;
+  --sidebar-primary-foreground: #E9F8F9;
+  --sidebar-accent: #C0EEF2;
+  --sidebar-accent-foreground: #181823;
+  --sidebar-border: #537FE7;
+  --sidebar-ring: #537FE7;
+  --font-orbit: "Orbit", sans-serif;
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-instrument-serif: "Instrument Serif", serif;
+  --font-figtree: "Figtree", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-orbit: var(--font-orbit);
+  --font-satoshi: var(--font-satoshi);
+  --font-instrument-serif: var(--font-instrument-serif);
+  /* Added Figtree font to theme configuration */
+  --font-sans: var(--font-satoshi);
+  --font-figtree: var(--font-figtree);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Set Satoshi as the default font family for the entire website */
+    font-family: var(--font-satoshi);
+  }
+}
+
+.instrument {
+  font-family: var(--font-instrument-serif);
+}
+
+.orbit {
+  font-family: var(--font-orbit);
+}
+
+.satoshi {
+  font-family: var(--font-satoshi);
+}
+
+/* Animation pour la galerie de logos */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-pause {
+  animation-play-state: paused;
+}
