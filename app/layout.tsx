@@ -13,8 +13,22 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr">
-      <body>{children}</body>
+    <html lang="fr" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      <head>
+        <style>{`
+          html::-webkit-scrollbar { display: none !important; width: 0 !important; }
+          body::-webkit-scrollbar { display: none !important; width: 0 !important; }
+          *::-webkit-scrollbar { display: none !important; width: 0 !important; }
+          html, body { 
+            scrollbar-width: none !important; 
+            -ms-overflow-style: none !important;
+            overflow-x: hidden !important;
+          }
+        `}</style>
+      </head>
+      <body style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overflowX: 'hidden' }}>
+        {children}
+      </body>
     </html>
   )
 }
