@@ -9,11 +9,21 @@ import ShaderBackground from "@/components/shader-background"
 export default function ShaderShowcase() {
   return (
     <>
-      <ShaderBackground>
+      <div className="relative isolate min-h-[100dvh]">
+        {/* Fond en arrière-plan — même scope que le header */}
+        <div className="absolute inset-0 -z-10">
+          <ShaderBackground>
+            <Hero3DBackground />
+          </ShaderBackground>
+        </div>
+
+        {/* Header qui blend avec ce fond */}
         <Header />
+
+        {/* Contenu par-dessus */}
         <HeroContent />
-        <Hero3DBackground />
-      </ShaderBackground>
+      </div>
+
       <HomeSections />
     </>
   )

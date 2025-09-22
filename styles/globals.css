@@ -123,3 +123,58 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Masquer la scrollbar sur tous les navigateurs - Version agressive */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer et Edge */
+  overflow-x: hidden; /* Empêcher le scroll horizontal */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari et Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Force masquer sur tous les éléments */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* YouTube Video Background - Masquer tous les contrôles */
+#youtube-player iframe {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 120% !important;
+  height: 120% !important;
+  transform: translate(-50%, -50%) !important;
+  border: none !important;
+  pointer-events: none !important;
+}
+
+/* Masquer complètement tous les éléments YouTube */
+#youtube-player .ytp-chrome-top,
+#youtube-player .ytp-chrome-bottom,
+#youtube-player .ytp-watermark,
+#youtube-player .ytp-pause-overlay,
+#youtube-player .ytp-scroll-min,
+#youtube-player .ytp-show-cards-title,
+#youtube-player .ytp-gradient-top,
+#youtube-player .ytp-gradient-bottom,
+#youtube-player .ytp-title,
+#youtube-player .ytp-title-channel-logo {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}

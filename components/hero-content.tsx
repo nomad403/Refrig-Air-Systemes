@@ -5,7 +5,7 @@ import LogoGallery from "./logo-gallery"
 
 export default function HeroContent() {
   return (
-    <main className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
+    <motion.main className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6">
       <div className="text-center max-w-5xl mx-auto">
         {/* Titre centré - plus petit pour rester sur une ligne */}
         <motion.h1
@@ -52,6 +52,6 @@ export default function HeroContent() {
       >
         <LogoGallery />
       </motion.div>
-    </main>
+    </motion.main>
   )
 }
