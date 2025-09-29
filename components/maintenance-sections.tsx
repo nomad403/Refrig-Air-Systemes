@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useMotionValue, useTransform, animate } from "framer-motion"
+import TrimmedImage from "./trimmed-image"
 import { useEffect, useState } from "react"
 
 // Composant pour animer les compteurs
@@ -269,7 +270,7 @@ export default function MaintenanceSections() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Support 24/7 */}
             <motion.div
-              className="bg-[#E9F8F9]/5 p-8 rounded-lg border border-[#E9F8F9]/10"
+              className="border border-[#E9F8F9]/20 p-8 hover:border-[#E9F8F9]/40 transition-colors duration-200 group transform-gpu backface-hidden bg-[#E9F8F9]/5 backdrop-blur-sm"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -290,7 +291,7 @@ export default function MaintenanceSections() {
 
             {/* Contrôle Avancé */}
             <motion.div
-              className="bg-[#E9F8F9]/5 p-8 rounded-lg border border-[#E9F8F9]/10"
+              className="border border-[#E9F8F9]/20 p-8 hover:border-[#E9F8F9]/40 transition-colors duration-200 group transform-gpu backface-hidden bg-[#E9F8F9]/5 backdrop-blur-sm"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -311,7 +312,7 @@ export default function MaintenanceSections() {
 
             {/* Optimisation Énergétique */}
             <motion.div
-              className="bg-[#E9F8F9]/5 p-8 rounded-lg border border-[#E9F8F9]/10"
+              className="border border-[#E9F8F9]/20 p-8 hover:border-[#E9F8F9]/40 transition-colors duration-200 group transform-gpu backface-hidden bg-[#E9F8F9]/5 backdrop-blur-sm"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -332,7 +333,7 @@ export default function MaintenanceSections() {
 
             {/* Conformité Réglementaire */}
             <motion.div
-              className="bg-[#E9F8F9]/5 p-8 rounded-lg border border-[#E9F8F9]/10"
+              className="border border-[#E9F8F9]/20 p-8 hover:border-[#E9F8F9]/40 transition-colors duration-200 group transform-gpu backface-hidden bg-[#E9F8F9]/5 backdrop-blur-sm"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -379,7 +380,7 @@ export default function MaintenanceSections() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {/* Temps d'intervention */}
             <motion.div
-              className="text-center bg-white p-8 rounded-lg shadow-sm"
+              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -392,7 +393,7 @@ export default function MaintenanceSections() {
 
             {/* Disponibilité */}
             <motion.div
-              className="text-center bg-white p-8 rounded-lg shadow-sm"
+              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -405,7 +406,7 @@ export default function MaintenanceSections() {
 
             {/* Équipe Certifiée */}
             <motion.div
-              className="text-center bg-white p-8 rounded-lg shadow-sm"
+              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -418,7 +419,7 @@ export default function MaintenanceSections() {
 
             {/* Traçabilité */}
             <motion.div
-              className="text-center bg-white p-8 rounded-lg shadow-sm"
+              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -449,46 +450,46 @@ export default function MaintenanceSections() {
             <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-8 text-center orbit">
               Secteurs que Nous Accompagnons
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
               <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 overflow-hidden">
-                  <img 
+                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                  <TrimmedImage 
                     src="/images/maintenances_services/server_rack.png" 
                     alt="Data Centers"
-                    className="w-full h-full object-contain"
+                    className="w-auto h-auto max-h-full max-w-full"
                   />
                 </div>
                 <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Data Centers</h4>
                 <p className="text-[#E9F8F9]/70 text-sm">Refroidissement constant, tolérance zéro aux pannes</p>
               </div>
               <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 overflow-hidden">
-                  <img 
-                    src="/images/maintenances_services/labo.png" 
+                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                  <TrimmedImage
+                    src="/images/maintenances_services/labo.png"
                     alt="Laboratoires"
-                    className="w-full h-full object-contain"
+                    className="w-auto h-auto max-h-full max-w-full"
                   />
                 </div>
                 <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Laboratoires</h4>
                 <p className="text-[#E9F8F9]/70 text-sm">Respect normes conservation et validation qualité</p>
               </div>
               <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 overflow-hidden">
-                  <img 
+                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                  <TrimmedImage 
                     src="/images/maintenances_services/agro_alimentaire.png" 
                     alt="Agroalimentaire"
-                    className="w-full h-full object-contain"
+                    className="w-auto h-auto max-h-full max-w-full"
                   />
                 </div>
                 <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Agroalimentaire</h4>
                 <p className="text-[#E9F8F9]/70 text-sm">Chambres froides, chaînes du froid sécurisées</p>
               </div>
               <div className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 overflow-hidden">
-                  <img 
-                    src="/images/maintenances_services/industry.png" 
+                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                  <TrimmedImage
+                    src="/images/maintenances_services/industry.png"
                     alt="Industrie"
-                    className="w-full h-full object-contain"
+                    className="w-auto h-auto max-h-full max-w-full"
                   />
                 </div>
                 <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Industrie</h4>

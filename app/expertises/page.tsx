@@ -9,7 +9,7 @@ export default function ExpertisesPage() {
       <div className="relative isolate min-h-[100dvh]">
         {/* Fond en arrière-plan — même scope que le header */}
         <div className="absolute inset-0 -z-10">
-          <ShaderBackground videoId="T2wx-YBRLL4" />
+          <ShaderBackground videoId="4g9hlpGvdAw" />
         </div>
 
         {/* Header qui blend avec ce fond */}
