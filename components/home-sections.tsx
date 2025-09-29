@@ -344,14 +344,32 @@ export default function HomeSections() {
         </div>
       </motion.section>
 
-      {/* Bloc 5 — Contact */}
+      {/* Bloc 5 — Contact avec image team en fond */}
       <motion.section 
-        className="min-h-screen flex items-center px-6 lg:px-12 bg-[#E9F8F9] relative"
+        className="min-h-screen flex items-center px-6 lg:px-12 bg-[#E9F8F9] relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
+        {/* Image team en fond fullscreen */}
+        <div className="absolute inset-0 w-full h-full">
+          <div 
+            className="w-full h-full bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: "url('/images/home/team.jpeg')",
+              backgroundPosition: "center -170%",
+              width: "120%",
+              height: "120%",
+              marginLeft: "-10%",
+              marginTop: "-10%",
+              minWidth: "120%",
+              minHeight: "120%"
+            }}
+          />
+          {/* Overlay pour contraste et lisibilité */}
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
         
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
           <motion.div
@@ -360,7 +378,7 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl lg:text-3xl font-light text-[#181823] mb-6 leading-tight orbit">
+            <h2 className="text-2xl lg:text-3xl font-light text-white mb-6 leading-tight orbit">
               Votre projet, notre expertise
             </h2>
           </motion.div>
@@ -370,7 +388,7 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <p className="text-lg text-[#181823]/80 leading-relaxed mb-8">
+            <p className="text-lg text-white/90 leading-relaxed mb-8">
               Parlez-nous de vos besoins en climatisation et froid industriel. Nos ingénieurs vous accompagnent dans l'élaboration d'une solution sur mesure. Demandez dès maintenant une étude personnalisée et recevez un devis instantané.
             </p>
             <motion.div 
@@ -381,7 +399,7 @@ export default function HomeSections() {
               viewport={{ once: true }}
             >
               <motion.button 
-                className="px-8 py-4 bg-[#537FE7] text-[#E9F8F9] font-medium rounded-full hover:bg-[#537FE7]/90 transition-all duration-200"
+                className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-200"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
@@ -389,7 +407,7 @@ export default function HomeSections() {
                 Demander un devis
               </motion.button>
               <motion.button 
-                className="px-8 py-4 border border-[#537FE7] text-[#537FE7] font-medium rounded-full hover:bg-[#537FE7] hover:text-[#E9F8F9] transition-all duration-200"
+                className="px-8 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-black transition-all duration-200"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}

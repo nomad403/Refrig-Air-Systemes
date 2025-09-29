@@ -14,8 +14,8 @@ const partnerLogos = [
   { 
     name: "Mitsubishi Electric", 
     icon: (
-      <svg className="w-64 h-32 fill-[#E9F8F9]" viewBox="0 0 200 60">
-        <polygon points="20,15 40,15 30,35" className="fill-[#E9F8F9]"/>
+      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+        <polygon points="20,15 40,15 30,35" className="fill-white"/>
         <text x="50" y="30" className="font-semibold text-sm">MITSUBISHI</text>
       </svg>
     )

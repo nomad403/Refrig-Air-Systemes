@@ -48,7 +48,7 @@ export default function Header() {
           <div className="absolute bottom-1 left-4 right-4 h-px bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
         </a>
         <a
-          href="#"
+          href="/qualites-certification"
           className="mix-blend-difference text-white text-sm font-bold px-4 py-2 relative group transition-colors duration-200 satoshi"
         >
           <span className="relative z-10">Qualités et Certification</span>

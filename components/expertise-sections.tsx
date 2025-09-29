@@ -1,13 +1,15 @@
 "use client"
 
 import { motion } from "framer-motion"
+import TrimmedImage from "./trimmed-image"
+import ScrollSlideTitle from "./scroll-slide-title"
 
 export default function ExpertiseSections() {
   return (
     <div className="relative z-20 bg-[#181823]">
       {/* Header Section - Accroche Premium */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#181823] text-center"
+        className="py-20 px-6 lg:px-12 bg-[#537FE7] text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -15,7 +17,7 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.h1
-            className="text-4xl lg:text-6xl font-light text-[#E9F8F9] mb-8 leading-tight orbit"
+            className="text-4xl lg:text-6xl font-light text-white mb-8 leading-tight orbit"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -24,7 +26,7 @@ export default function ExpertiseSections() {
             NOTRE EXPERTISE FRIGORIFIQUE À VOTRE SERVICE
           </motion.h1>
           <motion.div
-            className="text-xl lg:text-2xl font-light text-[#537FE7] mb-12"
+            className="text-xl lg:text-2xl font-light text-white/70 mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -33,7 +35,7 @@ export default function ExpertiseSections() {
             [notre expertise est reconnue]
           </motion.div>
           <motion.p
-            className="text-lg text-[#E9F8F9]/80 max-w-4xl mx-auto leading-relaxed mb-6"
+            className="text-lg text-white/80 max-w-4xl mx-auto leading-relaxed mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -42,7 +44,7 @@ export default function ExpertiseSections() {
             Conception, installation, entretien haut de gamme sur mesure pour les exigences les plus strictes.
           </motion.p>
           <motion.p
-            className="text-[#537FE7] text-sm"
+            className="text-white text-sm"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -55,7 +57,7 @@ export default function ExpertiseSections() {
 
       {/* Domaines d'Expertise avec Images */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#E9F8F9]"
+        className="py-32 lg:py-48 px-6 lg:px-12 bg-[#181823]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -63,160 +65,322 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-32 lg:mb-40"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-light text-[#181823] mb-6 orbit">
-              Nos Domaines d'Expertise
+            <h2 className="text-3xl lg:text-4xl font-light text-[#537FE7] mb-6 orbit">
+              NOS DOMAINES D'EXPERTISE
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {/* Climatisation */}
+          <div className="space-y-32 lg:space-y-48">
+            {/* Climatisation - Image à gauche, texte à droite */}
             <motion.div
-              className="text-center"
+              className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-medium text-[#181823] mb-6">
-                Climatisation & Réversible
-              </h3>
-              <div className="mb-6 overflow-hidden">
-                <motion.img 
-                  src="/images/expertises/Whisk_efd2273a347e26db2ea40ba11bbf31d5dr-removebg-preview.png" 
+              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+                <div
+                  className="absolute inset-0 pointer-events-none z-20"
+                  style={{
+                    WebkitMaskImage: 'url(/images/expertises/clim%20reversible.png)',
+                    maskImage: 'url(/images/expertises/clim%20reversible.png)',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    backgroundColor: '#537FE7',
+                  }}
+                />
+                <TrimmedImage 
+                  src="/images/expertises/clim%20reversible.png" 
                   alt="Climatisation & Réversible"
-                  className="w-full h-48 object-contain"
-                  whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-[1.35]"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 />
               </div>
-              <p className="text-[#181823]/70 leading-relaxed">
-                Systèmes haute performance pour environnements tertiaires et industriels
-              </p>
+              <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
+                <div className="relative z-0">
+                  <ScrollSlideTitle
+                    direction="fromLeft"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                  >
+                    Climatisation & Réversible
+                  </ScrollSlideTitle>
+                </div>
+                <motion.p
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Systèmes haute performance pour environnements tertiaires et industriels
+                </motion.p>
+              </div>
             </motion.div>
 
-            {/* Pompes à Chaleur */}
+            {/* Pompes à Chaleur - Image à droite, texte à gauche */}
             <motion.div
-              className="text-center"
+              className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-medium text-[#181823] mb-6">
-                Pompes à Chaleur Industrielles
-              </h3>
-              <div className="mb-6 overflow-hidden">
-                <motion.img 
+              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+                <div
+                  className="absolute inset-0 pointer-events-none z-20"
+                  style={{
+                    WebkitMaskImage: 'url(/images/expertises/Whisk_8e1c4946f8ef139bab04376179289556dr-removebg-preview.png)',
+                    maskImage: 'url(/images/expertises/Whisk_8e1c4946f8ef139bab04376179289556dr-removebg-preview.png)',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    backgroundColor: '#537FE7',
+                  }}
+                />
+                <TrimmedImage 
                   src="/images/expertises/Whisk_8e1c4946f8ef139bab04376179289556dr-removebg-preview.png" 
                   alt="Pompes à Chaleur Industrielles"
-                  className="w-full h-48 object-contain"
-                  whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-110"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 />
               </div>
-              <p className="text-[#181823]/70 leading-relaxed">
-                Solutions énergétiques durables et haute efficacité
-              </p>
+              <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
+                <div className="relative z-0">
+                  <ScrollSlideTitle
+                    direction="fromRight"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                  >
+                    Pompes à Chaleur Industrielles
+                  </ScrollSlideTitle>
+                </div>
+                <motion.p
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Solutions énergétiques durables et haute efficacité
+                </motion.p>
+              </div>
             </motion.div>
 
-            {/* Chambres Froides */}
+            {/* Chambres Froides - Image à gauche, texte à droite */}
             <motion.div
-              className="text-center"
+              className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-medium text-[#181823] mb-6">
-                Chambres Froides Positives & Négatives
-              </h3>
-              <div className="mb-6 overflow-hidden">
-                <motion.img 
-                  src="/images/expertises/Whisk_4bd159c6b3f9bb195284a95e5bbed094dr-removebg-preview.png" 
+              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+                <div
+                  className="absolute inset-0 pointer-events-none z-20"
+                  style={{
+                    WebkitMaskImage: 'url(/images/expertises/chambre_froide.png)',
+                    maskImage: 'url(/images/expertises/chambre_froide.png)',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    backgroundColor: '#537FE7',
+                  }}
+                />
+                <TrimmedImage 
+                  src="/images/expertises/chambre_froide.png" 
                   alt="Chambres Froides"
-                  className="w-full h-48 object-contain"
-                  whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-130"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 />
               </div>
-              <p className="text-[#181823]/70 leading-relaxed">
-                Conformes HACCP pour agroalimentaire et pharmaceutique
-              </p>
+              <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
+                <div className="relative z-0">
+                  <ScrollSlideTitle
+                    direction="fromLeft"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                  >
+                    Chambres Froides Positives & Négatives
+                  </ScrollSlideTitle>
+                </div>
+                <motion.p
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Conformes HACCP pour agroalimentaire et pharmaceutique
+                </motion.p>
+              </div>
             </motion.div>
 
-            {/* Groupes à Eau Glacée */}
+            {/* Groupes à Eau Glacée - Image à droite, texte à gauche */}
             <motion.div
-              className="text-center"
+              className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-medium text-[#181823] mb-6">
-                Groupes à Eau Glacée
-              </h3>
-                <div className="mb-6 overflow-hidden">
-                  <motion.img 
-                    src="/images/expertises/Whisk_156a412801b7bdda1c24335148af6254dr-removebg-preview.png" 
-                    alt="Groupes à Eau Glacée"
-                    className="w-4/5 h-48 object-contain mx-auto"
-                    whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
-                  />
+              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+                <div
+                  className="absolute inset-0 pointer-events-none z-20"
+                  style={{
+                    WebkitMaskImage: 'url(/images/expertises/Whisk_156a412801b7bdda1c24335148af6254dr-removebg-preview.png)',
+                    maskImage: 'url(/images/expertises/Whisk_156a412801b7bdda1c24335148af6254dr-removebg-preview.png)',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    backgroundColor: '#537FE7',
+                  }}
+                />
+                <TrimmedImage 
+                  src="/images/expertises/Whisk_156a412801b7bdda1c24335148af6254dr-removebg-preview.png" 
+                  alt="Groupes à Eau Glacée"
+                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-110"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                />
+              </div>
+              <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
+                <div className="relative z-0">
+                  <ScrollSlideTitle
+                    direction="fromRight"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                  >
+                    Groupes à Eau Glacée
+                  </ScrollSlideTitle>
                 </div>
-              <p className="text-[#181823]/70 leading-relaxed">
-                Refroidissement centralisé pour grands bâtiments et industries
-              </p>
+                <motion.p
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Refroidissement centralisé pour grands bâtiments et industries
+                </motion.p>
+              </div>
             </motion.div>
 
-            {/* Récupérateurs de Chaleur */}
+            {/* Récupérateurs de Chaleur - Image à gauche, texte à droite */}
             <motion.div
-              className="text-center"
+              className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-medium text-[#181823] mb-6">
-                Récupérateurs de Chaleur
-              </h3>
-              <div className="mb-6 overflow-hidden">
-                <motion.img 
-                  src="/images/expertises/Whisk_2fe1bda0bea1b6e93e64685bc5a92f2ddr-removebg-preview.png" 
+              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+                <div
+                  className="absolute inset-0 pointer-events-none z-20"
+                  style={{
+                    WebkitMaskImage: 'url(/images/expertises/recuperateur.png)',
+                    maskImage: 'url(/images/expertises/recuperateur.png)',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    backgroundColor: '#537FE7',
+                  }}
+                />
+                <TrimmedImage 
+                  src="/images/expertises/recuperateur.png" 
                   alt="Récupérateurs de Chaleur"
-                  className="w-full h-48 object-contain"
-                  whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-115"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 />
               </div>
-              <p className="text-[#181823]/70 leading-relaxed">
-                Technologies Boostherm pour optimisation énergétique
-              </p>
+              <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
+                <div className="relative z-0">
+                  <ScrollSlideTitle
+                    direction="fromLeft"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                  >
+                    Récupérateurs de Chaleur
+                  </ScrollSlideTitle>
+                </div>
+                <motion.p
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Technologies Boostherm pour optimisation énergétique
+                </motion.p>
+              </div>
             </motion.div>
 
-            {/* Maintenance Préventive */}
+            {/* Maintenance Préventive - Image à droite, texte à gauche */}
             <motion.div
-              className="text-center"
+              className="flex flex-col lg:flex-row-reverse items-center gap-2 lg:gap-4"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-medium text-[#181823] mb-6">
-                Maintenance & Diagnostic Énergétique
-              </h3>
-              <div className="mb-6 overflow-hidden">
-                <motion.img 
-                  src="/images/expertises/Whisk_21b1bd84fcfd855afb54b91686200f97dr-removebg-preview.png" 
+              <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative z-10">
+                <div
+                  className="absolute inset-0 pointer-events-none z-20"
+                  style={{
+                    WebkitMaskImage: 'url(/images/expertises/casque.png)',
+                    maskImage: 'url(/images/expertises/casque.png)',
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                    backgroundColor: '#537FE7',
+                  }}
+                />
+                <TrimmedImage 
+                  src="/images/expertises/casque.png" 
                   alt="Maintenance & Diagnostic"
-                  className="w-full h-48 object-contain"
-                  whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-125"
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                 />
               </div>
-              <p className="text-[#181823]/70 leading-relaxed">
-                Contrats premium avec suivi proactif et optimisation
-              </p>
+              <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
+                <div className="relative z-0">
+                  <ScrollSlideTitle
+                    direction="fromRight"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                  >
+                    Maintenance & Diagnostics
+                  </ScrollSlideTitle>
+                </div>
+                <motion.p
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Contrats premium avec suivi proactif et optimisation
+                </motion.p>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -232,7 +396,7 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-24 lg:mb-32"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -402,7 +566,7 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-24 lg:mb-32"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -417,64 +581,78 @@ export default function ExpertiseSections() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {/* QUALI-FROID */}
             <motion.div
-              className="text-center bg-white p-6 rounded-lg shadow-sm"
+              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-[#537FE7]/10 rounded-full flex items-center justify-center">
-                <span className="text-[#537FE7] font-bold text-xl">QF</span>
+              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <img 
+                  src="/images/certifications/qualifroid.svg" 
+                  alt="Logo QUALI-FROID"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">QUALI-FROID</h3>
-              <p className="text-[#181823]/60 text-sm">Qualification professionnelle frigoristes</p>
+              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">QUALI-FROID</h3>
+              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Qualification professionnelle frigoristes</p>
             </motion.div>
 
             {/* RGE */}
             <motion.div
-              className="text-center bg-white p-6 rounded-lg shadow-sm"
+              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-green-600 font-bold text-xl">RGE</span>
+              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <img 
+                  src="/images/certifications/rge.svg" 
+                  alt="Logo RGE Reconnu Garant de l'Environnement"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">RGE</h3>
-              <p className="text-[#181823]/60 text-sm">Reconnu Garant de l'Environnement</p>
+              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">RGE</h3>
+              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Reconnu Garant de l'Environnement</p>
             </motion.div>
 
             {/* Assurance Décennale */}
             <motion.div
-              className="text-center bg-white p-6 rounded-lg shadow-sm"
+              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L13.09 8.26L19 9L13.09 9.74L12 16L10.91 9.74L5 9L10.91 8.26L12 2Z"/>
-                </svg>
+              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <img 
+                  src="/images/certifications/assurance-decennale.svg" 
+                  alt="Logo Assurance Décennale"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Assurance Décennale</h3>
-              <p className="text-[#181823]/60 text-sm">Garantie 10 ans sur les gros œuvres</p>
+              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">Assurance Décennale</h3>
+              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Garantie 10 ans sur les gros œuvres</p>
             </motion.div>
 
             {/* Conformité HACCP */}
             <motion.div
-              className="text-center bg-white p-6 rounded-lg shadow-sm"
+              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
-                <span className="text-red-600 font-bold text-sm">HACCP</span>
+              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <img 
+                  src="/images/certifications/haccp.svg" 
+                  alt="Logo Conformité HACCP"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Conformité HACCP</h3>
-              <p className="text-[#181823]/60 text-sm">Normes alimentaires et pharmaceutiques</p>
+              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">Conformité HACCP</h3>
+              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Normes alimentaires et pharmaceutiques</p>
             </motion.div>
           </div>
 
