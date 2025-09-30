@@ -17,7 +17,7 @@
     "@react-three/fiber": "^9.3.0",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
-    "framer-motion": "latest",
+    "framer-motion": "^12.23.22",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
     "react": "^19",
