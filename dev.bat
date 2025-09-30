@@ -1,0 +1,3 @@
+@echo off
+echo Demarrage du serveur de developpement Next.js...
+node_modules\.bin\next.cmd dev

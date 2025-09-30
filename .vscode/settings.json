@@ -1,3 +1,20 @@
 {
-    "git.ignoreLimitWarning": true
+  "files.watcherExclude": {
+    "**/.next/**": true,
+    "**/node_modules/**": true,
+    "**/.turbo/**": true,
+    "**/out/**": true,
+    "**/dist/**": true
+  },
+  "search.exclude": {
+    "**/.next/**": true,
+    "**/node_modules/**": true,
+    "**/.turbo/**": true,
+    "**/out/**": true
+  },
+  "files.exclude": {
+    "**/.next": true,
+    "**/node_modules": false
+  },
+  "git.ignoreLimitWarning": true
 }
