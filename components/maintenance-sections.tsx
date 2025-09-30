@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useTransform, animate } from "framer-motion"
 import TrimmedImage from "./trimmed-image"
+import ScrollSlideTitle from "./scroll-slide-title"
 import { useEffect, useState } from "react"
 
 // Composant pour animer les compteurs
@@ -42,14 +43,22 @@ function AnimatedCounter({
 
   return (
     <motion.div
-      className="text-[#537FE7] text-4xl font-bold mb-4"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      className="text-[#537FE7] text-6xl font-bold mb-4 overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8, delay }}
       viewport={{ once: true }}
       onViewportEnter={() => setTimeout(animateCounter, delay * 1000)}
     >
-      {prefix}{displayValue}{suffix}
+      <motion.div
+        initial={{ y: "100%" }}
+        whileInView={{ y: "0%" }}
+        transition={{ duration: 0.8, delay: delay + 0.2, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="inline-block"
+      >
+        {prefix}{displayValue}{suffix}
+      </motion.div>
     </motion.div>
   )
 }
@@ -380,121 +389,321 @@ export default function MaintenanceSections() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {/* Temps d'intervention */}
             <motion.div
-              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="text-center p-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
               <AnimatedCounter value={4} delay={0.5} prefix="≤ " suffix="h" />
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Temps d'Intervention</h3>
-              <p className="text-[#181823]/60 text-sm">Garanti en Île-de-France pour vos urgences</p>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                viewport={{ once: true }}
+              >
+                <motion.h3 
+                  className="text-lg font-medium text-[#181823] mb-2"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Temps d'Intervention
+                </motion.h3>
+              </motion.div>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <motion.p 
+                  className="text-[#181823]/60 text-sm"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Garanti en Île-de-France pour vos urgences
+                </motion.p>
+              </motion.div>
             </motion.div>
 
             {/* Disponibilité */}
             <motion.div
-              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="text-center p-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
               <AnimatedCounter value={99} delay={0.7} prefix="> " suffix="%" />
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Taux de Disponibilité</h3>
-              <p className="text-[#181823]/60 text-sm">Sur nos installations critiques</p>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                viewport={{ once: true }}
+              >
+                <motion.h3 
+                  className="text-lg font-medium text-[#181823] mb-2"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Taux de Disponibilité
+                </motion.h3>
+              </motion.div>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.0 }}
+                viewport={{ once: true }}
+              >
+                <motion.p 
+                  className="text-[#181823]/60 text-sm"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Sur nos installations critiques
+                </motion.p>
+              </motion.div>
             </motion.div>
 
             {/* Équipe Certifiée */}
             <motion.div
-              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="text-center p-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               viewport={{ once: true }}
             >
               <AnimatedCounter value={100} delay={0.9} suffix="%" />
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Équipe Certifiée</h3>
-              <p className="text-[#181823]/60 text-sm">QUALI-FROID et RGE</p>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+                viewport={{ once: true }}
+              >
+                <motion.h3 
+                  className="text-lg font-medium text-[#181823] mb-2"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 1.1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Équipe Certifiée
+                </motion.h3>
+              </motion.div>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                viewport={{ once: true }}
+              >
+                <motion.p 
+                  className="text-[#181823]/60 text-sm"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  QUALI-FROID et RGE
+                </motion.p>
+              </motion.div>
             </motion.div>
 
             {/* Traçabilité */}
             <motion.div
-              className="text-center border border-[#181823]/10 p-8 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden bg-white"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="text-center p-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
+              <AnimatedCounter value={24} delay={1.1} prefix="" suffix="/7" />
               <motion.div
-                className="text-[#537FE7] text-4xl font-bold mb-4"
-                initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ duration: 1, delay: 1.1, ease: "backOut" }}
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.3 }}
                 viewport={{ once: true }}
               >
-                24/7
+                <motion.h3 
+                  className="text-lg font-medium text-[#181823] mb-2"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 1.3, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Traçabilité
+                </motion.h3>
               </motion.div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Traçabilité</h3>
-              <p className="text-[#181823]/60 text-sm">Rapports et suivi en temps réel</p>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.4 }}
+                viewport={{ once: true }}
+              >
+                <motion.p 
+                  className="text-[#181823]/60 text-sm"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  Rapports et suivi en temps réel
+                </motion.p>
+              </motion.div>
             </motion.div>
           </div>
 
           {/* Secteurs d'Application */}
           <motion.div
-            className="bg-[#181823] rounded-2xl p-8 lg:p-12"
+            className="py-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-8 text-center orbit">
-              Secteurs que Nous Accompagnons
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-              <div className="text-center">
-                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-3xl lg:text-4xl font-light text-[#181823] mb-6 orbit">
+                Secteurs que Nous Accompagnons
+              </h3>
+            </motion.div>
+
+            <div className="space-y-24 lg:space-y-32">
+              {/* Data Centers - Image à gauche, texte à droite */}
+              <motion.div
+                className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-full lg:w-1/2 h-80 lg:h-96 flex items-center justify-center relative">
+                  <ScrollSlideTitle
+                    direction="fromLeft"
+                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 left-0 w-full"
+                  >
+                    Data Centers
+                  </ScrollSlideTitle>
                   <TrimmedImage 
                     src="/images/maintenances_services/server_rack.png" 
                     alt="Data Centers"
-                    className="w-auto h-auto max-h-full max-w-full"
+                    className="w-auto h-auto max-h-full max-w-full relative z-10"
+                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                   />
                 </div>
-                <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Data Centers</h4>
-                <p className="text-[#E9F8F9]/70 text-sm">Refroidissement constant, tolérance zéro aux pannes</p>
-              </div>
-              <div className="text-center">
-                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                <div className="w-full lg:w-1/2 text-center lg:text-left relative">
+                  <p className="text-lg text-[#181823]/70 leading-relaxed">
+                    Refroidissement constant, tolérance zéro aux pannes
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Laboratoires - Image à droite, texte à gauche */}
+              <motion.div
+                className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16 relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative">
+                  <ScrollSlideTitle
+                    direction="fromRight"
+                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 right-0 w-full"
+                  >
+                    Laboratoires
+                  </ScrollSlideTitle>
                   <TrimmedImage
                     src="/images/maintenances_services/labo.png"
                     alt="Laboratoires"
-                    className="w-auto h-auto max-h-full max-w-full"
+                    className="w-auto h-auto max-h-full max-w-full relative z-10"
+                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                   />
                 </div>
-                <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Laboratoires</h4>
-                <p className="text-[#E9F8F9]/70 text-sm">Respect normes conservation et validation qualité</p>
-              </div>
-              <div className="text-center">
-                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                <div className="w-full lg:w-1/2 text-center lg:text-right relative">
+                  <p className="text-lg text-[#181823]/70 leading-relaxed">
+                    Respect normes conservation et validation qualité
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Agroalimentaire - Image à gauche, texte à droite */}
+              <motion.div
+                className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative">
+                  <ScrollSlideTitle
+                    direction="fromLeft"
+                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 left-0 w-full"
+                  >
+                    Agroalimentaire
+                  </ScrollSlideTitle>
                   <TrimmedImage 
                     src="/images/maintenances_services/agro_alimentaire.png" 
                     alt="Agroalimentaire"
-                    className="w-auto h-auto max-h-full max-w-full"
+                    className="w-auto h-auto max-h-full max-w-full relative z-10"
+                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                   />
                 </div>
-                <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Agroalimentaire</h4>
-                <p className="text-[#E9F8F9]/70 text-sm">Chambres froides, chaînes du froid sécurisées</p>
-              </div>
-              <div className="text-center">
-                <div className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 mx-auto mb-4 overflow-hidden flex items-center justify-center">
+                <div className="w-full lg:w-1/2 text-center lg:text-left relative">
+                  <p className="text-lg text-[#181823]/70 leading-relaxed">
+                    Chambres froides, chaînes du froid sécurisées
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Industrie - Image à droite, texte à gauche */}
+              <motion.div
+                className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16 relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative">
+                  <ScrollSlideTitle
+                    direction="fromRight"
+                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 right-0 w-full"
+                  >
+                    Industrie
+                  </ScrollSlideTitle>
                   <TrimmedImage
                     src="/images/maintenances_services/industry.png"
                     alt="Industrie"
-                    className="w-auto h-auto max-h-full max-w-full"
+                    className="w-auto h-auto max-h-full max-w-full relative z-10"
+                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
                   />
                 </div>
-                <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Industrie</h4>
-                <p className="text-[#E9F8F9]/70 text-sm">Confort thermique et process industriels maîtrisés</p>
-              </div>
+                <div className="w-full lg:w-1/2 text-center lg:text-right relative">
+                  <p className="text-lg text-[#181823]/70 leading-relaxed">
+                    Confort thermique et process industriels maîtrisés
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
