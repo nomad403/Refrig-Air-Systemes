@@ -1,20 +1,21 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Section3D from "./section-3d"
+import Image from "next/image"
+import ScrollSlideTitle from "./scroll-slide-title"
 
 export default function HomeSections() {
   return (
     <div className="relative z-20 bg-[#181823]">
       {/* Bloc 1 — Présentation */}
       <motion.section 
-        className="min-h-screen flex items-center px-6 lg:px-12 bg-[#E9F8F9]"
+        className="min-h-screen flex items-center bg-[#E9F8F9]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-stretch px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -22,25 +23,69 @@ export default function HomeSections() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <h1 className="text-xl lg:text-2xl font-light text-[#181823] mb-6 leading-tight orbit">
-              Ingénierie du froid et de la climatisation à Paris
-            </h1>
-            <p className="text-lg text-[#181823]/80 leading-relaxed">
-              Refrig'Air Systèmes accompagne entreprises et institutions dans la conception, l'installation et la maintenance de solutions frigorifiques et climatiques haut de gamme. Précision, fiabilité et efficacité énergétique sont au cœur de chaque projet.
-            </p>
+            <div className="flex flex-col justify-between h-full min-h-[60vh] lg:min-h-[800px]">
+              <ScrollSlideTitle
+                direction="fromLeft"
+                className="text-3xl lg:text-5xl font-bold text-[#181823] leading-tight orbit uppercase tracking-tight"
+              >
+                INGÉNIERIE DU FROID ET DE LA CLIMATISATION À PARIS
+              </ScrollSlideTitle>
+              <motion.div 
+                className="space-y-4"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true }}
+              >
+                <motion.p 
+                  className="text-xl lg:text-2xl text-[#181823]/80 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  Refrig'Air Systèmes conçoit, installe et maintient des solutions de climatisation de précision et de froid industriel pour data centers, laboratoires, sites industriels et l’agroalimentaire à Paris et en Île‑de‑France.
+                </motion.p>
+                <motion.p 
+                  className="text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.35 }}
+                  viewport={{ once: true }}
+                >
+                  Chambres froides, salles blanches, réseaux d’eau glacée, vitrines réfrigérées, systèmes VRV/VRF et CTA haut rendement : nous dimensionnons des installations sur mesure répondant aux exigences de disponibilité (N+1), confinement allées chaudes/froides, contrôle hygrométrique et efficacité énergétique (free‑cooling, récupération de chaleur).
+                </motion.p>
+                <motion.p 
+                  className="text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  Conformité et traçabilité : HACCP, GDP, ISO 14644/22000, GxP. Supervision et télésurveillance 24/7, contrats de maintenance premium et interventions rapides ; Refrig'Air Systèmes est votre partenaire certifié Qualifroid & RGE pour des environnements critiques fiables et durables.
+                </motion.p>
+              </motion.div>
+            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="h-[800px] xl:col-span-3"
+            className="h-[800px] xl:col-span-3 relative overflow-visible"
           >
-            <Section3D 
-              modelPath="/3d/hvac/AC04anim.glb"
-              position="right"
-              scale={0.7}
-            />
+            <div className="absolute inset-y-0 right-[10%] w-[65%]">
+              <Image
+                src="/images/home/hvac.png"
+                alt="Installation de refroidissement industriel - Refrig'Air Systèmes"
+                fill
+                className="object-contain object-right"
+                priority
+                sizes="(max-width: 1024px) 60vw, 40vw"
+                fetchPriority="high"
+                quality={90}
+              />
+            </div>
           </motion.div>
         </div>
       </motion.section>
@@ -398,22 +443,16 @@ export default function HomeSections() {
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <motion.button 
-                className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-200"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-              >
-                Demander un devis
-              </motion.button>
-              <motion.button 
-                className="px-8 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-black transition-all duration-200"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-              >
-                Nous contacter
-              </motion.button>
+              <a href="/contact">
+                <motion.button 
+                  className="px-8 py-4 font-medium rounded-sm transition-all duration-200 btn-effect-5"
+                  whileHover={{ scale: 1.05, y: 0 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Nous contacter
+                </motion.button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

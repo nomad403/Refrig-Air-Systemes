@@ -66,56 +66,51 @@ function AnimatedCounter({
 export default function MaintenanceSections() {
   return (
     <div className="relative z-20 bg-[#181823]">
-      {/* Introduction Accroche Premium */}
+      {/* Introduction Accroche Premium — disposition 2 colonnes comme home/contact */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#181823] text-center"
+        className="py-40 bg-[#181823]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            className="text-4xl lg:text-5xl font-light text-[#E9F8F9] mb-8 leading-tight orbit"
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            MAINTENANCE ET SERVICES HAUT DE GAMME
-          </motion.h2>
-          <motion.div
-            className="text-xl lg:text-2xl font-light text-[#537FE7] mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            Pour vos installations frigorifiques critiques
-          </motion.div>
-          <motion.p
-            className="text-lg text-[#E9F8F9]/80 max-w-4xl mx-auto leading-relaxed mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Nous accompagnons les environnements les plus exigeants – data centers, laboratoires pharmaceutiques, industries agroalimentaires et grandes surfaces – avec des contrats de maintenance sur mesure. Notre priorité : sécurité, performance continue et optimisation énergétique, même dans les environnements où aucune interruption n'est tolérée.
-          </motion.p>
-          <motion.p
-            className="text-[#537FE7] text-sm"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            viewport={{ once: true }}
-          >
-            —Élevés par l'expertise, animés par la fiabilité.
-          </motion.p>
+        <div className="px-4 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-20">
+            {/* Titre à gauche */}
+            <div className="flex-1">
+              <ScrollSlideTitle
+                direction="fromLeft"
+                className="text-5xl lg:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight"
+              >
+                MAINTENANCE ET<br/>SERVICES HAUT DE GAMME
+              </ScrollSlideTitle>
+            </div>
+
+            {/* Description à droite */}
+            <motion.div
+              className="flex-1 mt-12 lg:mt-20 space-y-8"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-2xl lg:text-3xl font-light text-[#537FE7] mb-10">
+                Pour vos installations frigorifiques critiques
+              </div>
+              <p className="text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed mb-8">
+                Nous accompagnons les environnements les plus exigeants – data centers, laboratoires pharmaceutiques, industries agroalimentaires et grandes surfaces – avec des contrats de maintenance sur mesure. Sécurité, performance continue et optimisation énergétique, même sans aucune interruption tolérée.
+              </p>
+              <p className="text-[#537FE7] text-base lg:text-lg">
+                —Élevés par l'expertise, animés par la fiabilité.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 
       {/* Types de Maintenance - Style GenCell */}
       <motion.section 
+        id="types-maintenance"
         className="py-20 px-6 lg:px-12 bg-[#E9F8F9]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -567,143 +562,218 @@ export default function MaintenanceSections() {
               </motion.div>
             </motion.div>
           </div>
+        </div>
+      </motion.section>
 
-          {/* Secteurs d'Application */}
+      {/* Secteurs d'Application - Pleine largeur */}
+      <motion.section 
+        id="secteurs"
+        className="pt-16 pb-0 bg-[#E9F8F9]"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div>
           <motion.div
-            className="py-16"
-            initial={{ opacity: 0, y: 50 }}
+            className="text-left"
+            initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: -30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              viewport={{ once: true }}
+            <ScrollSlideTitle
+              direction="fromLeft"
+              className="text-7xl lg:text-9xl font-bold text-[#181823] orbit uppercase tracking-tight leading-tight"
             >
-              <h3 className="text-3xl lg:text-4xl font-light text-[#181823] mb-6 orbit">
-                Secteurs que Nous Accompagnons
-              </h3>
-            </motion.div>
+              SECTEURS QUE<br/>NOUS ACCOMPAGNONS
+            </ScrollSlideTitle>
+          </motion.div>
+        </div>
 
-            <div className="space-y-24 lg:space-y-32">
-              {/* Data Centers - Image à gauche, texte à droite */}
-              <motion.div
-                className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-full lg:w-1/2 h-80 lg:h-96 flex items-center justify-center relative">
-                  <ScrollSlideTitle
-                    direction="fromLeft"
-                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 left-0 w-full"
-                  >
-                    Data Centers
-                  </ScrollSlideTitle>
-                  <TrimmedImage 
-                    src="/images/maintenances_services/server_rack.png" 
-                    alt="Data Centers"
-                    className="w-auto h-auto max-h-full max-w-full relative z-10"
-                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 text-center lg:text-left relative">
-                  <p className="text-lg text-[#181823]/70 leading-relaxed">
-                    Refroidissement constant, tolérance zéro aux pannes
-                  </p>
-                </div>
-              </motion.div>
+        <div className="space-y-0">
+          {/* Data Centers */}
+          <motion.div
+            className="relative h-80 lg:h-[28rem] overflow-hidden group"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {/* Image de fond */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              style={{ backgroundImage: "url('/images/maintenances_services/server_rack.jpg')" }}
+            />
+            {/* Overlay sombre */}
+            <div className="absolute inset-0 bg-[#181823]/60 group-hover:bg-[#181823]/50 transition-colors duration-300" />
+            {/* Contenu */}
+            <div className="relative z-10 h-full flex justify-between items-end">
+              {/* Titre en bas à gauche */}
+              <div className="flex-1 pl-4">
+                <ScrollSlideTitle
+                  direction="fromLeft"
+                  className="text-5xl lg:text-8xl font-bold text-[#E9F8F9] satoshi uppercase tracking-tight"
+                >
+                  Data Centers
+                </ScrollSlideTitle>
+              </div>
+              {/* Description à droite */}
+              <div className="flex-1 text-right px-8 pb-8">
+                <p className="text-lg text-[#E9F8F9]/90 leading-relaxed max-w-md ml-auto">
+                  Refroidissement constant, tolérance zéro aux pannes.<br/><br/>
+                  Maintenance préventive et corrective pour data centers, salles serveurs et infrastructures IT critiques.<br/><br/>
+                  Contrats d'astreinte 24/7, interventions garanties sous 4h en Île-de-France.
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
-              {/* Laboratoires - Image à droite, texte à gauche */}
-              <motion.div
-                className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16 relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative">
-                  <ScrollSlideTitle
-                    direction="fromRight"
-                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 right-0 w-full"
-                  >
-                    Laboratoires
-                  </ScrollSlideTitle>
-                  <TrimmedImage
-                    src="/images/maintenances_services/labo.png"
-                    alt="Laboratoires"
-                    className="w-auto h-auto max-h-full max-w-full relative z-10"
-                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 text-center lg:text-right relative">
-                  <p className="text-lg text-[#181823]/70 leading-relaxed">
-                    Respect normes conservation et validation qualité
-                  </p>
-                </div>
-              </motion.div>
+          {/* Laboratoires */}
+          <motion.div
+            className="relative h-80 lg:h-[28rem] overflow-hidden group"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            {/* Image de fond */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              style={{ backgroundImage: "url('/images/maintenances_services/labo.jpeg')" }}
+            />
+            {/* Overlay sombre */}
+            <div className="absolute inset-0 bg-[#181823]/60 group-hover:bg-[#181823]/50 transition-colors duration-300" />
+            {/* Contenu */}
+            <div className="relative z-10 h-full flex justify-between items-end">
+              {/* Titre en bas à gauche */}
+              <div className="flex-1 pl-4">
+                <ScrollSlideTitle
+                  direction="fromLeft"
+                  className="text-5xl lg:text-8xl font-bold text-[#E9F8F9] satoshi uppercase tracking-tight"
+                >
+                  Laboratoires
+                </ScrollSlideTitle>
+              </div>
+              {/* Description à droite */}
+              <div className="flex-1 text-right px-8 pb-8">
+                <p className="text-lg text-[#E9F8F9]/90 leading-relaxed max-w-md ml-auto">
+                  Respect normes conservation et validation qualité.<br/><br/>
+                  Maintenance climatisation laboratoires pharmaceutiques, centres de recherche et environnements contrôlés.<br/><br/>
+                  Conformité GDP, traçabilité complète et interventions certifiées QUALI-FROID.
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
-              {/* Agroalimentaire - Image à gauche, texte à droite */}
-              <motion.div
-                className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative">
-                  <ScrollSlideTitle
-                    direction="fromLeft"
-                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 left-0 w-full"
-                  >
-                    Agroalimentaire
-                  </ScrollSlideTitle>
-                  <TrimmedImage 
-                    src="/images/maintenances_services/agro_alimentaire.png" 
-                    alt="Agroalimentaire"
-                    className="w-auto h-auto max-h-full max-w-full relative z-10"
-                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 text-center lg:text-left relative">
-                  <p className="text-lg text-[#181823]/70 leading-relaxed">
-                    Chambres froides, chaînes du froid sécurisées
-                  </p>
-                </div>
-              </motion.div>
+          {/* Agroalimentaire */}
+          <motion.div
+            className="relative h-80 lg:h-[28rem] overflow-hidden group"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            {/* Image de fond */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              style={{ backgroundImage: "url('/images/maintenances_services/agro_alimentaire.jpg')" }}
+            />
+            {/* Overlay sombre */}
+            <div className="absolute inset-0 bg-[#181823]/60 group-hover:bg-[#181823]/50 transition-colors duration-300" />
+            {/* Contenu */}
+            <div className="relative z-10 h-full flex justify-between items-end">
+              {/* Titre en bas à gauche */}
+              <div className="flex-1 pl-4">
+                <ScrollSlideTitle
+                  direction="fromLeft"
+                  className="text-5xl lg:text-8xl font-bold text-[#E9F8F9] satoshi uppercase tracking-tight"
+                >
+                  Agroalimentaire
+                </ScrollSlideTitle>
+              </div>
+              {/* Description à droite */}
+              <div className="flex-1 text-right px-8 pb-8">
+                <p className="text-lg text-[#E9F8F9]/90 leading-relaxed max-w-md ml-auto">
+                  Chambres froides, chaînes du froid sécurisées.<br/><br/>
+                  Maintenance frigorifique pour industrie agroalimentaire, grandes surfaces, restaurants et commerces alimentaires.<br/><br/>
+                  Conformité HACCP, contrôles sanitaires et optimisation énergétique garantie.
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
-              {/* Industrie - Image à droite, texte à gauche */}
-              <motion.div
-                className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16 relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-full lg:w-1/2 h-64 lg:h-80 flex items-center justify-center relative">
-                  <ScrollSlideTitle
-                    direction="fromRight"
-                    className="text-4xl lg:text-6xl font-bold text-[#181823]/10 mb-4 satoshi uppercase tracking-tight absolute z-0 top-0 right-0 w-full"
-                  >
-                    Industrie
-                  </ScrollSlideTitle>
-                  <TrimmedImage
-                    src="/images/maintenances_services/industry.png"
-                    alt="Industrie"
-                    className="w-auto h-auto max-h-full max-w-full relative z-10"
-                    whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-                  />
-                </div>
-                <div className="w-full lg:w-1/2 text-center lg:text-right relative">
-                  <p className="text-lg text-[#181823]/70 leading-relaxed">
-                    Confort thermique et process industriels maîtrisés
-                  </p>
-                </div>
-              </motion.div>
+          {/* Industrie */}
+          <motion.div
+            className="relative h-80 lg:h-[28rem] overflow-hidden group"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            {/* Image de fond */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              style={{ backgroundImage: "url('/images/maintenances_services/industry.jpg')" }}
+            />
+            {/* Overlay sombre */}
+            <div className="absolute inset-0 bg-[#181823]/60 group-hover:bg-[#181823]/50 transition-colors duration-300" />
+            {/* Contenu */}
+            <div className="relative z-10 h-full flex justify-between items-end">
+              {/* Titre en bas à gauche */}
+              <div className="flex-1 pl-4">
+                <ScrollSlideTitle
+                  direction="fromLeft"
+                  className="text-5xl lg:text-8xl font-bold text-[#E9F8F9] satoshi uppercase tracking-tight"
+                >
+                  Industrie
+                </ScrollSlideTitle>
+              </div>
+              {/* Description à droite */}
+              <div className="flex-1 text-right px-8 pb-8">
+                <p className="text-lg text-[#E9F8F9]/90 leading-relaxed max-w-md ml-auto">
+                  Confort thermique et process industriels maîtrisés.<br/><br/>
+                  Maintenance climatisation industrielle et commerciale : usines, entrepôts, bureaux et espaces tertiaires.<br/><br/>
+                  Solutions HVAC sur mesure, régulation intelligente et maintenance prédictive pour optimiser vos coûts.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Commerces */}
+          <motion.div
+            className="relative h-80 lg:h-[28rem] overflow-hidden group"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {/* Image de fond */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              style={{ backgroundImage: "url('/images/maintenances_services/Coldiretti.jpg')" }}
+            />
+            {/* Overlay sombre */}
+            <div className="absolute inset-0 bg-[#181823]/60 group-hover:bg-[#181823]/50 transition-colors duration-300" />
+            {/* Contenu */}
+            <div className="relative z-10 h-full flex justify-between items-end">
+              {/* Titre en bas à gauche */}
+              <div className="flex-1 pl-4">
+                <ScrollSlideTitle
+                  direction="fromLeft"
+                  className="text-5xl lg:text-8xl font-bold text-[#E9F8F9] satoshi uppercase tracking-tight"
+                >
+                  Commerces
+                </ScrollSlideTitle>
+              </div>
+              {/* Description à droite */}
+              <div className="flex-1 text-right px-8 pb-8">
+                <p className="text-lg text-[#E9F8F9]/90 leading-relaxed max-w-md ml-auto">
+                  Confort clients et chaîne du froid maîtrisée.<br/><br/>
+                  Maintenance des vitrines réfrigérées, chambres froides et climatisation pour magasins, supermarchés et retail premium.<br/><br/>
+                  Interventions rapides, conformité HACCP et optimisation énergétique continue.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -743,22 +813,26 @@ export default function MaintenanceSections() {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <motion.button 
-              className="px-8 py-4 bg-[#537FE7] text-[#E9F8F9] font-medium rounded-sm hover:bg-[#537FE7]/90 transition-all duration-200"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
-              Demander un Audit Gratuit
-            </motion.button>
-            <motion.button 
-              className="px-8 py-4 border border-[#E9F8F9]/30 text-[#E9F8F9] font-medium rounded-sm hover:bg-[#E9F8F9] hover:text-[#181823] transition-all duration-200"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
-              Contrat de Maintenance
-            </motion.button>
+            <a href="/contact#formulaire">
+              <motion.button 
+                className="px-8 py-4 font-medium rounded-sm btn-effect-5"
+                whileHover={{ scale: 1.05, y: 0 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Demander un Audit Gratuit
+              </motion.button>
+            </a>
+            <a href="/maintenances-services#types-maintenance">
+              <motion.button 
+                className="px-8 py-4 font-medium rounded-sm btn-effect-5"
+                whileHover={{ scale: 1.05, y: 0 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Nos solutions de maintenance
+              </motion.button>
+            </a>
           </motion.div>
         </div>
       </motion.section>
