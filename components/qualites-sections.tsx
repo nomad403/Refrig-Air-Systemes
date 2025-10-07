@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import ScrollSlideTitle from "./scroll-slide-title"
 
 // Composant pour l'animation des compteurs
 function AnimatedCounter({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) {
@@ -135,40 +136,46 @@ export default function QualitesSections() {
 
   return (
     <div className="bg-[#181823]">
-      {/* Introduction */}
-      <section className="py-24 px-6 lg:px-12">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2 
-            className="text-4xl md:text-6xl font-light mb-12 text-[#E9F8F9] orbit transform-gpu backface-hidden"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Excellence & Conformité
-          </motion.h2>
-          <motion.p 
-            className="text-xl text-[#E9F8F9]/80 max-w-4xl mx-auto leading-relaxed satoshi font-light mb-12 transform-gpu backface-hidden"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Refrig'Air Systèmes, <strong>expert en climatisation professionnelle certifiée</strong> et 
-            <strong> froid industriel haut de gamme</strong>, garantit la conformité réglementaire et 
-            l'excellence technique pour vos installations critiques : data centers, laboratoires, 
-            industries agroalimentaires et grandes surfaces.
-          </motion.p>
-          
-          <motion.div 
-            className="flex flex-wrap justify-center gap-4 text-sm text-[#E9F8F9]/60"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Climatisation de précision</span>
-            <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Froid industriel</span>
-            <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Maintenance préventive</span>
-            <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Efficacité énergétique</span>
-          </motion.div>
+      {/* Introduction — disposition 2 colonnes (comme home/contact) */}
+      <section className="py-40">
+        <div className="px-4 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-20">
+            {/* Titre à gauche */}
+            <div className="flex-1">
+              <ScrollSlideTitle
+                direction="fromLeft"
+                className="text-5xl lg:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight max-w-[28ch] text-balance"
+              >
+                Excellence & Conformité
+              </ScrollSlideTitle>
+            </div>
+
+            {/* Description à droite */}
+            <motion.div
+              className="flex-1 mt-12 lg:mt-20 space-y-8"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <p 
+                className="text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed"
+              >
+                Refrig'Air Systèmes, <strong>expert en climatisation professionnelle certifiée</strong> et 
+                <strong> froid industriel haut de gamme</strong>, garantit la conformité réglementaire et 
+                l'excellence technique pour vos installations critiques : data centers, laboratoires, 
+                industries agroalimentaires et grandes surfaces.
+              </p>
+              <div 
+                className="flex flex-wrap gap-3 text-sm text-[#E9F8F9]/70"
+              >
+                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Climatisation de précision</span>
+                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Froid industriel</span>
+                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Maintenance préventive</span>
+                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Efficacité énergétique</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -358,12 +365,26 @@ export default function QualitesSections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <button className="bg-[#E9F8F9] text-[#181823] hover:bg-[#E9F8F9]/90 px-8 py-3 rounded-sm font-medium transition-all duration-300 satoshi">
-              Demander un Devis Certifié
-            </button>
-            <button className="border border-[#E9F8F9]/30 text-[#E9F8F9] hover:border-[#E9F8F9] hover:bg-[#E9F8F9] hover:text-[#181823] px-8 py-3 rounded-sm font-medium transition-all duration-300 satoshi">
-              Nos Références Premium
-            </button>
+            <a href="/contact#formulaire">
+              <motion.button 
+                className="px-8 py-3 rounded-sm btn-effect-5"
+                whileHover={{ scale: 1.05, y: 0 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Demander un Devis Certifié
+              </motion.button>
+            </a>
+            <a href="#certifications">
+              <motion.button 
+                className="px-8 py-3 rounded-sm btn-effect-5"
+                whileHover={{ scale: 1.05, y: 0 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Nos Références Premium
+              </motion.button>
+            </a>
           </motion.div>
         </div>
       </section>

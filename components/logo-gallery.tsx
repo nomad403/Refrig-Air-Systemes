@@ -6,7 +6,7 @@ const partnerLogos = [
   { 
     name: "Daikin", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <text x="10" y="35" className="font-bold text-2xl">DAIKIN</text>
       </svg>
     )
@@ -14,7 +14,7 @@ const partnerLogos = [
   { 
     name: "Mitsubishi Electric", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <polygon points="20,15 40,15 30,35" className="fill-white"/>
         <text x="50" y="30" className="font-semibold text-sm">MITSUBISHI</text>
       </svg>
@@ -23,7 +23,7 @@ const partnerLogos = [
   { 
     name: "Carrier", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <circle cx="25" cy="30" r="12" className="fill-none stroke-white stroke-2"/>
         <text x="45" y="35" className="font-bold text-xl">CARRIER</text>
       </svg>
@@ -32,7 +32,7 @@ const partnerLogos = [
   { 
     name: "Trane", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <rect x="15" y="20" width="20" height="20" className="fill-white"/>
         <text x="45" y="35" className="font-bold text-xl">TRANE</text>
       </svg>
@@ -41,7 +41,7 @@ const partnerLogos = [
   { 
     name: "Lennox", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <path d="M15,30 L25,20 L35,30 L25,40 Z" className="fill-white"/>
         <text x="45" y="35" className="font-bold text-lg">LENNOX</text>
       </svg>
@@ -50,7 +50,7 @@ const partnerLogos = [
   { 
     name: "Johnson Controls", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <circle cx="20" cy="25" r="6" className="fill-white"/>
         <circle cx="30" cy="35" r="6" className="fill-white"/>
         <text x="45" y="30" className="font-semibold text-xs">JOHNSON</text>
@@ -61,7 +61,7 @@ const partnerLogos = [
   { 
     name: "Danfoss", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <ellipse cx="25" cy="30" rx="15" ry="8" className="fill-none stroke-white stroke-2"/>
         <text x="50" y="35" className="font-bold text-lg">DANFOSS</text>
       </svg>
@@ -70,7 +70,7 @@ const partnerLogos = [
   { 
     name: "Copeland", 
     icon: (
-      <svg className="w-64 h-32 fill-white" viewBox="0 0 200 60">
+      <svg className="w-[22.4rem] h-[11.2rem] fill-white" viewBox="0 0 200 60">
         <rect x="15" y="25" width="25" height="10" className="fill-none stroke-white stroke-2"/>
         <text x="50" y="35" className="font-bold text-md">COPELAND</text>
       </svg>
@@ -112,7 +112,7 @@ export default function LogoGallery() {
         {duplicatedLogos.map((partner, index) => (
           <div
             key={index}
-            className="flex-shrink-0 flex items-center justify-center w-80 h-48 group cursor-pointer"
+            className="flex-shrink-0 flex items-center justify-center w-[28rem] h-[14rem] group cursor-pointer"
             onMouseEnter={() => setSelectedLogo(index)}
             onMouseLeave={() => setSelectedLogo(null)}
           >
@@ -129,7 +129,7 @@ export default function LogoGallery() {
         ))}
       </div>
       
-
+      
     </div>
   )
 }

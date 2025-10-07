@@ -235,3 +235,31 @@
     font-size: clamp(1.95rem, 2.9vw, 3.25rem); /* réduit de ~15% */
   }
 }
+
+/* Effet bouton .btn-effect-5 */
+.btn-effect-5 { 
+  position: relative;
+  z-index: 0; /* crée un stacking context pour que ::before reste derrière le texte mais au-dessus du fond */
+  overflow: hidden; /* masque le ::before lors de l'animation de largeur */
+  border: 1px solid #E9F8F9; 
+  background: transparent; 
+  color: #E9F8F9; 
+}
+.btn-effect-5::before {
+  content: '';
+  position: absolute; 
+  top: 0; 
+  left: 0;
+  width: 0; 
+  height: 100%; 
+  background: #E9F8F9;
+  font-family: var(--font-satoshi);
+  z-index: -1; 
+  transition: width 0.5s;
+}
+.btn-effect-5:hover { 
+  color: #000; 
+}
+.btn-effect-5:hover::before { 
+  width: 100%; 
+}

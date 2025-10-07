@@ -28,6 +28,7 @@ export default function ShaderBackground({
   const playerRef = useRef<any>(null)
   const [isActive, setIsActive] = useState(false)
   const [isPlayerReady, setIsPlayerReady] = useState(false)
+  const loopTimerRef = useRef<any>(null)
 
   useEffect(() => {
     // Ne charger l'API YouTube que si c'est une vidéo
@@ -68,10 +69,22 @@ export default function ShaderBackground({
                 event.target.mute()
                 event.target.playVideo()
                 setIsPlayerReady(true)
+                // Boucle quasi-instantanée: surveiller la fin et "seek" juste avant END
+                if (loopTimerRef.current) clearInterval(loopTimerRef.current)
+                loopTimerRef.current = setInterval(() => {
+                  try {
+                    const t = event.target.getCurrentTime?.() ?? 0
+                    const d = event.target.getDuration?.() ?? 0
+                    if (d > 0 && d - t <= 0.15) {
+                      event.target.seekTo(0, true)
+                    }
+                  } catch {}
+                }, 100)
               },
               onStateChange: (event: any) => {
                 // Relancer la vidéo si elle s'arrête
                 if (event.data === window.YT.PlayerState.ENDED) {
+                  event.target.seekTo(0, true)
                   event.target.playVideo()
                 }
               }
@@ -95,6 +108,7 @@ export default function ShaderBackground({
         container.removeEventListener("mouseenter", handleMouseEnter)
         container.removeEventListener("mouseleave", handleMouseLeave)
       }
+      if (loopTimerRef.current) clearInterval(loopTimerRef.current)
     }
   }, [backgroundType, videoId])
 
@@ -116,6 +130,10 @@ export default function ShaderBackground({
               minHeight: "120vh"
             }}
           />
+          {/* Masque anti-loader le temps du ready */}
+          {!isPlayerReady && (
+            <div className="absolute inset-0 bg-black" />
+          )}
           
           {/* Overlay pour donner du contraste sous le header */}
           <div className="pointer-events-none absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-black/50 via-black/20 to-transparent" />

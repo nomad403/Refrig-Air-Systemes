@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import Header from "@/components/header"
 
 export const metadata: Metadata = {
   title: "Refrig'Air Systemes - Climatisation et froid industriel",
@@ -15,6 +16,8 @@ export default function RootLayout({
   return (
     <html lang="fr" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <head>
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
         <style>{`
           html::-webkit-scrollbar { display: none !important; width: 0 !important; }
           body::-webkit-scrollbar { display: none !important; width: 0 !important; }
@@ -27,6 +30,7 @@ export default function RootLayout({
         `}</style>
       </head>
       <body style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overflowX: 'hidden' }}>
+        <Header />
         {children}
       </body>
     </html>

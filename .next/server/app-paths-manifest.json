@@ -1,4 +1,4 @@
 {
-  "/maintenances-services/page": "app/maintenances-services/page.js",
-  "/expertises/page": "app/expertises/page.js"
+  "/contact/page": "app/contact/page.js",
+  "/qualites-certification/page": "app/qualites-certification/page.js"
 }

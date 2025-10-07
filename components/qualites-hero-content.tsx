@@ -4,45 +4,45 @@ import { motion } from "framer-motion"
 
 export default function QualitesHeroContent() {
   return (
-    <div className="relative z-10 flex min-h-screen items-center justify-center px-4">
-      <div className="text-center max-w-4xl mx-auto">
-        {/* Titre principal */}
-        <motion.h1 
-          className="text-3xl md:text-5xl font-light mb-8 text-white leading-tight orbit"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          Qualités et Certifications
-        </motion.h1>
+    <div className="absolute inset-0 z-20 px-6">
+      {/* Titre bas-gauche */}
+      <motion.h1 
+        className="absolute left-6 bottom-8 md:bottom-6 text-lg md:text-3xl lg:text-5xl xl:text-6xl font-light text-white leading-tight orbit uppercase"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.2 }}
+      >
+        Qualités & Certifications
+      </motion.h1>
 
-        {/* Sous-titre */}
-        <motion.p 
-          className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed satoshi font-light"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-        >
-          Excellence technique, conformité réglementaire 
-          <br />
-          et engagement qualité premium.
-        </motion.p>
-
-        {/* CTA */}
-        <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-        >
-          <button className="bg-white text-black hover:bg-gray-200 px-8 py-3 rounded-sm font-medium transition-all duration-300 satoshi">
+      {/* CTA bas-droite */}
+      <motion.div 
+        className="absolute right-6 bottom-8 md:bottom-6 flex items-center justify-end gap-4"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
+        <a href="/contact#formulaire" className="satoshi">
+          <motion.button 
+            className="px-8 py-4 bg-[#E9F8F9] text-black font-medium text-sm rounded-sm btn-effect-5"
+            whileHover={{ scale: 1.05, y: 0 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
             Demander un Devis
-          </button>
-          <button className="border border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-sm font-medium transition-all duration-300 satoshi">
+          </motion.button>
+        </a>
+        <a href="#certifications" className="satoshi">
+          <motion.button 
+            className="px-8 py-4 bg-transparent border border-white/30 text-white font-medium text-sm rounded-sm btn-effect-5"
+            whileHover={{ scale: 1.05, y: 0 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
             Nos Certifications
-          </button>
-        </motion.div>
-      </div>
+          </motion.button>
+        </a>
+      </motion.div>
     </div>
   )
 }
