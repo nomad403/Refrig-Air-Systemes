@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import LiteYouTubeBackground from "./LiteYouTubeBackground"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import ScrollSlideTitle from "./scroll-slide-title"
@@ -137,14 +138,14 @@ export default function QualitesSections() {
   return (
     <div className="bg-[#181823]">
       {/* Introduction — disposition 2 colonnes (comme home/contact) */}
-      <section className="py-40">
-        <div className="px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-20">
+      <section className="py-20 sm:py-32 lg:py-40">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-start gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             {/* Titre à gauche */}
             <div className="flex-1">
               <ScrollSlideTitle
                 direction="fromLeft"
-                className="text-5xl lg:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight max-w-[28ch] text-balance"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight max-w-[24ch] sm:max-w-[26ch] lg:max-w-[28ch] text-balance"
               >
                 Excellence & Conformité
               </ScrollSlideTitle>
@@ -152,14 +153,14 @@ export default function QualitesSections() {
 
             {/* Description à droite */}
             <motion.div
-              className="flex-1 mt-12 lg:mt-20 space-y-8"
+              className="flex-1 mt-8 sm:mt-12 lg:mt-16 xl:mt-20 space-y-4 sm:space-y-6 lg:space-y-8"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
               <p 
-                className="text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed"
               >
                 Refrig'Air Systèmes, <strong>expert en climatisation professionnelle certifiée</strong> et 
                 <strong> froid industriel haut de gamme</strong>, garantit la conformité réglementaire et 
@@ -167,7 +168,7 @@ export default function QualitesSections() {
                 industries agroalimentaires et grandes surfaces.
               </p>
               <div 
-                className="flex flex-wrap gap-3 text-sm text-[#E9F8F9]/70"
+                className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm text-[#E9F8F9]/70"
               >
                 <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Climatisation de précision</span>
                 <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Froid industriel</span>
@@ -180,29 +181,15 @@ export default function QualitesSections() {
       </section>
 
       {/* Certifications - Format épuré avec vidéo en fond */}
-      <section ref={sectionRef} className="py-20 bg-[#E9F8F9] relative overflow-hidden">
-        {/* Vidéo en arrière-plan */}
+      <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 bg-[#E9F8F9] relative overflow-hidden">
+        {/* Vidéo en arrière-plan (lite embed, chargée à l'apparition) */}
         <div className="absolute inset-0 w-full h-full">
-          <iframe
-            src="https://www.youtube.com/embed/zMQxGxaE5xM?autoplay=1&mute=1&loop=1&playlist=zMQxGxaE5xM&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&fs=0&cc_load_policy=0&disablekb=1&enablejsapi=1"
-            className="absolute top-1/2 left-1/2 w-full h-full object-cover"
-            style={{
-              width: "177.77vh", // 16:9 ratio pour éliminer les barres noires
-              height: "100vw",
-              minWidth: "100%",
-              minHeight: "56.25vw", // 16:9 ratio
-              transform: "translate(-50%, -50%)",
-              pointerEvents: "none"
-            }}
-            allow="autoplay; encrypted-media"
-            allowFullScreen={false}
-            title="Certifications Background Video"
-          />
+          <LiteYouTubeBackground id="zMQxGxaE5xM" title="Certifications Background Video" />
         </div>
         
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <motion.h2 
-            className="text-3xl md:text-4xl font-light text-center mb-16 text-[#E9F8F9] orbit"
+            className="text-2xl sm:text-3xl md:text-4xl font-light text-center mb-12 sm:mb-16 text-[#E9F8F9] orbit"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
@@ -210,11 +197,11 @@ export default function QualitesSections() {
             Certifications
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {certifications.map((cert, index) => (
               <motion.div
                 key={cert.title}
-                className="border border-[#181823]/10 p-6 hover:border-[#181823]/20 transition-colors duration-200 group transform-gpu backface-hidden bg-[#E9F8F9]/95 backdrop-blur-sm"
+                className="border border-[#181823]/10 p-4 sm:p-6 hover:border-[#181823]/20 transition-colors duration-200 group transform-gpu backface-hidden bg-[#E9F8F9]/95 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -233,10 +220,10 @@ export default function QualitesSections() {
       </section>
 
       {/* Nos Engagements - Minimaliste */}
-      <section className="py-20 bg-[#181823]">
-        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#181823]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
           <motion.h2 
-            className="text-3xl md:text-4xl font-light text-center mb-16 text-[#E9F8F9] orbit"
+            className="text-2xl sm:text-3xl md:text-4xl font-light text-center mb-12 sm:mb-16 text-[#E9F8F9] orbit"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -244,11 +231,11 @@ export default function QualitesSections() {
             Nos Engagements
           </motion.h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {engagements.map((engagement, index) => (
               <motion.div
                 key={engagement.title}
-                className="text-center border-l border-[#E9F8F9]/20 pl-6 transform-gpu backface-hidden"
+                className="text-center border-l border-[#E9F8F9]/20 pl-4 sm:pl-6 transform-gpu backface-hidden"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -267,10 +254,10 @@ export default function QualitesSections() {
       </section>
 
       {/* Secteurs d'Excellence Premium */}
-      <section className="py-20 bg-[#E9F8F9]">
-        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#E9F8F9]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
           <motion.h2 
-            className="text-3xl md:text-4xl font-light text-center mb-16 text-[#181823] orbit"
+            className="text-2xl sm:text-3xl md:text-4xl font-light text-center mb-12 sm:mb-16 text-[#181823] orbit"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -278,7 +265,7 @@ export default function QualitesSections() {
             Secteurs d'Excellence
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
             {[
               {
                 title: "Data Centers",
@@ -303,7 +290,7 @@ export default function QualitesSections() {
             ].map((secteur, index) => (
               <motion.div
                 key={secteur.title}
-                className="border border-[#181823]/10 p-6 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden"
+                className="border border-[#181823]/10 p-4 sm:p-6 hover:border-[#181823]/20 transition-colors duration-200 transform-gpu backface-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -338,10 +325,10 @@ export default function QualitesSections() {
       </section>
 
       {/* Call to Action Final - Simple */}
-      <section className="py-20 bg-[#181823]">
-        <div className="max-w-3xl mx-auto text-center px-6 lg:px-12">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#181823]">
+        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-12">
           <motion.h2 
-            className="text-3xl md:text-4xl font-light mb-8 text-[#E9F8F9] orbit"
+            className="text-2xl sm:text-3xl md:text-4xl font-light mb-6 sm:mb-8 text-[#E9F8F9] orbit"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -360,14 +347,14 @@ export default function QualitesSections() {
           </motion.p>
           
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <a href="/contact#formulaire">
+            <a href="/contact#formulaire" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-3 rounded-sm btn-effect-5"
+                className="rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
@@ -375,9 +362,9 @@ export default function QualitesSections() {
                 Demander un Devis Certifié
               </motion.button>
             </a>
-            <a href="#certifications">
+            <a href="#certifications" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-3 rounded-sm btn-effect-5"
+                className="rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}

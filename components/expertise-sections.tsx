@@ -67,19 +67,19 @@ export default function ExpertiseSections() {
     <div className="relative z-20 bg-[#181823]">
       {/* En-tête section — même disposition que la bannière contact (2 colonnes) */}
       <motion.section 
-        className="py-40 px-4 lg:px-8 bg-[#537FE7]"
+        className="py-20 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-[#537FE7]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
         <div className="mx-auto">
-          <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-20">
+          <div className="flex flex-col lg:flex-row items-start gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             {/* Titre à gauche */}
             <div className="flex-1">
               <ScrollSlideTitle
                 direction="fromLeft"
-                className="text-5xl lg:text-7xl font-bold text-white orbit uppercase tracking-tight leading-tight max-w-[26ch] lg:max-w-[28ch] text-balance"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white orbit uppercase tracking-tight leading-tight max-w-[24ch] sm:max-w-[26ch] lg:max-w-[28ch] text-balance"
               >
                 NOTRE EXPERTISE FRIGORIFIQUE
               </ScrollSlideTitle>
@@ -87,19 +87,19 @@ export default function ExpertiseSections() {
 
             {/* Description à droite */}
             <motion.div
-              className="flex-1 mt-12 lg:mt-20 space-y-8"
+              className="flex-1 mt-8 sm:mt-12 lg:mt-16 xl:mt-20 space-y-4 sm:space-y-6 lg:space-y-8"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <div className="text-2xl lg:text-3xl font-light text-white/90 mb-10">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-white/90 mb-6 sm:mb-8 lg:mb-10">
                 Pour vos environnements climatisation & froid critiques
               </div>
-              <p className="text-xl lg:text-2xl text-white/85 leading-relaxed mb-8">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/85 leading-relaxed mb-6 sm:mb-8">
                 Conception, installation et maintenance haut de gamme pour data centers, laboratoires, industrie et agroalimentaire. Performances, fiabilité et efficacité énergétique au cœur de chaque projet.
               </p>
-              <p className="text-white/80 text-base lg:text-lg">
+              <p className="text-white/80 text-sm sm:text-base lg:text-lg">
                 —Élevés par l'expertise, animés par l'excellence.
               </p>
             </motion.div>
@@ -110,7 +110,7 @@ export default function ExpertiseSections() {
       {/* Domaines d'Expertise — vue liste avec séparateurs et détails repliables */}
       <motion.section 
         id="nos-domaines"
-        className="py-32 lg:py-48 px-6 lg:px-12 bg-[#181823]"
+        className="py-20 sm:py-32 lg:py-48 px-4 sm:px-6 lg:px-12 bg-[#181823]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -118,7 +118,7 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="mb-32 lg:mb-40"
+            className="mb-16 sm:mb-24 lg:mb-32 xl:mb-40"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -138,13 +138,13 @@ export default function ExpertiseSections() {
             {/* Climatisation - Item */}
             <div className="border-t border-white/10 pt-16 pb-8">
             <motion.div
-              className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24"
+              className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16 xl:gap-24"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+              <div className="w-full lg:w-1/2 h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 flex items-center justify-center relative z-10">
                 <div
                   className="absolute inset-0 pointer-events-none z-20"
                   style={{
@@ -162,8 +162,8 @@ export default function ExpertiseSections() {
                 <TrimmedImage 
                   src="/images/expertises/clim%20reversible.png" 
                   alt="Climatisation & Réversible"
-                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-[1.35]"
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  className="w-full h-full object-contain relative z-30"
+                  whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
               <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
@@ -187,7 +187,7 @@ export default function ExpertiseSections() {
                 <div className="mt-6">
                   <motion.button
                     onClick={() => toggleDomain("Climatisation Réversible")}
-                    className="px-6 py-3 font-medium rounded-sm btn-effect-5 relative"
+                    className="rounded-sm btn-effect-5 btn-standard relative"
                     whileHover={{ scale: 1.05, y: 0 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
@@ -223,13 +223,13 @@ export default function ExpertiseSections() {
             {/* Pompes à Chaleur - Item */}
             <div className="border-t border-white/10 pt-16 pb-8">
             <motion.div
-              className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12"
+              className="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+              <div className="w-full lg:w-1/2 h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 flex items-center justify-center relative z-10">
                 <div
                   className="absolute inset-0 pointer-events-none z-20"
                   style={{
@@ -247,8 +247,8 @@ export default function ExpertiseSections() {
                 <TrimmedImage 
                   src="/images/expertises/Whisk_8e1c4946f8ef139bab04376179289556dr-removebg-preview.png" 
                   alt="Pompes à Chaleur Industrielles"
-                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-110"
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  className="w-full h-full object-contain relative z-30"
+                  whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
               <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
@@ -272,7 +272,7 @@ export default function ExpertiseSections() {
                 <div className="mt-6 self-center lg:self-end">
                   <motion.button
                     onClick={() => toggleDomain("Pompes à Chaleur Industrielles")}
-                    className="px-6 py-3 font-medium rounded-sm btn-effect-5 relative"
+                    className="rounded-sm btn-effect-5 btn-standard relative"
                     whileHover={{ scale: 1.05, y: 0 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
@@ -308,13 +308,13 @@ export default function ExpertiseSections() {
             {/* Chambres Froides - Item */}
             <div className="border-t border-white/10 pt-16 pb-8">
             <motion.div
-              className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
+              className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+              <div className="w-full lg:w-1/2 h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 flex items-center justify-center relative z-10">
                 <div
                   className="absolute inset-0 pointer-events-none z-20"
                   style={{
@@ -332,8 +332,8 @@ export default function ExpertiseSections() {
                 <TrimmedImage 
                   src="/images/expertises/chambre_froide.png" 
                   alt="Chambres Froides"
-                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-130"
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  className="w-full h-full object-contain relative z-30"
+                  whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
               <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
@@ -357,7 +357,7 @@ export default function ExpertiseSections() {
                 <div className="mt-6">
                   <motion.button
                     onClick={() => toggleDomain("Chambres Froides Positives & Négatives")}
-                    className="px-6 py-3 font-medium rounded-sm btn-effect-5 relative"
+                    className="rounded-sm btn-effect-5 btn-standard relative"
                     whileHover={{ scale: 1.05, y: 0 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
@@ -393,13 +393,13 @@ export default function ExpertiseSections() {
             {/* Groupes à Eau Glacée - Item */}
             <div className="border-t border-white/10 pt-16 pb-8">
             <motion.div
-              className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12"
+              className="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+              <div className="w-full lg:w-1/2 h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 flex items-center justify-center relative z-10">
                 <div
                   className="absolute inset-0 pointer-events-none z-20"
                   style={{
@@ -417,8 +417,8 @@ export default function ExpertiseSections() {
                 <TrimmedImage 
                   src="/images/expertises/Whisk_156a412801b7bdda1c24335148af6254dr-removebg-preview.png" 
                   alt="Groupes à Eau Glacée"
-                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-110"
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  className="w-full h-full object-contain relative z-30"
+                  whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
               <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
@@ -442,7 +442,7 @@ export default function ExpertiseSections() {
                 <div className="mt-6 self-center lg:self-end">
                   <motion.button
                     onClick={() => toggleDomain("Groupes à Eau Glacée")}
-                    className="px-6 py-3 font-medium rounded-sm btn-effect-5 relative"
+                    className="rounded-sm btn-effect-5 btn-standard relative"
                     whileHover={{ scale: 1.05, y: 0 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
@@ -478,13 +478,13 @@ export default function ExpertiseSections() {
             {/* Récupérateurs de Chaleur - Item */}
             <div className="border-t border-white/10 pt-16 pb-8">
             <motion.div
-              className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
+              className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="w-full lg:w-1/2 h-72 lg:h-96 flex items-center justify-center relative z-10">
+              <div className="w-full lg:w-1/2 h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 flex items-center justify-center relative z-10">
                 <div
                   className="absolute inset-0 pointer-events-none z-20"
                   style={{
@@ -502,8 +502,8 @@ export default function ExpertiseSections() {
                 <TrimmedImage 
                   src="/images/expertises/recuperateur.png" 
                   alt="Récupérateurs de Chaleur"
-                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-115"
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  className="w-full h-full object-contain relative z-30"
+                  whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
               <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
@@ -527,7 +527,7 @@ export default function ExpertiseSections() {
                 <div className="mt-6">
                   <motion.button
                     onClick={() => toggleDomain("Récupérateurs de Chaleur")}
-                    className="px-6 py-3 font-medium rounded-sm btn-effect-5 relative"
+                    className="rounded-sm btn-effect-5 btn-standard relative"
                     whileHover={{ scale: 1.05, y: 0 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
@@ -563,7 +563,7 @@ export default function ExpertiseSections() {
             {/* Maintenance & Diagnostics - Item */}
             <div className="border-t border-white/10 pt-16 pb-8">
             <motion.div
-              className="flex flex-col lg:flex-row-reverse items-center gap-2 lg:gap-4"
+              className="flex flex-col lg:flex-row-reverse items-center gap-4 sm:gap-6 lg:gap-8"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
@@ -587,8 +587,8 @@ export default function ExpertiseSections() {
                 <TrimmedImage 
                   src="/images/expertises/casque.png" 
                   alt="Maintenance & Diagnostic"
-                  className="w-auto h-auto max-h-full max-w-full relative z-30 scale-125"
-                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                  className="w-full h-full object-contain relative z-30"
+                  whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
               <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
@@ -612,7 +612,7 @@ export default function ExpertiseSections() {
                 <div className="mt-6 self-center lg:self-end">
                   <motion.button
                     onClick={() => toggleDomain("Maintenance & Diagnostics")}
-                    className="px-6 py-3 font-medium rounded-sm btn-effect-5 relative"
+                    className="rounded-sm btn-effect-5 btn-standard relative"
                     whileHover={{ scale: 1.05, y: 0 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2 }}
@@ -652,7 +652,7 @@ export default function ExpertiseSections() {
 
       {/* Notre Processus / Méthodologie - Style GenCell */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#537FE7]"
+        className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-[#537FE7]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -660,7 +660,7 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-24 lg:mb-32"
+            className="text-center mb-16 sm:mb-20 lg:mb-24 xl:mb-32"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -822,7 +822,7 @@ export default function ExpertiseSections() {
 
       {/* Certifications & Garanties */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#E9F8F9]"
+        className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-[#E9F8F9]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -830,7 +830,7 @@ export default function ExpertiseSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-24 lg:mb-32"
+            className="text-center mb-16 sm:mb-20 lg:mb-24 xl:mb-32"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -842,7 +842,7 @@ export default function ExpertiseSections() {
             <p className="text-[#537FE7] text-lg">[nos engagements qualité]</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
             {/* QUALI-FROID */}
             <motion.div
               className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
@@ -857,6 +857,7 @@ export default function ExpertiseSections() {
                   alt="Logo QUALI-FROID"
                   className="w-full h-full object-contain"
                   loading="lazy" decoding="async"
+                  sizes="64px"
                 />
               </div>
               <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">QUALI-FROID</h3>
@@ -877,6 +878,7 @@ export default function ExpertiseSections() {
                   alt="Logo RGE Reconnu Garant de l'Environnement"
                   className="w-full h-full object-contain"
                   loading="lazy" decoding="async"
+                  sizes="64px"
                 />
               </div>
               <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">RGE</h3>
@@ -897,6 +899,7 @@ export default function ExpertiseSections() {
                   alt="Logo Assurance Décennale"
                   className="w-full h-full object-contain"
                   loading="lazy" decoding="async"
+                  sizes="64px"
                 />
               </div>
               <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">Assurance Décennale</h3>
@@ -917,6 +920,7 @@ export default function ExpertiseSections() {
                   alt="Logo Conformité HACCP"
                   className="w-full h-full object-contain"
                   loading="lazy" decoding="async"
+                  sizes="64px"
                 />
               </div>
               <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">Conformité HACCP</h3>
@@ -958,7 +962,7 @@ export default function ExpertiseSections() {
 
       {/* CTA Premium */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#181823] text-center"
+        className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-[#181823] text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -984,15 +988,15 @@ export default function ExpertiseSections() {
             Confiez-nous votre projet et bénéficiez de notre expertise reconnue. Audit gratuit, devis personnalisé et accompagnement premium.
           </motion.p>
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <a href="/contact">
+            <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-4 bg-[#537FE7] text-[#E9F8F9] font-medium rounded-sm btn-effect-5"
+                className="bg-[#537FE7] text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
@@ -1000,9 +1004,9 @@ export default function ExpertiseSections() {
                 Demander un Audit Gratuit
               </motion.button>
             </a>
-            <a href="/contact">
+            <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-4 border border-[#E9F8F9]/30 text-[#E9F8F9] font-medium rounded-sm btn-effect-5"
+                className="border border-[#E9F8F9]/30 text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}

@@ -207,7 +207,11 @@
 }
 
 .animate-scroll {
-  animation: scroll 30s linear infinite;
+  animation: scroll 25s linear infinite;
+}
+
+.animate-scroll-fast {
+  animation: scroll 20s linear infinite;
 }
 
 .animate-pause {
@@ -244,6 +248,7 @@
   border: 1px solid #E9F8F9; 
   background: transparent; 
   color: #E9F8F9; 
+  font-family: var(--font-satoshi);
 }
 .btn-effect-5::before {
   content: '';
@@ -253,7 +258,6 @@
   width: 0; 
   height: 100%; 
   background: #E9F8F9;
-  font-family: var(--font-satoshi);
   z-index: -1; 
   transition: width 0.5s;
 }
@@ -262,4 +266,52 @@
 }
 .btn-effect-5:hover::before { 
   width: 100%; 
+}
+
+/* Tailles standardisées pour les boutons d'action */
+.btn-standard {
+  padding: 0.75rem 1.5rem; /* py-3 px-6 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  cursor: pointer;
+  min-width: 10rem; /* Largeur minimale pour uniformiser */
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .btn-standard {
+    padding: 1rem 2rem; /* sm:py-4 sm:px-8 */
+    font-size: 1rem; /* sm:text-base */
+    min-width: 12rem; /* Largeur minimale plus grande sur desktop */
+  }
+}
+
+/* Styles pour la vidéo responsive */
+@media (max-width: 768px) {
+  #youtube-player {
+    /* Format paysage 16:9 sur mobile - couvre toute la hauteur */
+    width: 177.78vh !important; /* 16/9 * 100vh */
+    height: 100vh !important;
+    margin-left: calc((100vw - 177.78vh) / 2) !important;
+    margin-top: 0 !important;
+    min-width: 177.78vh !important;
+    min-height: 100vh !important;
+  }
+  
+  /* Assurer que la vidéo couvre bien l'écran sur mobile */
+  .shader-background-mobile {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shader-background-mobile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: black;
+    z-index: -1;
+  }
 }
