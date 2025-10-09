@@ -1,5 +1,18 @@
+export const metadata = {
+  title: "Contact",
+  description: "Contact Refrig'Air Systèmes: devis, audit, accompagnement technique pour climatisation de précision et froid industriel à Paris et en Île‑de‑France.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact",
+    description: "Climatisation de précision et froid industriel (Paris/IDF).",
+    url: "/contact",
+  },
+  twitter: {
+    title: "Contact",
+    description: "Devis et audit HVAC (Paris/IDF).",
+  }
+}
 import ShaderBackground from "../../components/shader-background"
-import Header from "../../components/header"
 import ContactSections from "../../components/contact-sections"
 import ContactHeroContent from "../../components/contact-hero-content"
 
@@ -11,9 +24,6 @@ export default function ContactPage() {
         <div className="absolute inset-0 -z-10">
           <ShaderBackground videoId="c_qmsj_hqJs" />
         </div>
-
-        {/* Header qui blend avec ce fond */}
-        <Header />
 
         {/* Contenu par-dessus */}
         <ContactHeroContent />

@@ -108,6 +108,9 @@ export default function TrimmedImage({ src, alt, className, ...motionProps }: Tr
       className={className}
       // Important pour la lisibilité et la stabilité visuelle
       style={{ objectFit: "contain" }}
+      loading="lazy"
+      decoding="async"
+      sizes="(max-width: 1024px) 100vw, 50vw"
       {...motionProps}
     />
   )

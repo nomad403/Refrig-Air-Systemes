@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: transparent; --fg: #E9F8F9; }
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg: transparent; --fg: #181823; }
+    }
+  </style>
+  <rect width="64" height="64" rx="8" fill="var(--bg)"/>
+  <!-- RAS centrés via texte (fallback si Orbit indisponible) -->
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="var(--fg)" font-family="Orbit, Arial, sans-serif" font-size="28" letter-spacing="1">
+    RAS
+  </text>
+</svg>
+

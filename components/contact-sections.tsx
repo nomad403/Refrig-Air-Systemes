@@ -66,7 +66,7 @@ function ContactFormMinimal() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         <div>
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
           NOM
@@ -97,7 +97,7 @@ function ContactFormMinimal() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         <div>
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
           TÉLÉPHONE
@@ -280,7 +280,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
             Nom et prénom *
@@ -311,7 +311,7 @@ function ContactForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
             Email *
@@ -342,7 +342,7 @@ function ContactForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
             Secteur d'activité *
@@ -416,19 +416,19 @@ export default function ContactSections() {
       {/* Introduction Premium */}
       <motion.section 
         id="intro-contact"
-        className="py-40 bg-[#181823]"
+        className="py-20 sm:py-32 lg:py-40 bg-[#181823]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-start gap-24">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-start gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             {/* Titre à gauche */}
             <div className="flex-1">
               <ScrollSlideTitle
                 direction="fromLeft"
-                className="text-5xl lg:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight max-w-[24ch] sm:max-w-[26ch] lg:max-w-[28ch] text-balance"
               >
                 CONTACTEZ NOS<br/>EXPERTS MAINTENANCE
               </ScrollSlideTitle>
@@ -436,19 +436,19 @@ export default function ContactSections() {
 
             {/* Description en dessous à droite */}
             <motion.div
-              className="flex-1 mt-12 lg:mt-20 space-y-8"
+              className="flex-1 mt-8 sm:mt-12 lg:mt-16 xl:mt-20 space-y-4 sm:space-y-6 lg:space-y-8"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <div className="text-2xl lg:text-3xl font-light text-[#537FE7] mb-10">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-[#537FE7] mb-6 sm:mb-8 lg:mb-10">
                 Pour vos installations climatisation et froid critiques
               </div>
-              <p className="text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed mb-8">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed mb-6 sm:mb-8">
                 Nos ingénieurs frigoristes certifiés QUALI-FROID vous accompagnent dans la maintenance de vos installations critiques. Data centers, laboratoires pharmaceutiques, industrie agroalimentaire : expertise reconnue et interventions garanties.
               </p>
-              <p className="text-[#537FE7] text-base lg:text-lg">
+              <p className="text-[#537FE7] text-sm sm:text-base lg:text-lg">
                 —Réponse garantie sous 24h pour vos projets premium.
               </p>
             </motion.div>
@@ -459,14 +459,14 @@ export default function ContactSections() {
       {/* Formulaire de Contact - Design Minimaliste */}
       <motion.section 
         id="formulaire"
-        className="py-20 px-6 lg:px-12 bg-[#E9F8F9]"
+        className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-[#E9F8F9]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
             {/* Contenu à gauche */}
             <motion.div
               className="space-y-8"
@@ -476,16 +476,16 @@ export default function ContactSections() {
               viewport={{ once: true }}
             >
               <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-[#181823] mb-6 satoshi uppercase tracking-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#181823] mb-4 sm:mb-6 satoshi uppercase tracking-tight">
                   Contact
                 </h2>
-                <p className="text-lg text-[#181823]/70 leading-relaxed">
+                <p className="text-base sm:text-lg text-[#181823]/70 leading-relaxed">
                   Nos experts maintenance climatisation vous accompagnent dans vos projets critiques. 
                   Data centers, laboratoires, industrie : expertise reconnue et interventions garanties.
                 </p>
               </div>
 
-              <div className="text-sm text-[#181823]/60 leading-relaxed">
+              <div className="text-xs sm:text-sm text-[#181823]/60 leading-relaxed">
                 <p>
                   Maintenance préventive et corrective pour installations climatisation critiques. 
                   Contrats d'astreinte 24/7, interventions garanties sous 4h en Île-de-France. 
@@ -511,7 +511,7 @@ export default function ContactSections() {
       {/* Informations de Contact */}
       <motion.section 
         id="infos"
-        className="py-20 px-6 lg:px-12 relative overflow-hidden"
+        className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -528,7 +528,7 @@ export default function ContactSections() {
         <div className="absolute inset-0 bg-[#181823]/70" />
         
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
             {/* Section gauche */}
             <motion.div
               className="space-y-8"
@@ -538,13 +538,13 @@ export default function ContactSections() {
               viewport={{ once: true }}
             >
               <div>
-                <h2 className="text-sm font-medium text-[#E9F8F9] mb-8 uppercase tracking-wider">—Nos bureaux</h2>
+                <h2 className="text-xs sm:text-sm font-medium text-[#E9F8F9] mb-6 sm:mb-8 uppercase tracking-wider">—Nos bureaux</h2>
               </div>
             </motion.div>
 
             {/* Section droite */}
             <motion.div
-              className="space-y-12"
+              className="space-y-8 sm:space-y-12"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -552,22 +552,22 @@ export default function ContactSections() {
             >
               {/* Nom de l'entreprise */}
               <div>
-                <h1 className="text-4xl lg:text-6xl font-bold text-[#E9F8F9] uppercase tracking-tight satoshi">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#E9F8F9] uppercase tracking-tight satoshi">
                   REFRIG'AIR<br/>SYSTEMES
                 </h1>
               </div>
 
               {/* Informations de contact */}
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 <div>
-                  <p className="text-lg text-[#E9F8F9] mb-1">149 Avenue du Maine</p>
-                  <p className="text-lg text-[#E9F8F9] mb-4">75014 Paris</p>
-                  <p className="text-sm text-[#E9F8F9]/80 mb-2">tel: 06 67 80 90 74</p>
-                  <p className="text-sm text-[#E9F8F9]/80">contact@refrigairsystemes.com</p>
+                  <p className="text-base sm:text-lg text-[#E9F8F9] mb-1">149 Avenue du Maine</p>
+                  <p className="text-base sm:text-lg text-[#E9F8F9] mb-3 sm:mb-4">75014 Paris</p>
+                  <p className="text-xs sm:text-sm text-[#E9F8F9]/80 mb-2">tel: 06 67 80 90 74</p>
+                  <p className="text-xs sm:text-sm text-[#E9F8F9]/80">contact@refrigairsystemes.com</p>
                 </div>
 
-                <div className="pt-8">
-                  <p className="text-sm text-[#E9F8F9]/70">
+                <div className="pt-6 sm:pt-8">
+                  <p className="text-xs sm:text-sm text-[#E9F8F9]/70">
                     Ou envoyez-nous un email à contact@refrigairsystemes.com
                   </p>
                 </div>
@@ -580,7 +580,7 @@ export default function ContactSections() {
       {/* CTA Final */}
       <motion.section 
         id="cta-final"
-        className="py-20 px-6 lg:px-12 bg-[#181823] text-center"
+        className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-[#181823] text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -588,7 +588,7 @@ export default function ContactSections() {
       >
         <div className="max-w-4xl mx-auto">
           <motion.h2
-            className="text-3xl lg:text-4xl font-light text-[#E9F8F9] mb-6 orbit"
+            className="text-2xl sm:text-3xl md:text-4xl font-light text-[#E9F8F9] mb-4 sm:mb-6 orbit"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -597,7 +597,7 @@ export default function ContactSections() {
             Prêt à Optimiser vos Installations ?
           </motion.h2>
           <motion.p
-            className="text-lg text-[#E9F8F9]/80 mb-8 leading-relaxed"
+            className="text-base sm:text-lg text-[#E9F8F9]/80 mb-6 sm:mb-8 leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -606,15 +606,15 @@ export default function ContactSections() {
             Rejoignez nos clients premium qui font confiance à notre expertise pour la maintenance de leurs installations climatisation et froid critiques. Contrats sur mesure, interventions garanties et optimisation énergétique.
           </motion.p>
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <a href="/contact">
+            <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-4 bg-[#537FE7] text-[#E9F8F9] font-medium rounded-sm btn-effect-5"
+                className="bg-[#537FE7] text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
@@ -622,9 +622,9 @@ export default function ContactSections() {
                 Demander un Audit Gratuit
               </motion.button>
             </a>
-            <a href="/contact">
+            <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-4 border border-[#E9F8F9]/30 text-[#E9F8F9] font-medium rounded-sm btn-effect-5"
+                className="border border-[#E9F8F9]/30 text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}

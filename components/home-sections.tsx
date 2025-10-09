@@ -9,13 +9,13 @@ export default function HomeSections() {
     <div className="relative z-20 bg-[#181823]">
       {/* Bloc 1 — Présentation */}
       <motion.section 
-        className="min-h-screen flex items-center bg-[#E9F8F9]"
+        className="relative min-h-screen flex items-center bg-[#E9F8F9]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="w-full grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-stretch px-6 lg:px-12">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-20 items-stretch px-4 sm:px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -23,40 +23,40 @@ export default function HomeSections() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <div className="flex flex-col justify-between h-full min-h-[60vh] lg:min-h-[800px]">
+            <div className="relative flex flex-col justify-between h-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[800px]">
               <ScrollSlideTitle
                 direction="fromLeft"
-                className="text-3xl lg:text-5xl font-bold text-[#181823] leading-tight orbit uppercase tracking-tight"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#181823] leading-tight orbit uppercase tracking-tight"
               >
                 INGÉNIERIE DU FROID ET DE LA CLIMATISATION À PARIS
               </ScrollSlideTitle>
               <motion.div 
-                className="space-y-4"
+                className="space-y-3 sm:space-y-4"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
               >
                 <motion.p 
-                  className="text-xl lg:text-2xl text-[#181823]/80 leading-relaxed"
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#181823]/80 leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  Refrig'Air Systèmes conçoit, installe et maintient des solutions de climatisation de précision et de froid industriel pour data centers, laboratoires, sites industriels et l’agroalimentaire à Paris et en Île‑de‑France.
+                  Refrig'Air Systèmes conçoit, installe et maintient des solutions de climatisation de précision et de froid industriel pour data centers, laboratoires, sites industriels et l'agroalimentaire à Paris et en Île‑de‑France.
                 </motion.p>
                 <motion.p 
-                  className="text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
+                  className="text-sm sm:text-base md:text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.35 }}
                   viewport={{ once: true }}
                 >
-                  Chambres froides, salles blanches, réseaux d’eau glacée, vitrines réfrigérées, systèmes VRV/VRF et CTA haut rendement : nous dimensionnons des installations sur mesure répondant aux exigences de disponibilité (N+1), confinement allées chaudes/froides, contrôle hygrométrique et efficacité énergétique (free‑cooling, récupération de chaleur).
+                  Chambres froides, salles blanches, réseaux d'eau glacée, vitrines réfrigérées, systèmes VRV/VRF et CTA haut rendement : nous dimensionnons des installations sur mesure répondant aux exigences de disponibilité (N+1), confinement allées chaudes/froides, contrôle hygrométrique et efficacité énergétique (free‑cooling, récupération de chaleur).
                 </motion.p>
                 <motion.p 
-                  className="text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
+                  className="text-sm sm:text-base md:text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
@@ -72,16 +72,16 @@ export default function HomeSections() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="h-[800px] xl:col-span-3 relative overflow-visible"
+            className="h-[400px] sm:h-[600px] lg:h-[800px] xl:col-span-3 relative overflow-visible"
           >
-            <div className="absolute inset-y-0 right-[10%] w-[65%]">
+            <div className="absolute inset-y-0 right-[5%] sm:right-[10%] w-[70%] sm:w-[65%]">
               <Image
                 src="/images/home/hvac.png"
                 alt="Installation de refroidissement industriel - Refrig'Air Systèmes"
                 fill
                 className="object-contain object-right"
                 priority
-                sizes="(max-width: 1024px) 60vw, 40vw"
+                sizes="(max-width: 640px) 70vw, (max-width: 1024px) 60vw, 40vw"
                 fetchPriority="high"
                 quality={90}
               />
@@ -92,7 +92,7 @@ export default function HomeSections() {
 
       {/* Introduction Titre Principal */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#181823] text-center"
+        className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 bg-[#181823] text-center"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -100,7 +100,7 @@ export default function HomeSections() {
       >
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-4xl lg:text-6xl font-light text-[#E9F8F9] mb-8 leading-tight orbit"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-[#E9F8F9] mb-6 sm:mb-8 leading-tight orbit"
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -109,7 +109,7 @@ export default function HomeSections() {
             EXPERTISE FRIGORIFIQUE POUR L'INDUSTRIE
           </motion.h2>
           <motion.div
-            className="text-xl lg:text-2xl font-light text-[#537FE7] mb-12"
+            className="text-lg sm:text-xl lg:text-2xl font-light text-[#537FE7] mb-8 sm:mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -436,8 +436,8 @@ export default function HomeSections() {
             <p className="text-lg text-white/90 leading-relaxed mb-8">
               Parlez-nous de vos besoins en climatisation et froid industriel. Nos ingénieurs vous accompagnent dans l'élaboration d'une solution sur mesure. Demandez dès maintenant une étude personnalisée et recevez un devis instantané.
             </p>
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -445,7 +445,7 @@ export default function HomeSections() {
             >
               <a href="/contact">
                 <motion.button 
-                  className="px-8 py-4 font-medium rounded-sm transition-all duration-200 btn-effect-5"
+                  className="rounded-sm transition-all duration-200 btn-effect-5 btn-standard"
                   whileHover={{ scale: 1.05, y: 0 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}

@@ -1,4 +1,17 @@
-import Header from "@/components/header"
+export const metadata = {
+  title: "Qualités & Certifications",
+  description: "Qualités & certifications: QUALI-FROID, RGE, HACCP, Qualifelec. Garanties et conformité pour vos installations HVAC critiques (data centers, laboratoires, industrie).",
+  alternates: { canonical: "/qualites-certification" },
+  openGraph: {
+    title: "Qualités & Certifications",
+    description: "Excellence et conformité pour installations critiques.",
+    url: "/qualites-certification",
+  },
+  twitter: {
+    title: "Qualités & Certifications",
+    description: "QUALI-FROID, RGE, HACCP, Qualifelec.",
+  }
+}
 import QualitesHeroContent from "@/components/qualites-hero-content"
 import QualitesSections from "@/components/qualites-sections"
 import ShaderBackground from "@/components/shader-background"
@@ -14,9 +27,6 @@ export default function QualitesCertificationPage() {
             imageUrl="/images/qualites/bg-image.jpeg"
           />
         </div>
-
-        {/* Header qui blend avec ce fond */}
-        <Header />
 
         {/* Contenu hero par-dessus */}
         <QualitesHeroContent />
