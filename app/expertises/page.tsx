@@ -1,15 +1,20 @@
 export const metadata = {
-  title: "Nos Expertises HVAC",
-  description: "Expertises HVAC: climatisation de précision, froid industriel, chambres froides, supervision 24/7 et maintenance prédictive. Solutions pour data centers, laboratoires, agroalimentaire et tertiaire.",
+  title: "Expertises HVAC - Climatisation & Froid industriel | Paris",
+  description: "Expertises HVAC: climatisation de précision, froid industriel, installations très haute technicité, très basse température, salles blanches, froid commercial, vitrines réfrigérées. Solutions pour data centers, laboratoires, agroalimentaire et tertiaire. Partenaire certifié des leaders mondiaux.",
+  keywords: [
+    'expertise HVAC', 'climatisation de précision', 'froid industriel', 'installations très haute technicité', 
+    'très basse température', 'salles blanches', 'froid commercial', 'vitrines réfrigérées', 'data center', 
+    'laboratoire', 'agroalimentaire', 'maintenance HVAC', 'Paris', 'Île-de-France'
+  ],
   alternates: { canonical: "/expertises" },
   openGraph: {
-    title: "Nos Expertises HVAC",
-    description: "Domaines: data centers, laboratoires, agroalimentaire, tertiaire. Maintenance et supervision 24/7.",
+    title: "Expertises HVAC - Climatisation & Froid industriel | Paris",
+    description: "Domaines: data centers, laboratoires, agroalimentaire, tertiaire. Installations très haute technicité, très basse température, salles blanches. Partenaire certifié des leaders mondiaux.",
     url: "/expertises",
   },
   twitter: {
-    title: "Nos Expertises",
-    description: "Climatisation de précision, froid industriel, maintenance prédictive.",
+    title: "Expertises HVAC - Climatisation & Froid industriel",
+    description: "Climatisation de précision, froid industriel, installations très haute technicité, maintenance prédictive.",
   }
 }
 import ShaderBackground from "../../components/shader-background"

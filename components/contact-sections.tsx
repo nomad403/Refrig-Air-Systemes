@@ -446,7 +446,7 @@ export default function ContactSections() {
                 Pour vos installations climatisation et froid critiques
               </div>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed mb-6 sm:mb-8">
-                Nos ingénieurs frigoristes certifiés QUALI-FROID vous accompagnent dans la maintenance de vos installations critiques. Data centers, laboratoires pharmaceutiques, industrie agroalimentaire : expertise reconnue et interventions garanties.
+                Nos ingénieurs frigoristes habilités aux fluides frigorigènes vous accompagnent dans la maintenance de vos installations critiques. Data centers, laboratoires pharmaceutiques, industrie agroalimentaire : expertise reconnue et interventions garanties.
               </p>
               <p className="text-[#537FE7] text-sm sm:text-base lg:text-lg">
                 —Réponse garantie sous 24h pour vos projets premium.
@@ -488,8 +488,8 @@ export default function ContactSections() {
               <div className="text-xs sm:text-sm text-[#181823]/60 leading-relaxed">
                 <p>
                   Maintenance préventive et corrective pour installations climatisation critiques. 
-                  Contrats d'astreinte 24/7, interventions garanties sous 4h en Île-de-France. 
-                  Certification QUALI-FROID et conformité réglementaire assurées.
+                  Interventions 24h/24 et 7j/7, garanties sous 4h en Île-de-France. 
+                  Opérations éligibles C2E et conformité réglementaire assurées.
                 </p>
               </div>
             </motion.div>

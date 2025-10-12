@@ -1,16 +1,12 @@
-import type { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const base = 'https://www.refrigairsystemes.fr'
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/_next/'],
+      disallow: ['/api/', '/_next/', '/admin/'],
     },
-    sitemap: `${base}/sitemap.xml`,
-    host: base,
+    sitemap: 'https://www.refrigairsystemes.fr/sitemap.xml',
   }
 }
-
-

@@ -13,7 +13,7 @@ export default function ExpertiseSections() {
     "Climatisation Réversible": {
       subtitle: "Confort premium et continuité de service",
       paragraphs: [
-        "Systèmes de climatisation de précision dimensionnés pour les environnements exigeants (bureaux haut de gamme, data centers de proximité, espaces retail premium).",
+        "Systèmes de climatisation de précision dimensionnés pour les environnements exigeants (bureaux haut de gamme, data centers de proximité, espaces retail premium, vitrines réfrigérées et froid commercial).",
         "Régulation fine température/hygrométrie, optimisation énergétique (inverters, récupération de chaleur) et plans de maintenance préventive adaptés à votre niveau de criticité.",
         "Interventions rapides et traçabilité complète pour garantir disponibilité et confort en continu."
       ]
@@ -29,33 +29,49 @@ export default function ExpertiseSections() {
     "Chambres Froides Positives & Négatives": {
       subtitle: "Chaîne du froid maîtrisée — agro & pharma",
       paragraphs: [
-        "Conception et installation de chambres froides conformes HACCP/ISO 14644, adaptées aux laboratoires, industries agroalimentaires et logistique.",
-        "Suivi de température, alarmes, enregistrements et astreinte 24/7 pour sécuriser produits et échantillons sensibles.",
-        "Contrats premium avec diagnostics énergétiques et optimisation des cycles de dégivrage."
+        "Conception et installation de chambres froides conformes HACCP/ISO 14644, adaptées aux laboratoires, industries agroalimentaires, logistique et froid commercial.",
+        "Suivi de température, alarmes, enregistrements et interventions 24h/24 et 7j/7 pour sécuriser produits et échantillons sensibles.",
+        "Contrats premium avec diagnostics énergétiques et optimisation des cycles de dégivrage pour vitrines réfrigérées et meubles froids."
+      ]
+    },
+    "Installations Très Haute Technicité": {
+      subtitle: "Très basse température et salles blanches — expertise critique",
+      paragraphs: [
+        "Installations cryogéniques très haute technicité jusqu'à -80°C pour conservation d'échantillons biologiques, vaccins et produits pharmaceutiques sensibles.",
+        "Salles blanches ISO 14644 pour industries pharmaceutiques, électroniques et biotechnologiques avec contrôle particules et régulation précise température/hygrométrie.",
+        "Expertise reconnue dans les environnements contrôlés critiques avec surveillance continue et maintenance spécialisée pour garantir la conformité réglementaire."
+      ]
+    },
+    "Froid Commercial & Vitrines Réfrigérées": {
+      subtitle: "Retail & restauration — performance optimisée",
+      paragraphs: [
+        "Installation et maintenance de vitrines réfrigérées, meubles froids, armoires frigorifiques pour supermarchés, boutiques et restaurants.",
+        "Optimisation énergétique des équipements frigorifiques commerciaux avec fluides écologiques et récupération de chaleur.",
+        "Contrats de maintenance spécialisés pour garantir la continuité commerciale et la conservation optimale des produits frais."
       ]
     },
     "Groupes à Eau Glacée": {
       subtitle: "Refroidissement central pour sites critiques",
       paragraphs: [
-        "Groupes froid à haut rendement pour data centers, sites industriels et grands ensembles tertiaires.",
-        "Ingénierie hydraulique (équilibrage, qualité d’eau, redondance), régulation avancée et monitoring continu.",
-        "Plans de continuité d’activité, pièces critiques en stock et temps d’intervention garantis."
+        "Groupes froid à haut rendement pour data centers, sites industriels et grands ensembles tertiaires. Installations très haute technicité pour environnements critiques.",
+        "Ingénierie hydraulique (équilibrage, qualité d'eau, redondance), régulation avancée et monitoring continu avec surveillance 24/7.",
+        "Plans de continuité d'activité, pièces critiques en stock et temps d'intervention garantis pour installations très basse température et salles blanches."
       ]
     },
     "Récupérateurs de Chaleur": {
       subtitle: "ROI mesurable et performance durable",
       paragraphs: [
-        "Récupération d’énergie sur circuits frigorifiques et CTA pour réduire la facture énergétique.",
-        "Études technico-économiques, calculs de retour sur investissement et intégration sans perturber vos opérations.",
-        "Reporting périodique de performance et ajustements pour maximiser les gains."
+        "Récupération d'énergie sur circuits frigorifiques et CTA pour réduire la facture énergétique. Solutions très haute technicité pour installations critiques.",
+        "Études technico-économiques, calculs de retour sur investissement et intégration sans perturber vos opérations en environnements contrôlés.",
+        "Reporting périodique de performance et ajustements pour maximiser les gains sur installations très basse température et salles blanches."
       ]
     },
     "Maintenance & Diagnostics": {
       subtitle: "Disponibilité maximale — zéro interruption",
       paragraphs: [
-        "Contrats de maintenance premium avec supervision 24/7, télésurveillance et interventions sous 4h en Île-de-France.",
-        "Méthodologie prédictive (capteurs, analyses) pour anticiper les dérives et sécuriser vos installations critiques (data centers, laboratoires).",
-        "Tableaux de bord, traçabilité complète et recommandations d’optimisation en continu."
+        "Contrats de maintenance premium avec supervision 24/7, télésurveillance et interventions sous 4h en Île-de-France pour installations très haute technicité.",
+        "Méthodologie prédictive (capteurs, analyses) pour anticiper les dérives et sécuriser vos installations critiques (data centers, laboratoires, salles blanches, très basse température).",
+        "Tableaux de bord, traçabilité complète et recommandations d'optimisation en continu pour environnements contrôlés et installations cryogéniques."
       ]
     }
   }
@@ -97,7 +113,7 @@ export default function ExpertiseSections() {
                 Pour vos environnements climatisation & froid critiques
               </div>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/85 leading-relaxed mb-6 sm:mb-8">
-                Conception, installation et maintenance haut de gamme pour data centers, laboratoires, industrie et agroalimentaire. Performances, fiabilité et efficacité énergétique au cœur de chaque projet.
+                Conception, installation et maintenance haut de gamme pour data centers, laboratoires, industrie et agroalimentaire. Installations très haute technicité, très basse température et salles blanches. Performances, fiabilité et efficacité énergétique au cœur de chaque projet.
               </p>
               <p className="text-white/80 text-sm sm:text-base lg:text-lg">
                 —Élevés par l'expertise, animés par l'excellence.
@@ -745,12 +761,12 @@ export default function ExpertiseSections() {
                 <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
                   Installation par Équipes Certifiées
                 </h3>
-                <p className="text-[#181823] text-lg mb-6">
-                  Réalisation par des techniciens QUALI-FROID avec équipements de pointe.
+                <p className="text-[#181823] text-lg mb-6" suppressHydrationWarning>
+                  Réalisation par des techniciens habilités aux fluides frigorigènes avec équipements de pointe.
                 </p>
                 <div className="space-y-4">
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Nos équipes certifiées QUALI-FROID et habilitées aux fluides frigorigènes réalisent l'installation selon les règles de l'art. Nous utilisons exclusivement des équipements de marques reconnues et respectons scrupuleusement les normes de sécurité et environnementales.
+                  <p className="text-[#E9F8F9]/80 leading-relaxed" suppressHydrationWarning>
+                    Nos équipes habilitées aux fluides frigorigènes réalisent l'installation selon les règles de l'art. Nous utilisons exclusivement des équipements de marques reconnues et respectons scrupuleusement les normes de sécurité et environnementales.
                   </p>
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
                     Chaque étape fait l'objet d'un contrôle qualité rigoureux avec documentation complète des interventions, tests d'étanchéité et vérifications de conformité.
@@ -843,88 +859,52 @@ export default function ExpertiseSections() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
-            {/* QUALI-FROID */}
             <motion.div
-              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
+              className="p-6 bg-white text-left"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <img 
-                  src="/images/certifications/qualifroid.svg" 
-                  alt="Logo QUALI-FROID"
-                  className="w-full h-full object-contain"
-                  loading="lazy" decoding="async"
-                  sizes="64px"
-                />
-              </div>
-              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">QUALI-FROID</h3>
-              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Qualification professionnelle frigoristes</p>
+              <h3 className="text-lg font-medium text-[#181823] mb-2 satoshi">C2E — Certificats d’Économies d’Énergie</h3>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm">Montage complet des dossiers et maximisation des primes énergie.</p>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm mt-1">ROI accéléré: fiches standardisées ciblées et adaptées à votre site.</p>
             </motion.div>
 
-            {/* RGE */}
             <motion.div
-              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
+              className="p-6 bg-white text-left"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <img 
-                  src="/images/certifications/rge.svg" 
-                  alt="Logo RGE Reconnu Garant de l'Environnement"
-                  className="w-full h-full object-contain"
-                  loading="lazy" decoding="async"
-                  sizes="64px"
-                />
-              </div>
-              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">RGE</h3>
-              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Reconnu Garant de l'Environnement</p>
+              <h3 className="text-lg font-medium text-[#181823] mb-2 satoshi">RGE — Reconnu Garant de l’Environnement</h3>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm">Travaux éligibles aux aides publiques avec qualité d’exécution contrôlée.</p>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm mt-1">Engagement de performance et traçabilité complète jusqu’à la réception.</p>
             </motion.div>
 
-            {/* Assurance Décennale */}
             <motion.div
-              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
+              className="p-6 bg-white text-left"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <img 
-                  src="/images/certifications/assurance-decennale.svg" 
-                  alt="Logo Assurance Décennale"
-                  className="w-full h-full object-contain"
-                  loading="lazy" decoding="async"
-                  sizes="64px"
-                />
-              </div>
-              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">Assurance Décennale</h3>
-              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Garantie 10 ans sur les gros œuvres</p>
+              <h3 className="text-lg font-medium text-[#181823] mb-2 satoshi">Assurance Décennale</h3>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm">Couverture 10 ans sur nos ouvrages et interfaces multi‑lots.</p>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm mt-1">Sérénité contractuelle et réactivité en cas de sinistre.</p>
             </motion.div>
 
-            {/* Conformité HACCP */}
             <motion.div
-              className="text-center p-6 transition-colors duration-200 transform-gpu backface-hidden bg-white"
+              className="p-6 bg-white text-left"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <img 
-                  src="/images/certifications/haccp.svg" 
-                  alt="Logo Conformité HACCP"
-                  className="w-full h-full object-contain"
-                  loading="lazy" decoding="async"
-                  sizes="64px"
-                />
-              </div>
-              <h3 className="text-lg font-light text-[#181823] mb-2 satoshi">Conformité HACCP</h3>
-              <p className="text-[#181823]/70 satoshi font-light leading-relaxed text-sm">Normes alimentaires et pharmaceutiques</p>
+              <h3 className="text-lg font-medium text-[#181823] mb-2 satoshi">Conformité HACCP</h3>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm">Procédures, enregistrements et plans de nettoyage validés.</p>
+              <p className="text-[#181823]/70 satoshi leading-relaxed text-sm mt-1">Audits réussis: maîtrise des risques et continuité de service assurée.</p>
             </motion.div>
           </div>
 
@@ -943,7 +923,7 @@ export default function ExpertiseSections() {
               <div className="text-center">
                 <div className="text-[#537FE7] text-4xl mb-4">24/7</div>
                 <h4 className="text-lg font-medium text-[#E9F8F9] mb-2">Service d'Urgence</h4>
-                <p className="text-[#E9F8F9]/70">Astreinte technique pour vos installations critiques</p>
+                <p className="text-[#E9F8F9]/70">Interventions 24h/24 et 7j/7 pour vos installations critiques</p>
               </div>
               <div className="text-center">
                 <div className="text-[#537FE7] text-4xl mb-4">≤ 4h</div>

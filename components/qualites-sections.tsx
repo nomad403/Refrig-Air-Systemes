@@ -42,8 +42,8 @@ export default function QualitesSections() {
 
   const certifications = [
     {
-      title: "QualiClimaFroid & Qualifroid",
-      description: "Certifications attestant des compétences techniques, humaines, juridiques et financières dans le conditionnement d'air, climatisation, pompes à chaleur et ventilation pour data centers et laboratoires",
+      title: "C2E — Certificats d'Économies d'Énergie",
+      description: "Reconnaissance officielle d'actions d'efficacité énergétique pour installations frigorifiques et climatisation de précision",
       category: "Technique"
     },
     {
@@ -87,10 +87,10 @@ export default function QualitesSections() {
       description: "Projets réalisés pour data centers, laboratoires et industries sensibles"
     },
     {
-      title: "Techniciens Certifiés",
-      value: 14,
+      title: "Installations très haute technicité",
+      value: 12,
       suffix: "",
-      description: "Équipe qualifiée RGE, Qualifroid et formations constructeurs"
+      description: "Installations très basse température réalisées avec succès"
     },
     {
       title: "Support Technique",

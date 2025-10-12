@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <circle cx="50" cy="50" r="45" fill="none" stroke="#181823" stroke-width="2"/>
-  <text x="50" y="35" text-anchor="middle" fill="#181823" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QUALI</text>
-  <text x="50" y="55" text-anchor="middle" fill="#181823" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FROID</text>
-  <path d="M20 70 Q30 65 40 70 Q50 75 60 70 Q70 65 80 70" stroke="#181823" stroke-width="2" fill="none"/>
-</svg>

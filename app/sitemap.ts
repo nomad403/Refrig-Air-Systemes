@@ -1,21 +1,38 @@
-import type { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://www.refrigairsystemes.fr'
-  const now = new Date().toISOString()
-  const urls = [
-    '',
-    '/expertises',
-    '/maintenances-services',
-    '/qualites-certification',
-    '/contact',
+  const baseUrl = 'https://www.refrigairsystemes.fr'
+  
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/expertises`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/maintenances-et-services`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/qualites-certification`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
-  return urls.map((path) => ({
-    url: `${base}${path}`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: path === '' ? 1 : 0.8,
-  }))
 }
-
-

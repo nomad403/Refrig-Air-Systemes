@@ -44,6 +44,47 @@
   font-display: swap;
 }
 
+/* Space Grotesk font family */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space_grotesk/SpaceGrotesk-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space_grotesk/SpaceGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space_grotesk/SpaceGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space_grotesk/SpaceGrotesk-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space_grotesk/SpaceGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* New color palette for Refrig'Air Systèmes */
   --background: #181823; /* Bleu-noir profond - fond principal */
@@ -79,9 +120,9 @@
   --sidebar-accent-foreground: #181823; /* Texte sur accent sidebar */
   --sidebar-border: #537FE7; /* Bleu électrique pour bordures sidebar */
   --sidebar-ring: #537FE7; /* Bleu électrique pour focus sidebar */
-  --font-orbit: "Orbit", sans-serif; /* Orbit font for headings */
+  --font-orbit: "Space Grotesk", sans-serif; /* Headings now use Space Grotesk */
   --font-satoshi: "Satoshi", sans-serif; /* Satoshi font for body text */
-  --font-orbit: "Orbit", sans-serif; /* Orbit font for headings */
+  --font-orbit: "Space Grotesk", sans-serif; /* Headings now use Space Grotesk */
   --font-satoshi: "Satoshi", sans-serif; /* Satoshi font for body text */
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree as the primary font variable */
@@ -122,7 +163,7 @@
   --sidebar-accent-foreground: #181823;
   --sidebar-border: #537FE7;
   --sidebar-ring: #537FE7;
-  --font-orbit: "Orbit", sans-serif;
+  --font-orbit: "Space Grotesk", sans-serif;
   --font-satoshi: "Satoshi", sans-serif;
   --font-instrument-serif: "Instrument Serif", serif;
   --font-figtree: "Figtree", sans-serif;

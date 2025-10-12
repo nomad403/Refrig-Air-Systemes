@@ -8,7 +8,8 @@
     "dev:clean": "rimraf .next && next dev",
     "clean": "rimraf .next node_modules/.cache",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "images:svg2png": "node scripts/convert-svg-to-png.mjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -33,6 +34,7 @@
     "@types/react-dom": "^19",
     "postcss": "^8.5",
     "rimraf": "^6.0.1",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
