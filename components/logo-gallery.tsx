@@ -1,128 +1,128 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 
 const partnerLogos = [
   { 
     name: "Daikin", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <text x="10" y="35" className="font-bold text-xl sm:text-2xl">DAIKIN</text>
-      </svg>
-    )
+    logoPath: "/images/home/gallery/daikin.png",
+    website: "https://www.daikin.fr/"
   },
   { 
     name: "Mitsubishi Electric", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <polygon points="20,15 40,15 30,35" className="fill-white"/>
-        <text x="50" y="30" className="font-semibold text-xs sm:text-sm">MITSUBISHI</text>
-      </svg>
-    )
+    logoPath: "/images/home/gallery/mitsubishi-electric-cooling-heating-logo-i17iwys3nweuzmyg-2.png",
+    website: "https://www.mitsubishielectric.fr/"
   },
   { 
     name: "Carrier", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <circle cx="25" cy="30" r="12" className="fill-none stroke-white stroke-2"/>
-        <text x="45" y="35" className="font-bold text-lg sm:text-xl">CARRIER</text>
-      </svg>
-    )
+    logoPath: "/images/home/gallery/carrier.png",
+    website: "https://www.carrier.fr/"
   },
   { 
     name: "Trane", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <rect x="15" y="20" width="20" height="20" className="fill-white"/>
-        <text x="45" y="35" className="font-bold text-lg sm:text-xl">TRANE</text>
-      </svg>
-    )
-  },
-  { 
-    name: "Lennox", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <path d="M15,30 L25,20 L35,30 L25,40 Z" className="fill-white"/>
-        <text x="45" y="35" className="font-bold text-sm sm:text-lg">LENNOX</text>
-      </svg>
-    )
+    logoPath: "/images/home/gallery/trane.png",
+    website: "https://www.trane.com/fr-fr/"
   },
   { 
     name: "Johnson Controls", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <circle cx="20" cy="25" r="6" className="fill-white"/>
-        <circle cx="30" cy="35" r="6" className="fill-white"/>
-        <text x="45" y="30" className="font-semibold text-xs sm:text-sm">JOHNSON</text>
-        <text x="45" y="42" className="font-semibold text-xs sm:text-sm">CONTROLS</text>
-      </svg>
-    )
+    logoPath: "/images/home/gallery/johnson-controls-2.png",
+    website: "https://www.johnsoncontrols.com/fr-fr"
   },
   { 
     name: "Danfoss", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <ellipse cx="25" cy="30" rx="15" ry="8" className="fill-none stroke-white stroke-2"/>
-        <text x="50" y="35" className="font-bold text-sm sm:text-lg">DANFOSS</text>
-      </svg>
-    )
+    logoPath: "/images/home/gallery/danfoss-3.png",
+    website: "https://www.danfoss.com/fr-fr/"
   },
   { 
-    name: "Copeland", 
-    icon: (
-      <svg className="w-[16rem] h-[8rem] sm:w-[20rem] sm:h-[10rem] lg:w-[22.4rem] lg:h-[11.2rem] fill-white" viewBox="0 0 200 60">
-        <rect x="15" y="25" width="25" height="10" className="fill-none stroke-white stroke-2"/>
-        <text x="50" y="35" className="font-bold text-sm sm:text-md">COPELAND</text>
-      </svg>
-    )
+    name: "Panasonic", 
+    logoPath: "/images/home/gallery/panasonic.png",
+    website: "https://www.panasonic.fr/"
+  },
+  { 
+    name: "Liebherr", 
+    logoPath: "/images/home/gallery/liebherr.png",
+    website: "https://www.liebherr.com/fr/fra/"
+  },
+  { 
+    name: "STULZ", 
+    logoPath: "/images/home/gallery/stulz.png",
+    website: "https://www.stulz.fr/"
+  },
+  { 
+    name: "Emerson", 
+    logoPath: "/images/home/gallery/emerson-electric.png",
+    website: "https://www.emerson.com/fr-fr"
+  },
+  { 
+    name: "General Electric", 
+    logoPath: "/images/home/gallery/general-electric.png",
+    website: "https://www.ge.com/"
   },
 ]
-
-// Dupliquer exactement 2 fois pour un défilement parfaitement continu
-const duplicatedLogos = [...partnerLogos, ...partnerLogos]
 
 export default function LogoGallery() {
   const [isHovered, setIsHovered] = useState(false)
   const [selectedLogo, setSelectedLogo] = useState<number | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<number | undefined>(undefined)
+  const positionRef = useRef(0)
 
-  // Détecter la taille d'écran pour ajuster l'animation
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-    
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-
+  // Animation avec requestAnimationFrame pour scroll continu sans sursaut
   useEffect(() => {
     const element = scrollRef.current
     if (!element) return
 
-    if (isHovered) {
-      element.style.animationPlayState = 'paused'
-    } else {
-      element.style.animationPlayState = 'running'
+    const speed = 0.5 // pixels par frame (ajustable)
+    let lastTime = performance.now()
+
+    const animate = (currentTime: number) => {
+      if (!isHovered) {
+        const deltaTime = currentTime - lastTime
+        const distance = (speed * deltaTime) / 16 // Normaliser pour 60fps
+
+        positionRef.current += distance
+
+        // Récupérer la largeur d'un ensemble de logos
+        const firstChild = element.firstElementChild as HTMLElement
+        if (firstChild) {
+          const itemWidth = firstChild.offsetWidth
+          const totalWidth = itemWidth * partnerLogos.length
+
+          // Reset invisible quand on a scrollé une longueur complète
+          if (positionRef.current >= totalWidth) {
+            positionRef.current -= totalWidth
+          }
+
+          element.style.transform = `translateX(-${positionRef.current}px)`
+        }
+      }
+
+      lastTime = currentTime
+      animationRef.current = requestAnimationFrame(animate)
+    }
+
+    animationRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationRef.current !== undefined) {
+        cancelAnimationFrame(animationRef.current)
+      }
     }
   }, [isHovered])
+
+  // Tripler les logos pour assurer qu'il y a toujours assez d'éléments visibles
+  const tripleLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos]
 
   return (
     <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
       <div 
         ref={scrollRef}
-        className={`flex items-center py-3 sm:py-4 lg:py-6 ${
-          isMobile ? 'space-x-6' : 'space-x-8 sm:space-x-10 lg:space-x-12'
-        }`}
+        className="flex items-center py-4 sm:py-6 lg:py-8 space-x-12 sm:space-x-16 lg:space-x-20"
         style={{
-          animationName: 'scroll',
-          animationDuration: isMobile ? '20s' : '25s',
-          animationTimingFunction: 'linear',
-          animationIterationCount: 'infinite',
-          animationPlayState: isHovered ? 'paused' : 'running'
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          willChange: 'transform'
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
@@ -130,32 +130,50 @@ export default function LogoGallery() {
           setSelectedLogo(null)
         }}
       >
-        {/* Icônes de fournisseurs dupliquées pour un défilement parfaitement continu */}
-        {duplicatedLogos.map((partner, index) => (
+        {tripleLogos.map((partner, index) => (
           <div
-            key={index}
-            className={`flex-shrink-0 flex items-center justify-center group cursor-pointer ${
-              isMobile 
-                ? 'w-[16rem] h-[8rem]' 
-                : 'w-[20rem] h-[10rem] sm:w-[24rem] sm:h-[12rem] lg:w-[28rem] lg:h-[14rem]'
-            }`}
+            key={`${partner.name}-${index}`}
+            className="flex-shrink-0 flex items-center justify-center group cursor-pointer w-[8rem] h-[4rem] sm:w-[10rem] sm:h-[5rem] lg:w-[12rem] lg:h-[6rem] px-8"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative'
+            }}
             onMouseEnter={() => setSelectedLogo(index)}
             onMouseLeave={() => setSelectedLogo(null)}
           >
-            <div 
-              className={`transition-all duration-300 ${
-                selectedLogo === index 
-                  ? 'scale-110 brightness-125 drop-shadow-lg' 
-                  : 'scale-100 brightness-75 hover:scale-105 hover:brightness-90'
-              }`}
+            <a 
+              href={partner.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full h-full"
+              aria-label={`Visiter le site officiel de ${partner.name}`}
             >
-              {partner.icon}
-            </div>
+              <div 
+                className={`transition-all duration-300 flex items-center justify-center w-full h-full ${
+                  selectedLogo === index 
+                    ? 'scale-110 brightness-125 drop-shadow-lg' 
+                    : 'scale-100 brightness-75 hover:scale-105 hover:brightness-90'
+                }`}
+              >
+                <Image
+                  src={partner.logoPath}
+                  alt={`Logo ${partner.name} - Constructeur de systèmes de climatisation et réfrigération`}
+                  width={400}
+                  height={200}
+                  className="max-w-[90%] max-h-[90%] object-contain"
+                  style={{ 
+                    objectFit: 'contain',
+                    objectPosition: 'center'
+                  }}
+                  priority={false}
+                />
+              </div>
+            </a>
           </div>
         ))}
       </div>
-      
-      
     </div>
   )
 }

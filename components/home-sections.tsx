@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import ScrollSlideTitle from "./scroll-slide-title"
+import ClientGallery from "./client-gallery"
 
 export default function HomeSections() {
   return (
@@ -23,15 +24,15 @@ export default function HomeSections() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <div className="relative flex flex-col justify-between h-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[800px]">
+            <div className="relative flex flex-col justify-center items-start h-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[800px]">
               <ScrollSlideTitle
                 direction="fromLeft"
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#181823] leading-tight orbit uppercase tracking-tight"
+                className="text-left text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#181823] leading-tight orbit uppercase tracking-tight mb-4 sm:mb-6 lg:mb-8"
               >
                 INGÉNIERIE DU FROID ET DE LA CLIMATISATION À PARIS
               </ScrollSlideTitle>
               <motion.div 
-                className="space-y-3 sm:space-y-4"
+                className="space-y-3 sm:space-y-4 text-left"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -44,7 +45,7 @@ export default function HomeSections() {
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  Refrig'Air Systèmes conçoit, installe et maintient des solutions de climatisation de précision et de froid industriel pour data centers, laboratoires, sites industriels et l'agroalimentaire à Paris et en Île‑de‑France.
+                  Refrig'Air Systèmes conçoit, installe et maintient des solutions de climatisation de précision, de froid industriel et de froid commercial pour data centers, laboratoires, sites industriels, l'agroalimentaire et le retail à Paris et en Île‑de‑France.
                 </motion.p>
                 <motion.p 
                   className="text-sm sm:text-base md:text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
@@ -53,7 +54,7 @@ export default function HomeSections() {
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.35 }}
                   viewport={{ once: true }}
                 >
-                  Chambres froides, salles blanches, réseaux d'eau glacée, vitrines réfrigérées, systèmes VRV/VRF et CTA haut rendement : nous dimensionnons des installations sur mesure répondant aux exigences de disponibilité (N+1), confinement allées chaudes/froides, contrôle hygrométrique et efficacité énergétique (free‑cooling, récupération de chaleur).
+                  Chambres froides, salles blanches, réseaux d'eau glacée, vitrines réfrigérées, meubles froids, armoires frigorifiques, systèmes VRV/VRF et CTA haut rendement : nous dimensionnons des installations sur mesure répondant aux exigences de disponibilité (N+1), confinement allées chaudes/froides, contrôle hygrométrique et efficacité énergétique (free‑cooling, récupération de chaleur).
                 </motion.p>
                 <motion.p 
                   className="text-sm sm:text-base md:text-lg lg:text-xl text-[#181823]/70 leading-relaxed"
@@ -61,8 +62,9 @@ export default function HomeSections() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
                   viewport={{ once: true }}
+                  suppressHydrationWarning
                 >
-                  Conformité et traçabilité : HACCP, GDP, ISO 14644/22000, GxP. Supervision et télésurveillance 24/7, contrats de maintenance premium et interventions rapides ; Refrig'Air Systèmes est votre partenaire certifié Qualifroid & RGE pour des environnements critiques fiables et durables.
+                  Conformité et traçabilité : HACCP, ISO 14644/22000, GxP. Supervision et télésurveillance 24/7, contrats de maintenance premium et interventions rapides ; Refrig'Air Systèmes réalise des opérations éligibles C2E et est certifié RGE pour des environnements critiques fiables et durables.
                 </motion.p>
               </motion.div>
             </div>
@@ -183,7 +185,7 @@ export default function HomeSections() {
             </div>
           </motion.div>
 
-          {/* Solution 2 - Froid Industriel */}
+          {/* Solution 2 - Froid Commercial */}
           <motion.div
             className="mb-16 border-b border-[#E9F8F9]/10 pb-16"
             initial={{ opacity: 0, y: 50 }}
@@ -195,24 +197,50 @@ export default function HomeSections() {
               <span className="text-[#537FE7] text-lg font-mono mr-4">[ 02 ]</span>
               <div className="flex-1">
                 <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Froid Industriel & Chambres Froides
+                  Froid Commercial & Vitrines Réfrigérées
                 </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
-                  Installations frigorifiques pour l'industrie pharmaceutique, agroalimentaire et la grande distribution.
+                  Solutions frigorifiques pour retail, restauration et distribution commerciale
                 </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                  <div>
+                    <h4 className="text-[#E9F8F9] text-lg font-medium mb-3">Supermarchés & Hypermarchés</h4>
+                    <p className="text-[#E9F8F9]/70 leading-relaxed mb-4">
+                      Vitrines réfrigérées, meubles froids et armoires frigorifiques pour la grande distribution avec optimisation énergétique et conformité HACCP.
+                    </p>
+                    <ul className="text-[#537FE7] text-sm space-y-1">
+                      <li>• Vitrines à porte coulissante</li>
+                      <li>• Meubles froids ouverts</li>
+                      <li>• Armoires de conservation</li>
+                      <li>• Fluides frigorigènes écologiques</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-[#E9F8F9] text-lg font-medium mb-3">Restaurants & Boutiques</h4>
+                    <p className="text-[#E9F8F9]/70 leading-relaxed mb-4">
+                      Équipements frigorifiques compacts pour restauration rapide, boulangeries, boucheries et commerces de proximité.
+                    </p>
+                    <ul className="text-[#537FE7] text-sm space-y-1">
+                      <li>• Vitrines pâtissières</li>
+                      <li>• Armoires de stockage</li>
+                      <li>• Meubles de vente</li>
+                      <li>• Maintenance préventive</li>
+                    </ul>
+                  </div>
+                </div>
                 <div className="space-y-4">
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Chambres froides médicales, conservatoires agroalimentaires, data centers : nos installations respectent les normes les plus strictes (HACCP, GDP, ISO) pour garantir la chaîne du froid et la conservation optimale de vos produits.
+                    Installation et maintenance de vitrines réfrigérées, meubles froids, armoires frigorifiques pour supermarchés, boutiques et restaurants. Optimisation énergétique des équipements frigorifiques commerciaux avec fluides écologiques.
                   </p>
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Solutions modulaires et évolutives, conçues pour répondre aux exigences de traçabilité, de sécurité et de performance énergétique des environnements industriels les plus critiques.
+                    Contrats de maintenance spécialisés pour garantir la continuité commerciale et la conservation optimale des produits frais. Interventions 24h/24 et 7j/7 pour minimiser les pertes de marchandises.
                   </p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Solution 3 - Maintenance Préventive */}
+          {/* Solution 3 - Froid Industriel */}
           <motion.div
             className="mb-16 border-b border-[#E9F8F9]/10 pb-16"
             initial={{ opacity: 0, y: 50 }}
@@ -222,6 +250,61 @@ export default function HomeSections() {
           >
             <div className="flex items-start mb-6">
               <span className="text-[#537FE7] text-lg font-mono mr-4">[ 03 ]</span>
+              <div className="flex-1">
+                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                  Froid Industriel & Installations Très Haute Technicité
+                </h3>
+                <p className="text-[#537FE7] text-lg mb-6">
+                  Installations frigorifiques très haute technicité pour l'industrie pharmaceutique, agroalimentaire, salles blanches et très basse température.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                  <div>
+                    <h4 className="text-[#E9F8F9] text-lg font-medium mb-3">Très Basse Température</h4>
+                    <p className="text-[#E9F8F9]/70 leading-relaxed mb-4">
+                      Installations cryogéniques jusqu'à -80°C pour conservation d'échantillons biologiques, vaccins et produits pharmaceutiques sensibles.
+                    </p>
+                    <ul className="text-[#537FE7] text-sm space-y-1">
+                      <li>• Chambres froides -80°C</li>
+                      <li>• Armoires cryogéniques</li>
+                      <li>• Conservation vaccins</li>
+                      <li>• Échantillons biologiques</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-[#E9F8F9] text-lg font-medium mb-3">Salles Blanches</h4>
+                    <p className="text-[#E9F8F9]/70 leading-relaxed mb-4">
+                      Environnements contrôlés ISO 14644 pour industries pharmaceutiques, électroniques et biotechnologiques.
+                    </p>
+                    <ul className="text-[#537FE7] text-sm space-y-1">
+                      <li>• Classe ISO 5 à 8</li>
+                      <li>• Contrôle particules</li>
+                      <li>• Régulation T°C/RH</li>
+                      <li>• Sursurveillance continue</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <p className="text-[#E9F8F9]/80 leading-relaxed">
+                    Chambres froides médicales, conservatoires agroalimentaires, data centers : nos installations très haute technicité respectent les normes les plus strictes (HACCP, ISO) pour garantir la chaîne du froid et la conservation optimale de vos produits.
+                  </p>
+                  <p className="text-[#E9F8F9]/80 leading-relaxed">
+                    Solutions modulaires et évolutives, conçues pour répondre aux exigences de traçabilité, de sécurité et de performance énergétique des environnements industriels les plus critiques. Expertise reconnue dans les installations très basse température et salles blanches.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Solution 4 - Maintenance Préventive */}
+          <motion.div
+            className="mb-16 border-b border-[#E9F8F9]/10 pb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-start mb-6">
+              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 04 ]</span>
               <div className="flex-1">
                 <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
                   Maintenance Préventive & Supervision
@@ -241,16 +324,16 @@ export default function HomeSections() {
             </div>
           </motion.div>
 
-          {/* Solution 4 - Dépannage d'Urgence */}
+          {/* Solution 5 - Dépannage d'Urgence */}
           <motion.div
             className="mb-16"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
             viewport={{ once: true }}
           >
             <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 04 ]</span>
+              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 05 ]</span>
               <div className="flex-1">
                 <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
                   Dépannage d'Urgence & Interventions Rapides
@@ -272,9 +355,9 @@ export default function HomeSections() {
         </div>
       </motion.section>
 
-      {/* Section Avantages - Style GenCell "we keep you powered" */}
+      {/* Section Clients - "Ils nous ont fait confiance" */}
       <motion.section 
-        className="py-20 px-6 lg:px-12 bg-[#E9F8F9]"
+        className="py-20 px-6 lg:px-12 bg-[#537FE7]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -288,104 +371,23 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-4xl font-light text-[#181823] mb-6 orbit">
-              nous vous gardons opérationnels
+            <h2 className="text-3xl lg:text-4xl font-light text-white mb-6 orbit">
+              Ils nous ont fait confiance
             </h2>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+              Des entreprises de renom nous font confiance pour leurs installations critiques. 
+              Laboratoires, industrie, retail, luxe : découvrez nos clients partenaires.
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {/* Sans interruptions - Chaîne */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-                  <path d="M9 7H6C4.9 7 4 7.9 4 9V15C4 16.1 4.9 17 6 17H9C10.1 17 11 16.1 11 15V9C11 7.9 10.1 7 9 7Z" stroke="#537FE7" strokeWidth="2"/>
-                  <path d="M15 7H18C19.1 7 20 7.9 20 9V15C20 16.1 19.1 17 18 17H15C13.9 17 13 16.1 13 15V9C13 7.9 13.9 7 15 7Z" stroke="#537FE7" strokeWidth="2"/>
-                  <path d="M11 12H13" stroke="#537FE7" strokeWidth="3" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Sans interruptions</h3>
-            </motion.div>
-
-            {/* Énergie propre - Feuille */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3C8 3 5 6 5 10C5 14 8 17 12 21C16 17 19 14 19 10C19 6 16 3 12 3Z" stroke="#537FE7" strokeWidth="2" fill="none"/>
-                  <path d="M12 7V17" stroke="#537FE7" strokeWidth="1.5"/>
-                  <path d="M9 10L12 13L15 10" stroke="#537FE7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Énergie propre</h3>
-            </motion.div>
-
-            {/* Performance illimitée - Compteur/Gauge */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 12C3 7.5 7.5 3 12 3S21 7.5 21 12C21 16.5 17.5 21 12 21" stroke="#537FE7" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M12 7V12L16 16" stroke="#537FE7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="12" cy="12" r="1.5" fill="#537FE7"/>
-                  <path d="M7 7L5 5" stroke="#537FE7" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M17 7L19 5" stroke="#537FE7" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Performance illimitée</h3>
-            </motion.div>
-
-            {/* Innovation intelligente - Ampoule */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-                  <path d="M9 21H15" stroke="#537FE7" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M10 18H14" stroke="#537FE7" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M12 2C8.5 2 6 4.5 6 8C6 10 7 11.5 8.5 12.5C9 13 9.5 13.5 9.5 14.5V16H14.5V14.5C14.5 13.5 15 13 15.5 12.5C17 11.5 18 10 18 8C18 4.5 15.5 2 12 2Z" stroke="#537FE7" strokeWidth="2"/>
-                  <path d="M10 9L12 11L14 9" stroke="#537FE7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Innovation intelligente</h3>
-            </motion.div>
-
-            {/* Expertise persistante - Engrenage */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#537FE7" strokeWidth="2"/>
-                  <path d="M19.4 15C19.2669 15.3016 19.2669 15.6484 19.4 15.95L20.4 17.8C20.5 18 20.4 18.3 20.2 18.4L18.8 19.2C18.6 19.3 18.3 19.2 18.2 19L17.2 17.1C16.8 17.3 16.4 17.4 16 17.4H15C14.7 17.4 14.4 17.6 14.3 17.9L14 20C13.9 20.3 13.6 20.5 13.3 20.5H11.7C11.4 20.5 11.1 20.3 11 20L10.7 17.9C10.6 17.6 10.3 17.4 10 17.4H9C8.6 17.4 8.2 17.3 7.8 17.1L6.8 19C6.7 19.2 6.4 19.3 6.2 19.2L4.8 18.4C4.6 18.3 4.5 18 4.6 17.8L5.6 15.95C5.7331 15.6484 5.7331 15.3016 5.6 15L4.6 13.2C4.5 13 4.6 12.7 4.8 12.6L6.2 11.8C6.4 11.7 6.7 11.8 6.8 12L7.8 13.9C8.2 13.7 8.6 13.6 9 13.6H10C10.3 13.6 10.6 13.4 10.7 13.1L11 11C11.1 10.7 11.4 10.5 11.7 10.5H13.3C13.6 10.5 13.9 10.7 14 11L14.3 13.1C14.4 13.4 14.7 13.6 15 13.6H16C16.4 13.6 16.8 13.7 17.2 13.9L18.2 12C18.3 11.8 18.6 11.7 18.8 11.8L20.2 12.6C20.4 12.7 20.5 13 20.4 13.2L19.4 15Z" stroke="#537FE7" strokeWidth="1.5"/>
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-[#181823] mb-2">Expertise persistante</h3>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <ClientGallery />
+          </motion.div>
         </div>
       </motion.section>
 

@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Qualités & Certifications",
-  description: "Qualités & certifications: QUALI-FROID, RGE, HACCP, Qualifelec. Garanties et conformité pour vos installations HVAC critiques (data centers, laboratoires, industrie).",
+  description: "Qualités & certifications: C2E, RGE, HACCP, Qualifelec. Garanties et conformité pour vos installations HVAC critiques (data centers, laboratoires, industrie).",
   alternates: { canonical: "/qualites-certification" },
   openGraph: {
     title: "Qualités & Certifications",
@@ -9,7 +9,7 @@ export const metadata = {
   },
   twitter: {
     title: "Qualités & Certifications",
-    description: "QUALI-FROID, RGE, HACCP, Qualifelec.",
+    description: "C2E, RGE, HACCP, Qualifelec.",
   }
 }
 import QualitesHeroContent from "@/components/qualites-hero-content"

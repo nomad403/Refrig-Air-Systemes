@@ -1,10 +1,10 @@
 export const metadata = {
   title: "Maintenance HVAC & Services",
-  description: "Contrats de maintenance HVAC: préventive, corrective, prédictive. Astreinte 24/7, SLA ≤ 4h, optimisation énergétique et traçabilité pour installations critiques.",
+  description: "Contrats de maintenance HVAC: préventive, corrective, prédictive. Interventions 24/7, SLA ≤ 4h, optimisation énergétique et traçabilité pour installations critiques.",
   alternates: { canonical: "/maintenances-services" },
   openGraph: {
     title: "Maintenance HVAC & Services",
-    description: "Astreinte 24/7, SLA ≤ 4h, optimisation énergétique, traçabilité.",
+    description: "Interventions 24/7, SLA ≤ 4h, optimisation énergétique, traçabilité.",
     url: "/maintenances-services",
   },
   twitter: {

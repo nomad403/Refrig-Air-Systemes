@@ -10,7 +10,7 @@ export default function HeroContent() {
     <motion.main className="absolute inset-0 z-20 px-4 sm:px-6">
       {/* Carrousel de logos en bas */}
       <motion.div 
-        className="absolute left-0 right-0 bottom-16 sm:bottom-20 md:bottom-24 px-4 sm:px-6"
+        className="absolute left-0 right-0 bottom-32 sm:bottom-28 md:bottom-32 lg:bottom-40 px-4 sm:px-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}

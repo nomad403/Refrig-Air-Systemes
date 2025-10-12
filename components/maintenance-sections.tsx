@@ -157,18 +157,18 @@ export default function MaintenanceSections() {
                   Inspections régulières, contrôles de performance, anticipation des pannes.
                 </p>
                 <div className="space-y-4">
-                  <p className="text-[#181823]/80 leading-relaxed">
+                  <p className="text-[#181823]/80 leading-relaxed" suppressHydrationWarning>
                     Inspections systématiques selon un planning optimisé, contrôles de performance énergétique, nettoyage approfondi des échangeurs et vérification des points critiques. Remplacement préventif des pièces d'usure avant défaillance pour garantir une disponibilité maximale.
                   </p>
-                  <p className="text-[#181823]/80 leading-relaxed">
-                    Nos techniciens certifiés QUALI-FROID interviennent avec des protocoles stricts adaptés à chaque secteur : traçabilité pharmaceutique, normes HACCP agroalimentaire, uptime data center.
+                  <p className="text-[#181823]/80 leading-relaxed" suppressHydrationWarning>
+                    Nos techniciens habilités aux fluides frigorigènes interviennent avec des protocoles stricts adaptés à chaque secteur : traçabilité pharmaceutique, normes HACCP agroalimentaire, uptime data center.
                   </p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Maintenance Corrective */}
+          {/* Maintenance curative & corrective */}
           <motion.div
             className="mb-16 border-b border-[#181823]/10 pb-16"
             initial={{ opacity: 0, y: 50 }}
@@ -180,14 +180,14 @@ export default function MaintenanceSections() {
               <span className="text-[#537FE7] text-lg font-mono mr-4">[ 02 ]</span>
               <div className="flex-1">
                 <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
-                  Maintenance Corrective
+                  Maintenance curative & corrective
                 </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Intervention rapide et efficace en cas de dysfonctionnement critique.
                 </p>
                 <div className="space-y-4">
                   <p className="text-[#181823]/80 leading-relaxed">
-                    Service d'urgence 24/7 avec astreinte dédiée pour vos installations critiques. Diagnostic rapide par nos experts, intervention immédiate avec un stock stratégique de pièces détachées pour minimiser les temps d'arrêt.
+                  Service d'urgence 24h/24 et 7j/7 pour vos installations critiques. Diagnostic rapide par nos experts, intervention immédiate avec un stock stratégique de pièces détachées pour minimiser les temps d'arrêt.
                   </p>
                   <p className="text-[#181823]/80 leading-relaxed">
                     Équipes mobiles équipées d'outils de diagnostic avancés, véhicules-ateliers pour interventions complexes et solutions temporaires de secours pour assurer la continuité de service.
@@ -245,7 +245,7 @@ export default function MaintenanceSections() {
                 </p>
                 <div className="space-y-4">
                   <p className="text-[#181823]/80 leading-relaxed">
-                    Contrats premium modulables selon vos exigences : astreinte 24/7 pour data centers, interventions programmées pour laboratoires, maintenance saisonnière pour grandes surfaces. SLA personnalisés avec garanties de temps d'intervention.
+                  Contrats premium modulables selon vos exigences : interventions 24h/24 et 7j/7 pour data centers, interventions programmées pour laboratoires, maintenance saisonnière pour grandes surfaces. SLA personnalisés avec garanties de temps d'intervention.
                   </p>
                   <p className="text-[#181823]/80 leading-relaxed">
                     Facturation transparente, planning d'interventions optimisé et support technique dédié avec un interlocuteur unique pour simplifier la gestion de vos installations critiques.
@@ -294,10 +294,10 @@ export default function MaintenanceSections() {
                     <path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M12 20C7.6 20 4 16.4 4 12S7.6 4 12 4 20 7.6 20 12 16.4 20 12 20M12 6C9.8 6 8 7.8 8 10V14C8 16.2 9.8 18 12 18S16 16.2 16 14V10C16 7.8 14.2 6 12 6M12 16C10.9 16 10 15.1 10 14V10C10 8.9 10.9 8 12 8S14 8.9 14 10V14C14 15.1 13.1 16 12 16Z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-medium text-[#E9F8F9]">Support 24/7 & Astreintes</h3>
+                <h3 className="text-xl font-medium text-[#E9F8F9]">Support et Interventions 24/7</h3>
               </div>
               <p className="text-[#E9F8F9]/80 leading-relaxed">
-                Interventions garanties en urgence pour limiter tout arrêt d'activité. Astreinte technique dédiée aux installations critiques avec engagement de temps d'intervention personnalisé selon votre secteur.
+                Interventions garanties en urgence 24h/24 et 7j/7 pour limiter tout arrêt d'activité. Équipe dédiée aux installations critiques avec engagement de temps d'intervention personnalisé selon votre secteur.
               </p>
             </motion.div>
 
@@ -360,7 +360,7 @@ export default function MaintenanceSections() {
                 <h3 className="text-xl font-medium text-[#E9F8F9]">Conformité Réglementaire</h3>
               </div>
               <p className="text-[#E9F8F9]/80 leading-relaxed">
-                Suivi des fluides frigorigènes, respect des normes environnementales et traçabilité complète. Mise en conformité HACCP, GDP, et autres référentiels selon votre secteur d'activité.
+                Suivi des fluides frigorigènes, respect des normes environnementales et traçabilité complète. Mise en conformité HACCP et autres référentiels européens selon votre secteur d'activité.
               </p>
             </motion.div>
           </div>
@@ -520,7 +520,7 @@ export default function MaintenanceSections() {
                   transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
                   viewport={{ once: true }}
                 >
-                  QUALI-FROID et RGE
+                  Opérations éligibles C2E et RGE
                 </motion.p>
               </motion.div>
             </motion.div>
@@ -720,7 +720,7 @@ export default function MaintenanceSections() {
                       <div className="lg:col-span-2 space-y-3">
                         <h3 className="text-[#E9F8F9] text-lg sm:text-xl font-semibold">Laboratoires & Pharmaceutique — Environnements contrôlés</h3>
                         <p className="text-sm sm:text-base lg:text-lg text-[#E9F8F9]/90 leading-relaxed">
-                          Température, hygrométrie et qualité d’air maîtrisées. Procédures alignées GDP et BPF avec traçabilité complète pour vos zones critiques, salles blanches et chambres climatiques.
+                          Température, hygrométrie et qualité d’air maîtrisées. Procédures alignées aux bonnes pratiques et BPF avec traçabilité complète pour vos zones critiques, salles blanches et chambres climatiques.
                         </p>
                         <ul className="list-disc pl-5 text-[#E9F8F9]/85 space-y-1">
                           <li>Qualification et métrologie (calibration capteurs)</li>
