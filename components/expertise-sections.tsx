@@ -304,14 +304,14 @@ export default function ExpertiseSections() {
                       animate={{ height: "auto", opacity: 1, y: 0 }}
                       exit={{ height: 0, opacity: 0, y: -8 }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden mt-6 text-right"
+                      className="overflow-hidden mt-6 text-left"
                     >
                       {domainDetails["Pompes à Chaleur Industrielles"].subtitle && (
                         <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Pompes à Chaleur Industrielles"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Pompes à Chaleur Industrielles"].paragraphs.map((p, idx) => (
-                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base">{p}</p>
+                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base text-left">{p}</p>
                         ))}
                       </div>
                     </motion.div>
@@ -474,14 +474,14 @@ export default function ExpertiseSections() {
                       animate={{ height: "auto", opacity: 1, y: 0 }}
                       exit={{ height: 0, opacity: 0, y: -8 }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden mt-6 text-right"
+                      className="overflow-hidden mt-6 text-left"
                     >
                       {domainDetails["Groupes à Eau Glacée"].subtitle && (
                         <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Groupes à Eau Glacée"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Groupes à Eau Glacée"].paragraphs.map((p, idx) => (
-                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base">{p}</p>
+                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base text-left">{p}</p>
                         ))}
                       </div>
                     </motion.div>
@@ -644,14 +644,14 @@ export default function ExpertiseSections() {
                       animate={{ height: "auto", opacity: 1, y: 0 }}
                       exit={{ height: 0, opacity: 0, y: -8 }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden mt-6 text-right"
+                      className="overflow-hidden mt-6 text-left"
                     >
                       {domainDetails["Maintenance & Diagnostics"].subtitle && (
                         <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Maintenance & Diagnostics"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Maintenance & Diagnostics"].paragraphs.map((p, idx) => (
-                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base">{p}</p>
+                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base text-left">{p}</p>
                         ))}
                       </div>
                     </motion.div>
