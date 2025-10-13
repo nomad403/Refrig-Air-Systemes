@@ -615,7 +615,7 @@ export default function ContactSections() {
             <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
                 className="bg-[#537FE7] text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
-                whileHover={{ scale: 1.05, y: 0 }}
+                whileHover={{ scale: 1.01, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
@@ -625,7 +625,7 @@ export default function ContactSections() {
             <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
                 className="border border-[#E9F8F9]/30 text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
-                whileHover={{ scale: 1.05, y: 0 }}
+                whileHover={{ scale: 1.01, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >

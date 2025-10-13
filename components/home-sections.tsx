@@ -24,7 +24,7 @@ export default function HomeSections() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <div className="relative flex flex-col justify-center items-start h-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[800px]">
+            <div className="relative flex flex-col justify-center items-start h-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[800px] pt-16 sm:pt-0">
               <ScrollSlideTitle
                 direction="fromLeft"
                 className="text-left text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#181823] leading-tight orbit uppercase tracking-tight mb-4 sm:mb-6 lg:mb-8"
@@ -164,22 +164,24 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 01 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Climatisation Professionnelle
-                </h3>
-                <p className="text-[#537FE7] text-lg mb-6">
-                  Solutions de confort thermique pour bureaux, commerces et établissements.
-                </p>
-                <div className="space-y-4">
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Systèmes de climatisation haute performance pour environnements tertiaires et commerciaux. Nos équipes conçoivent et déploient des installations sur mesure, garantissant confort optimal et efficacité énergétique maximale.
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 01 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Climatisation Professionnelle
+                  </h3>
+                  <p className="text-[#537FE7] text-lg mb-6">
+                    Solutions de confort thermique pour bureaux, commerces et établissements.
                   </p>
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    De la conception à la mise en service, nous accompagnons vos projets de climatisation avec des solutions adaptées aux contraintes architecturales et réglementaires de chaque bâtiment.
-                  </p>
+                  <div className="space-y-4">
+                    <p className="text-[#E9F8F9]/80 leading-relaxed">
+                      Systèmes de climatisation haute performance pour environnements tertiaires et commerciaux. Nos équipes conçoivent et déploient des installations sur mesure, garantissant confort optimal et efficacité énergétique maximale.
+                    </p>
+                    <p className="text-[#E9F8F9]/80 leading-relaxed">
+                      De la conception à la mise en service, nous accompagnons vos projets de climatisation avec des solutions adaptées aux contraintes architecturales et réglementaires de chaque bâtiment.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -193,12 +195,13 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 02 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Froid Commercial & Vitrines Réfrigérées
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 02 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Froid Commercial & Vitrines Réfrigérées
+                  </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Solutions frigorifiques pour retail, restauration et distribution commerciale
                 </p>
@@ -236,6 +239,7 @@ export default function HomeSections() {
                     Contrats de maintenance spécialisés pour garantir la continuité commerciale et la conservation optimale des produits frais. Interventions 24h/24 et 7j/7 pour minimiser les pertes de marchandises.
                   </p>
                 </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -248,12 +252,13 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 03 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Froid Industriel & Installations Très Haute Technicité
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 03 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Froid Industriel & Installations Très Haute Technicité
+                  </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Installations frigorifiques très haute technicité pour l'industrie pharmaceutique, agroalimentaire, salles blanches et très basse température.
                 </p>
@@ -291,6 +296,7 @@ export default function HomeSections() {
                     Solutions modulaires et évolutives, conçues pour répondre aux exigences de traçabilité, de sécurité et de performance énergétique des environnements industriels les plus critiques. Expertise reconnue dans les installations très basse température et salles blanches.
                   </p>
                 </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -303,22 +309,24 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 04 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Maintenance Préventive & Supervision
-                </h3>
-                <p className="text-[#537FE7] text-lg mb-6">
-                  Contrats de maintenance premium avec supervision 24/7 pour assurer la continuité de vos installations.
-                </p>
-                <div className="space-y-4">
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Programmes de maintenance préventive sur mesure, télésurveillance en temps réel et interventions programmées pour maximiser la durée de vie de vos équipements et prévenir les pannes critiques.
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 04 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Maintenance Préventive & Supervision
+                  </h3>
+                  <p className="text-[#537FE7] text-lg mb-6">
+                    Contrats de maintenance premium avec supervision 24/7 pour assurer la continuité de vos installations.
                   </p>
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Nos contrats premium incluent diagnostics énergétiques, optimisation des performances et reporting détaillé pour réduire vos coûts d'exploitation tout en garantissant la fiabilité de vos installations.
-                  </p>
+                  <div className="space-y-4">
+                    <p className="text-[#E9F8F9]/80 leading-relaxed">
+                      Programmes de maintenance préventive sur mesure, télésurveillance en temps réel et interventions programmées pour maximiser la durée de vie de vos équipements et prévenir les pannes critiques.
+                    </p>
+                    <p className="text-[#E9F8F9]/80 leading-relaxed">
+                      Nos contrats premium incluent diagnostics énergétiques, optimisation des performances et reporting détaillé pour réduire vos coûts d'exploitation tout en garantissant la fiabilité de vos installations.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -332,22 +340,24 @@ export default function HomeSections() {
             transition={{ duration: 0.8, delay: 0.7 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 05 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Dépannage d'Urgence & Interventions Rapides
-                </h3>
-                <p className="text-[#537FE7] text-lg mb-6">
-                  Service d'intervention 24h/24, 7j/7 pour rétablir rapidement vos installations critiques.
-                </p>
-                <div className="space-y-4">
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Face aux pannes critiques, nos équipes d'intervention d'urgence sont mobilisables à tout moment. Diagnostic rapide, réparations immédiates et solutions temporaires pour garantir la continuité de votre activité.
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 05 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Dépannage d'Urgence & Interventions Rapides
+                  </h3>
+                  <p className="text-[#537FE7] text-lg mb-6">
+                    Service d'intervention 24h/24, 7j/7 pour rétablir rapidement vos installations critiques.
                   </p>
-                  <p className="text-[#E9F8F9]/80 leading-relaxed">
-                    Nos techniciens certifiés interviennent avec un stock de pièces détachées et d'équipements de secours pour assurer un dépannage efficace et durable, minimisant les temps d'arrêt de vos installations.
-                  </p>
+                  <div className="space-y-4">
+                    <p className="text-[#E9F8F9]/80 leading-relaxed">
+                      Face aux pannes critiques, nos équipes d'intervention d'urgence sont mobilisables à tout moment. Diagnostic rapide, réparations immédiates et solutions temporaires pour garantir la continuité de votre activité.
+                    </p>
+                    <p className="text-[#E9F8F9]/80 leading-relaxed">
+                      Nos techniciens certifiés interviennent avec un stock de pièces détachées et d'équipements de secours pour assurer un dépannage efficace et durable, minimisant les temps d'arrêt de vos installations.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -447,8 +457,8 @@ export default function HomeSections() {
             >
               <a href="/contact">
                 <motion.button 
-                  className="rounded-sm transition-all duration-200 btn-effect-5 btn-standard"
-                  whileHover={{ scale: 1.05, y: 0 }}
+                  className="rounded-sm transition-all duration-200 btn-effect-5 btn-standard whitespace-nowrap w-full"
+                  whileHover={{ scale: 1.02, y: 0 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                 >

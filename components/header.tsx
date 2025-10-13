@@ -259,10 +259,10 @@ export default function Header() {
                 <div className="mt-8">
                   <a 
                     href="/contact#formulaire" 
-                    className="inline-block"
+                    className="block w-full"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <button className="w-full bg-[#537FE7] text-white px-8 py-3 rounded-sm hover:bg-[#537FE7]/80 transition-colors font-bold">
+                    <button className="w-full bg-[#537FE7] text-white px-8 py-3 rounded-sm btn-effect-5 btn-standard font-bold">
                       Demander un Devis
                     </button>
                   </a>
