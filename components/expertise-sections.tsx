@@ -186,13 +186,13 @@ export default function ExpertiseSections() {
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromLeft"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-left"
                   >
                     Climatisation Réversible
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -200,7 +200,7 @@ export default function ExpertiseSections() {
                 >
                   Systèmes haute performance pour environnements tertiaires et industriels
                 </motion.p>
-                <div className="mt-6">
+                <div className="mt-6 flex justify-center lg:justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Climatisation Réversible")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -222,11 +222,11 @@ export default function ExpertiseSections() {
                       className="overflow-hidden mt-6 text-left"
                     >
                       {domainDetails["Climatisation Réversible"].subtitle && (
-                        <p className="text-white/90 text-base lg:text-lg mb-3">{domainDetails["Climatisation Réversible"].subtitle}</p>
+                        <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Climatisation Réversible"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Climatisation Réversible"].paragraphs.map((p, idx) => (
-                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base">{p}</p>
+                          <p key={idx} className="text-white/80 leading-relaxed text-sm lg:text-base text-left">{p}</p>
                         ))}
                       </div>
                     </motion.div>
@@ -271,13 +271,13 @@ export default function ExpertiseSections() {
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromRight"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-right"
                   >
                     Pompes à Chaleur Industrielles
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-right"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -285,7 +285,7 @@ export default function ExpertiseSections() {
                 >
                   Solutions énergétiques durables et haute efficacité
                 </motion.p>
-                <div className="mt-6 self-center lg:self-end">
+                <div className="mt-6 flex justify-center lg:justify-end">
                   <motion.button
                     onClick={() => toggleDomain("Pompes à Chaleur Industrielles")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -307,7 +307,7 @@ export default function ExpertiseSections() {
                       className="overflow-hidden mt-6 text-right"
                     >
                       {domainDetails["Pompes à Chaleur Industrielles"].subtitle && (
-                        <p className="text-white/90 text-base lg:text-lg mb-3">{domainDetails["Pompes à Chaleur Industrielles"].subtitle}</p>
+                        <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Pompes à Chaleur Industrielles"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Pompes à Chaleur Industrielles"].paragraphs.map((p, idx) => (
@@ -356,13 +356,13 @@ export default function ExpertiseSections() {
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromLeft"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-left"
                   >
                     Chambres Froides Positives & Négatives
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -370,7 +370,7 @@ export default function ExpertiseSections() {
                 >
                   Conformes HACCP pour agroalimentaire et pharmaceutique
                 </motion.p>
-                <div className="mt-6">
+                <div className="mt-6 flex justify-center lg:justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Chambres Froides Positives & Négatives")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -392,7 +392,7 @@ export default function ExpertiseSections() {
                       className="overflow-hidden mt-6 text-left"
                     >
                       {domainDetails["Chambres Froides Positives & Négatives"].subtitle && (
-                        <p className="text-white/90 text-base lg:text-lg mb-3">{domainDetails["Chambres Froides Positives & Négatives"].subtitle}</p>
+                        <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Chambres Froides Positives & Négatives"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Chambres Froides Positives & Négatives"].paragraphs.map((p, idx) => (
@@ -441,13 +441,13 @@ export default function ExpertiseSections() {
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromRight"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-right"
                   >
                     Groupes à Eau Glacée
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-right"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -455,7 +455,7 @@ export default function ExpertiseSections() {
                 >
                   Refroidissement centralisé pour grands bâtiments et industries
                 </motion.p>
-                <div className="mt-6 self-center lg:self-end">
+                <div className="mt-6 flex justify-center lg:justify-end">
                   <motion.button
                     onClick={() => toggleDomain("Groupes à Eau Glacée")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -477,7 +477,7 @@ export default function ExpertiseSections() {
                       className="overflow-hidden mt-6 text-right"
                     >
                       {domainDetails["Groupes à Eau Glacée"].subtitle && (
-                        <p className="text-white/90 text-base lg:text-lg mb-3">{domainDetails["Groupes à Eau Glacée"].subtitle}</p>
+                        <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Groupes à Eau Glacée"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Groupes à Eau Glacée"].paragraphs.map((p, idx) => (
@@ -526,13 +526,13 @@ export default function ExpertiseSections() {
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromLeft"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-left"
                   >
                     Récupérateurs de Chaleur
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -540,7 +540,7 @@ export default function ExpertiseSections() {
                 >
                   Technologies Boostherm pour optimisation énergétique
                 </motion.p>
-                <div className="mt-6">
+                <div className="mt-6 flex justify-center lg:justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Récupérateurs de Chaleur")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -562,7 +562,7 @@ export default function ExpertiseSections() {
                       className="overflow-hidden mt-6 text-left"
                     >
                       {domainDetails["Récupérateurs de Chaleur"].subtitle && (
-                        <p className="text-white/90 text-base lg:text-lg mb-3">{domainDetails["Récupérateurs de Chaleur"].subtitle}</p>
+                        <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Récupérateurs de Chaleur"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Récupérateurs de Chaleur"].paragraphs.map((p, idx) => (
@@ -611,13 +611,13 @@ export default function ExpertiseSections() {
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromRight"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-right"
                   >
                     Maintenance & Diagnostics
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-right"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -625,7 +625,7 @@ export default function ExpertiseSections() {
                 >
                   Contrats premium avec suivi proactif et optimisation
                 </motion.p>
-                <div className="mt-6 self-center lg:self-end">
+                <div className="mt-6 flex justify-center lg:justify-end">
                   <motion.button
                     onClick={() => toggleDomain("Maintenance & Diagnostics")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -647,7 +647,7 @@ export default function ExpertiseSections() {
                       className="overflow-hidden mt-6 text-right"
                     >
                       {domainDetails["Maintenance & Diagnostics"].subtitle && (
-                        <p className="text-white/90 text-base lg:text-lg mb-3">{domainDetails["Maintenance & Diagnostics"].subtitle}</p>
+                        <p className="text-white/90 text-base lg:text-lg mb-3 text-left">{domainDetails["Maintenance & Diagnostics"].subtitle}</p>
                       )}
                       <div className="space-y-4">
                         {domainDetails["Maintenance & Diagnostics"].paragraphs.map((p, idx) => (
@@ -697,12 +697,13 @@ export default function ExpertiseSections() {
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#181823] text-lg font-mono mr-4">[ 01 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Audits & Diagnostic sur Site
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#181823] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 01 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Audits & Diagnostic sur Site
+                  </h3>
                 <p className="text-[#181823] text-lg mb-6">
                   Analyse complète de vos besoins frigorifiques et énergétiques.
                 </p>
@@ -713,6 +714,7 @@ export default function ExpertiseSections() {
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
                     Cette phase inclut un bilan énergétique précis avec mesures et simulations thermodynamiques pour identifier les potentiels d'optimisation et garantir le dimensionnement optimal de votre future installation.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -726,12 +728,13 @@ export default function ExpertiseSections() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#181823] text-lg font-mono mr-4">[ 02 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Proposition sur Mesure
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#181823] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 02 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Proposition sur Mesure
+                  </h3>
                 <p className="text-[#181823] text-lg mb-6">
                   Étude technique détaillée, plans 3D et simulations de performance.
                 </p>
@@ -742,6 +745,7 @@ export default function ExpertiseSections() {
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
                     Nous proposons plusieurs scénarios avec analyse coût/bénéfice, retour sur investissement et conformité aux normes en vigueur (RT2012, RE2020, HACCP selon votre secteur).
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -755,12 +759,13 @@ export default function ExpertiseSections() {
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#181823] text-lg font-mono mr-4">[ 03 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Installation par Équipes Certifiées
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#181823] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 03 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Installation par Équipes Certifiées
+                  </h3>
                 <p className="text-[#181823] text-lg mb-6" suppressHydrationWarning>
                   Réalisation par des techniciens habilités aux fluides frigorigènes avec équipements de pointe.
                 </p>
@@ -771,6 +776,7 @@ export default function ExpertiseSections() {
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
                     Chaque étape fait l'objet d'un contrôle qualité rigoureux avec documentation complète des interventions, tests d'étanchéité et vérifications de conformité.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -784,12 +790,13 @@ export default function ExpertiseSections() {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#181823] text-lg font-mono mr-4">[ 04 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Mise en Service & Tests Performance
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#181823] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 04 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Mise en Service & Tests Performance
+                  </h3>
                 <p className="text-[#181823] text-lg mb-6">
                   Optimisation des réglages et validation des performances attendues.
                 </p>
@@ -800,6 +807,7 @@ export default function ExpertiseSections() {
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
                     Formation complète de vos équipes aux nouveaux équipements, remise de la documentation technique et création du carnet de suivi personnalisé pour optimiser la maintenance future.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -813,12 +821,13 @@ export default function ExpertiseSections() {
             transition={{ duration: 0.8, delay: 0.7 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#181823] text-lg font-mono mr-4">[ 05 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
-                  Maintenance & Suivi Proactif
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#181823] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 05 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
+                    Maintenance & Suivi Proactif
+                  </h3>
                 <p className="text-[#181823] text-lg mb-6">
                   Contrats premium avec télésurveillance et interventions préventives.
                 </p>
@@ -829,6 +838,7 @@ export default function ExpertiseSections() {
                   <p className="text-[#E9F8F9]/80 leading-relaxed">
                     Reporting détaillé avec suivi énergétique, recommandations d'amélioration et planification des renouvellements d'équipements pour anticiper vos investissements futurs.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -977,7 +987,7 @@ export default function ExpertiseSections() {
             <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
                 className="bg-[#537FE7] text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
-                whileHover={{ scale: 1.05, y: 0 }}
+                whileHover={{ scale: 1.01, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
@@ -987,7 +997,7 @@ export default function ExpertiseSections() {
             <a href="/contact" className="w-full sm:w-auto">
               <motion.button 
                 className="border border-[#E9F8F9]/30 text-[#E9F8F9] rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
-                whileHover={{ scale: 1.05, y: 0 }}
+                whileHover={{ scale: 1.01, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >

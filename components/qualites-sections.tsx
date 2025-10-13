@@ -1,15 +1,55 @@
 "use client"
 
+import React from "react"
 import { motion } from "framer-motion"
 import LiteYouTubeBackground from "./LiteYouTubeBackground"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import ScrollSlideTitle from "./scroll-slide-title"
 
-// Composant pour l'animation des compteurs
-function AnimatedCounter({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) {
+// Composant pour l'animation des compteurs avec effet de comptage
+function AnimatedCounter({ value, suffix = "", duration = 2, delay = 0 }: { value: number; suffix?: string; duration?: number; delay?: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
+  const [displayValue, setDisplayValue] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!isInView) return
+
+    let startTime: number
+    let animationFrame: number
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime
+      
+      const elapsed = currentTime - startTime
+      const progress = Math.min((elapsed - delay * 1000) / (duration * 1000), 1)
+      
+      if (progress < 0) {
+        // Pas encore le moment de démarrer l'animation
+        animationFrame = requestAnimationFrame(animate)
+        return
+      }
+      
+      // Fonction d'easing pour un effet plus naturel
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const currentValue = Math.floor(easeOutQuart * value)
+      
+      setDisplayValue(currentValue)
+      
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame)
+      }
+    }
+  }, [isInView, value, duration, delay])
 
   return (
     <motion.span
@@ -19,19 +59,16 @@ function AnimatedCounter({ value, suffix = "", duration = 2 }: { value: number; 
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      {isInView ? (
-        <motion.span
-          style={{ display: "inline-block" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
-          {value}
-        </motion.span>
-      ) : (
-        "0"
-      )}
-      {suffix}
+      <motion.span
+        key={displayValue} // Force la re-render pour l'animation
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className={suffix === "%" ? "text-[#537FE7]" : ""} // Mettre en évidence les pourcentages
+      >
+        {displayValue}
+      </motion.span>
+      <span className={suffix === "%" ? "text-[#537FE7]" : ""}>{suffix}</span>
     </motion.span>
   )
 }
@@ -243,7 +280,8 @@ export default function QualitesSections() {
                 <AnimatedCounter 
                   value={engagement.value} 
                   suffix={engagement.suffix}
-                  duration={2 + index * 0.2}
+                  duration={2}
+                  delay={index * 0.3}
                 />
                 <h3 className="text-sm font-light mt-2 text-[#E9F8F9]/70 satoshi">{engagement.title}</h3>
                 <p className="text-xs text-[#E9F8F9]/50 mt-1 satoshi">{engagement.description}</p>

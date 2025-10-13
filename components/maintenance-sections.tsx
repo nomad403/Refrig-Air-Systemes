@@ -147,12 +147,13 @@ export default function MaintenanceSections() {
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 01 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
-                  Maintenance Préventive
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 01 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
+                    Maintenance Préventive
+                  </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Inspections régulières, contrôles de performance, anticipation des pannes.
                 </p>
@@ -163,6 +164,7 @@ export default function MaintenanceSections() {
                   <p className="text-[#181823]/80 leading-relaxed" suppressHydrationWarning>
                     Nos techniciens habilités aux fluides frigorigènes interviennent avec des protocoles stricts adaptés à chaque secteur : traçabilité pharmaceutique, normes HACCP agroalimentaire, uptime data center.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -176,12 +178,13 @@ export default function MaintenanceSections() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 02 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
-                  Maintenance curative & corrective
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 02 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
+                    Maintenance curative & corrective
+                  </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Intervention rapide et efficace en cas de dysfonctionnement critique.
                 </p>
@@ -192,6 +195,7 @@ export default function MaintenanceSections() {
                   <p className="text-[#181823]/80 leading-relaxed">
                     Équipes mobiles équipées d'outils de diagnostic avancés, véhicules-ateliers pour interventions complexes et solutions temporaires de secours pour assurer la continuité de service.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -205,12 +209,13 @@ export default function MaintenanceSections() {
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 03 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
-                  Maintenance Prédictive
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 03 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
+                    Maintenance Prédictive
+                  </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Capteurs connectés et suivi temps réel pour anticiper les anomalies.
                 </p>
@@ -221,6 +226,7 @@ export default function MaintenanceSections() {
                   <p className="text-[#181823]/80 leading-relaxed">
                     Tableaux de bord en temps réel, rapports prédictifs mensuels et recommandations d'optimisation pour maximiser la durée de vie de vos équipements tout en réduisant les coûts d'exploitation.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -234,12 +240,13 @@ export default function MaintenanceSections() {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="flex items-start mb-6">
-              <span className="text-[#537FE7] text-lg font-mono mr-4">[ 04 ]</span>
-              <div className="flex-1">
-                <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
-                  Contrats Sur Mesure
-                </h3>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-start">
+                <span className="text-[#537FE7] text-lg font-mono mb-2 sm:mb-0 sm:mr-4">[ 04 ]</span>
+                <div className="flex-1">
+                  <h3 className="text-2xl lg:text-3xl font-light text-[#181823] mb-4 orbit">
+                    Contrats Sur Mesure
+                  </h3>
                 <p className="text-[#537FE7] text-lg mb-6">
                   Fréquence et niveau de service adaptés à votre secteur d'activité.
                 </p>
@@ -250,6 +257,7 @@ export default function MaintenanceSections() {
                   <p className="text-[#181823]/80 leading-relaxed">
                     Facturation transparente, planning d'interventions optimisé et support technique dédié avec un interlocuteur unique pour simplifier la gestion de vos installations critiques.
                   </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -612,7 +620,7 @@ export default function MaintenanceSections() {
             >
               {/* Image de fond */}
               <div 
-                className="relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                className={`relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 ${openDescriptions['data-centers'] ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                 style={{ backgroundImage: "url('/images/maintenances_services/server_rack.jpg')" }}
               />
               {/* Overlay sombre */}
@@ -686,7 +694,7 @@ export default function MaintenanceSections() {
             >
               {/* Image de fond */}
               <div 
-                className="relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                className={`relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 ${openDescriptions['laboratoires'] ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                 style={{ backgroundImage: "url('/images/maintenances_services/labo.jpeg')" }}
               />
               {/* Overlay sombre */}
@@ -759,7 +767,7 @@ export default function MaintenanceSections() {
             >
               {/* Image de fond */}
               <div 
-                className="relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                className={`relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 ${openDescriptions['agroalimentaire'] ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                 style={{ backgroundImage: "url('/images/maintenances_services/agro_alimentaire.jpg')" }}
               />
               {/* Overlay sombre */}
@@ -832,7 +840,7 @@ export default function MaintenanceSections() {
             >
               {/* Image de fond */}
               <div 
-                className="relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                className={`relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 ${openDescriptions['industrie'] ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                 style={{ backgroundImage: "url('/images/maintenances_services/industry.jpg')" }}
               />
               {/* Overlay sombre */}
@@ -905,7 +913,7 @@ export default function MaintenanceSections() {
             >
               {/* Image de fond */}
               <div 
-                className="relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                className={`relative h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] bg-cover bg-center bg-no-repeat transition-all duration-500 group-hover:scale-105 ${openDescriptions['commerces'] ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                 style={{ backgroundImage: "url('/images/maintenances_services/Coldiretti.jpg')" }}
               />
               {/* Overlay sombre */}
@@ -1005,7 +1013,7 @@ export default function MaintenanceSections() {
             <a href="/contact#formulaire" className="w-full sm:w-auto">
               <motion.button 
                 className="rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
-                whileHover={{ scale: 1.05, y: 0 }}
+                whileHover={{ scale: 1.01, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
@@ -1015,7 +1023,7 @@ export default function MaintenanceSections() {
             <a href="/maintenances-services#types-maintenance" className="w-full sm:w-auto">
               <motion.button 
                 className="rounded-sm btn-effect-5 btn-standard w-full whitespace-nowrap"
-                whileHover={{ scale: 1.05, y: 0 }}
+                whileHover={{ scale: 1.01, y: 0 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
