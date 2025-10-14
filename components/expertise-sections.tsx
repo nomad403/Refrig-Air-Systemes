@@ -182,17 +182,17 @@ export default function ExpertiseSections() {
                   whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 text-left relative flex flex-col justify-center">
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromLeft"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-left"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-left"
                   >
                     Climatisation Réversible
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-left"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -200,7 +200,7 @@ export default function ExpertiseSections() {
                 >
                   Systèmes haute performance pour environnements tertiaires et industriels
                 </motion.p>
-                <div className="mt-6 flex justify-center lg:justify-start">
+                <div className="mt-6 flex justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Climatisation Réversible")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -267,17 +267,17 @@ export default function ExpertiseSections() {
                   whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 text-left relative flex flex-col justify-center">
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromRight"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-right"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-left"
                   >
                     Pompes à Chaleur Industrielles
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-right"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -285,7 +285,7 @@ export default function ExpertiseSections() {
                 >
                   Solutions énergétiques durables et haute efficacité
                 </motion.p>
-                <div className="mt-6 flex justify-center lg:justify-end">
+                <div className="mt-6 flex justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Pompes à Chaleur Industrielles")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -352,17 +352,17 @@ export default function ExpertiseSections() {
                   whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 text-left relative flex flex-col justify-center">
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromLeft"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-left"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-left"
                   >
                     Chambres Froides Positives & Négatives
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-left"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -370,7 +370,7 @@ export default function ExpertiseSections() {
                 >
                   Conformes HACCP pour agroalimentaire et pharmaceutique
                 </motion.p>
-                <div className="mt-6 flex justify-center lg:justify-start">
+                <div className="mt-6 flex justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Chambres Froides Positives & Négatives")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -437,17 +437,17 @@ export default function ExpertiseSections() {
                   whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 text-left relative flex flex-col justify-center">
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromRight"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-right"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-left"
                   >
                     Groupes à Eau Glacée
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-right"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -455,7 +455,7 @@ export default function ExpertiseSections() {
                 >
                   Refroidissement centralisé pour grands bâtiments et industries
                 </motion.p>
-                <div className="mt-6 flex justify-center lg:justify-end">
+                <div className="mt-6 flex justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Groupes à Eau Glacée")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -522,17 +522,17 @@ export default function ExpertiseSections() {
                   whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 text-center lg:text-left relative flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 text-left relative flex flex-col justify-center">
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromLeft"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-left"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-left"
                   >
                     Récupérateurs de Chaleur
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-left"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -540,7 +540,7 @@ export default function ExpertiseSections() {
                 >
                   Technologies Boostherm pour optimisation énergétique
                 </motion.p>
-                <div className="mt-6 flex justify-center lg:justify-start">
+                <div className="mt-6 flex justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Récupérateurs de Chaleur")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
@@ -607,17 +607,17 @@ export default function ExpertiseSections() {
                   whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
                 />
               </div>
-              <div className="w-full lg:w-1/2 text-center lg:text-right relative flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 text-left relative flex flex-col justify-center">
                 <div className="relative z-0">
                   <ScrollSlideTitle
                     direction="fromRight"
-                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-center lg:text-right"
+                    className="fluid-title satoshi font-bold uppercase tracking-tight text-white mb-6 lg:mb-8 max-w-[28ch] text-balance text-left"
                   >
                     Maintenance & Diagnostics
                   </ScrollSlideTitle>
                 </div>
                 <motion.p
-                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-center lg:text-right"
+                  className="text-lg lg:text-xl text-white/80 leading-relaxed lg:leading-loose text-left"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
@@ -625,7 +625,7 @@ export default function ExpertiseSections() {
                 >
                   Contrats premium avec suivi proactif et optimisation
                 </motion.p>
-                <div className="mt-6 flex justify-center lg:justify-end">
+                <div className="mt-6 flex justify-start">
                   <motion.button
                     onClick={() => toggleDomain("Maintenance & Diagnostics")}
                     className="rounded-sm btn-effect-5 btn-standard relative"
