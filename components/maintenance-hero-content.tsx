@@ -17,7 +17,7 @@ export default function MaintenanceHeroContent() {
 
       {/* Boutons centrés en bas sur mobile, bas-droite sur desktop */}
       <motion.div 
-        className="absolute left-4 right-4 sm:left-auto sm:right-4 sm:right-6 bottom-4 sm:bottom-6 md:bottom-8 flex items-center justify-center sm:justify-end gap-2 sm:gap-4 flex-row"
+        className="absolute left-4 right-4 sm:left-auto sm:right-4 sm:right-6 bottom-8 sm:bottom-6 md:bottom-8 flex items-center justify-center sm:justify-end gap-2 sm:gap-4 flex-row"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
