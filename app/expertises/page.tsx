@@ -23,7 +23,7 @@ import ExpertiseHeroContent from "../../components/expertise-hero-content"
 
 export default function ExpertisesPage() {
   return (
-    <div className="min-h-screen">
+    <>
       {/* JSON-LD Services pour les offres principales */}
       <script
         type="application/ld+json"
@@ -59,6 +59,6 @@ export default function ExpertisesPage() {
       </div>
 
       <ExpertiseSections />
-    </div>
+    </>
   )
 }
