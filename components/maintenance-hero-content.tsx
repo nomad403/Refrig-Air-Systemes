@@ -29,7 +29,7 @@ export default function MaintenanceHeroContent() {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            Nos contrats maintenance
+            Contrats maintenance
           </motion.button>
         </a>
         <a href="/maintenances-services#secteurs" className="w-full sm:w-auto">
@@ -39,7 +39,7 @@ export default function MaintenanceHeroContent() {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            Secteurs d'application
+            Nos secteurs
           </motion.button>  
         </a>
       </motion.div>
