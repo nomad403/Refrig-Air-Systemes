@@ -14,6 +14,7 @@ export default function ExpertiseHeroContent() {
       >
         Expertise frigorifique
       </motion.h1>
+      
 
       {/* Boutons centrés en bas sur mobile, bas-droite sur desktop */}
       <motion.div 
@@ -29,7 +30,7 @@ export default function ExpertiseHeroContent() {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            Découvrir nos expertises
+            Nos expertises
           </motion.button>
         </a>
         <a href="/contact#formulaire" className="w-full sm:w-auto">
@@ -39,7 +40,7 @@ export default function ExpertiseHeroContent() {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            Audit technique gratuit
+            Audit gratuit
           </motion.button>  
         </a>
       </motion.div>
