@@ -18,7 +18,7 @@ import MaintenanceHeroContent from "../../components/maintenance-hero-content"
 
 export default function MaintenanceServicesPage() {
   return (
-    <div className="min-h-screen">
+    <>
       <div className="relative isolate min-h-[100dvh]">
         {/* Fond en arrière-plan — même scope que le header */}
         <div className="absolute inset-0 -z-10">
@@ -30,6 +30,6 @@ export default function MaintenanceServicesPage() {
       </div>
 
       <MaintenanceSections />
-    </div>
+    </>
   )
 }
