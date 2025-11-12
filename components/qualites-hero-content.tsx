@@ -12,7 +12,7 @@ export default function QualitesHeroContent() {
       {/* Titre - Centré à gauche sur mobile, en bas à gauche sur desktop */}
       <motion.h1 
         className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 sm:left-6 sm:translate-x-0 sm:top-auto sm:translate-y-0 sm:bottom-4 md:bottom-6 lg:bottom-8 text-2xl sm:text-lg md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold sm:font-light text-white leading-tight sm:leading-none tracking-tight orbit uppercase text-center sm:text-left w-full sm:w-auto sm:max-w-none mix-blend-difference z-20"
-        initial={{ opacity: 0, y: 12 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
@@ -22,7 +22,7 @@ export default function QualitesHeroContent() {
       {/* Boutons centrés en bas sur mobile, bas-droite sur desktop */}
       <motion.div 
         className="absolute left-4 right-4 sm:left-auto sm:right-4 sm:right-6 bottom-4 sm:bottom-6 md:bottom-8 flex items-center justify-center sm:justify-end gap-2 sm:gap-4 flex-row mix-blend-difference"
-        initial={{ opacity: 0, y: 12 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.3 }}
       >

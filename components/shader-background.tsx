@@ -73,7 +73,7 @@ export default function ShaderBackground({
     }
   }, [defaultMediaStyle])
 
-  const [mediaStyle, setMediaStyle] = useState<React.CSSProperties>(() => defaultMediaStyle())
+  const [mediaStyle, setMediaStyle] = useState<React.CSSProperties>(defaultMediaStyle)
 
   useEffect(() => {
     setHasHydrated(true)
@@ -293,7 +293,7 @@ export default function ShaderBackground({
   }, [videoUrl, resolvedVideoUrl, isInView])
 
   return (
-    <div ref={containerRef} className={`min-h-screen bg-black relative overflow-hidden ${isMobile ? 'shader-background-mobile' : ''}`}>
+    <div ref={containerRef} className={`min-h-screen bg-black relative overflow-hidden ${hasHydrated && isMobile ? 'shader-background-mobile' : ''}`}>
       {backgroundType === "video" ? (
         videoUrl ? (
           <div
@@ -365,7 +365,7 @@ export default function ShaderBackground({
           <div 
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{
-              ...mediaStyle,
+              ...(hasHydrated ? mediaStyle : defaultMediaStyle()),
               backgroundImage: imageUrl ? `url(${imageUrl})` : undefined
             }}
           />
