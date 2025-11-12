@@ -1,4 +1,5 @@
 import type React from "react"
+import { Suspense } from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import Header from "@/components/header"
@@ -157,7 +158,9 @@ export default function RootLayout({
       </head>
       <body style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overflowX: 'hidden' }}>
         <LanguageProvider>
-          <Header />
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
           {children}
         </LanguageProvider>
       </body>
