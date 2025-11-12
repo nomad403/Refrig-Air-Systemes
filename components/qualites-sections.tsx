@@ -1,11 +1,10 @@
 "use client"
 
-import React from "react"
-import { motion } from "framer-motion"
+import React, { useMemo, useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import LiteYouTubeBackground from "./LiteYouTubeBackground"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
 import ScrollSlideTitle from "./scroll-slide-title"
+import { useLanguage } from "@/contexts/language-context"
 
 // Composant pour l'animation des compteurs avec effet de comptage
 function AnimatedCounter({ value, suffix = "", duration = 2, delay = 0 }: { value: number; suffix?: string; duration?: number; delay?: number }) {
@@ -76,101 +75,121 @@ function AnimatedCounter({ value, suffix = "", duration = 2, delay = 0 }: { valu
 export default function QualitesSections() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, margin: "-100px", amount: 0.3 })
+  const { isFrench } = useLanguage()
+  const t = (fr: string, en: string) => (isFrench ? fr : en)
 
-  const certifications = [
+  const certifications = useMemo(() => ([
     {
-      title: "C2E — Certificats d'Économies d'Énergie",
-      description: "Reconnaissance officielle d'actions d'efficacité énergétique pour installations frigorifiques et climatisation de précision",
-      category: "Technique"
+      title: t("C2E — Certificats d'Économies d'Énergie", "C2E — Energy Savings Certificates"),
+      description: t(
+        "Reconnaissance officielle d'actions d'efficacité énergétique pour installations frigorifiques et climatisation de précision",
+        "Official recognition of energy-efficiency actions for refrigeration plants and precision HVAC"
+      ),
+      category: t("Technique", "Technical")
     },
     {
-      title: "Certification RGE",
-      description: "Reconnu Garant de l'Environnement - Qualification officielle pour travaux de rénovation énergétique et efficacité des installations frigorifiques industrielles",
-      category: "Environnemental"
+      title: t("Certification RGE", "RGE Certification"),
+      description: t(
+        "Reconnu Garant de l'Environnement - Qualification officielle pour travaux de rénovation énergétique et efficacité des installations frigorifiques industrielles",
+        "Recognised Environmental Guarantor – official qualification for energy retrofits and efficient industrial refrigeration installations"
+      ),
+      category: t("Environnemental", "Environmental")
     },
     {
-      title: "Attestation Capacité Fluides Frigorigènes",
-      description: "Habilitation légale pour manipulation des fluides HFC, R-410A, R-32 et fluides naturels (CO2, NH3) pour installations critiques haute performance",
-      category: "Réglementaire"
+      title: t("Attestation Capacité Fluides Frigorigènes", "Refrigerant Handling Capacity Certificate"),
+      description: t(
+        "Habilitation légale pour manipulation des fluides HFC, R-410A, R-32 et fluides naturels (CO2, NH3) pour installations critiques haute performance",
+        "Legal licence to handle HFCs, R-410A, R-32 and natural refrigerants (CO2, NH3) for high-performance critical installations"
+      ),
+      category: t("Réglementaire", "Regulatory")
     },
     {
-      title: "Certification Qualifelec",
-      description: "Compétence certifiée en génie électrique et énergétique pour systèmes de climatisation de précision et supervision des installations tertiaires",
-      category: "Électrique"
+      title: t("Certification Qualifelec", "Qualifelec Certification"),
+      description: t(
+        "Compétence certifiée en génie électrique et énergétique pour systèmes de climatisation de précision et supervision des installations tertiaires",
+        "Certified expertise in electrical and energy engineering for precision HVAC systems and tertiary site supervision"
+      ),
+      category: t("Électrique", "Electrical")
     },
     {
-      title: "Partenariat Carrier Agréé",
-      description: "Formation technique spécialisée sur équipements Carrier pour data centers, salles blanches et applications critiques haute disponibilité",
-      category: "Fabricant"
+      title: t("Partenariat Carrier Agréé", "Authorised Carrier Partner"),
+      description: t(
+        "Formation technique spécialisée sur équipements Carrier pour data centers, salles blanches et applications critiques haute disponibilité",
+        "Specialised technical training on Carrier equipment for data centres, cleanrooms and high-availability critical applications"
+      ),
+      category: t("Fabricant", "Manufacturer")
     },
     {
-      title: "Membre SNEFCCA",
-      description: "Syndicat National des Entreprises du Froid - Engagement professionnel et veille réglementaire pour installations agroalimentaires et pharmaceutiques",
-      category: "Professionnel"
+      title: t("Membre SNEFCCA", "SNEFCCA Member"),
+      description: t(
+        "Syndicat National des Entreprises du Froid - Engagement professionnel et veille réglementaire pour installations agroalimentaires et pharmaceutiques",
+        "National Syndicate of Refrigeration Companies – professional commitment and regulatory watch for agri-food and pharmaceutical installations"
+      ),
+      category: t("Professionnel", "Professional")
     }
-  ]
+  ]), [isFrench])
 
-  const engagements = [
+  const engagements = useMemo(() => ([
     {
-      title: "Années d'Expérience",
+      title: t("Années d'Expérience", "Years of Experience"),
       value: 30,
       suffix: "",
-      description: "Expertise reconnue en climatisation et froid industriel"
+      description: t("Expertise reconnue en climatisation et froid industriel", "Recognised expertise in HVAC and industrial refrigeration")
     },
     {
-      title: "Installations Critiques",
+      title: t("Installations Critiques", "Critical Installations"),
       value: 43,
       suffix: "",
-      description: "Projets réalisés pour data centers, laboratoires et industries sensibles"
+      description: t("Projets réalisés pour data centers, laboratoires et industries sensibles", "Projects delivered for data centres, laboratories and sensitive industries")
     },
     {
-      title: "Installations très haute technicité",
+      title: t("Installations très haute technicité", "High-Tech Installations"),
       value: 12,
       suffix: "",
-      description: "Installations très basse température réalisées avec succès"
+      description: t("Installations très basse température réalisées avec succès", "Ultra-low temperature installations delivered successfully")
     },
     {
-      title: "Support Technique",
+      title: t("Support Technique", "Technical Support"),
       value: 24,
       suffix: "/7",
-      description: "Astreinte dédiée pour vos installations critiques"
+      description: t("Astreinte dédiée pour vos installations critiques", "Dedicated on-call team for your critical systems")
     },
     {
-      title: "Solutions Écologiques",
+      title: t("Solutions Écologiques", "Eco-Friendly Solutions"),
       value: 100,
       suffix: "%",
-      description: "Engagement total pour les fluides et technologies durables"
+      description: t("Engagement total pour les fluides et technologies durables", "Full commitment to sustainable refrigerants and technologies")
     },
     {
-      title: "Taux de Satisfaction",
+      title: t("Taux de Satisfaction", "Customer Satisfaction"),
       value: 99,
       suffix: "%",
-      description: "Performance et qualité reconnues par nos clients"
+      description: t("Performance et qualité reconnues par nos clients", "Performance and quality recognised by our clients")
     }
-  ]
+  ]), [isFrench])
 
-  const secteurs = [
+  const secteurs = useMemo(() => ([
     {
-      title: "Data Centers",
-      description: "Climatisation de précision pour infrastructures critiques",
+      title: t("Data Centers", "Data Centres"),
+      description: t("Climatisation de précision pour infrastructures critiques", "Precision cooling for mission-critical infrastructure"),
       image: "/images/qualites/data-center.jpg"
     },
     {
-      title: "Laboratoires",
-      description: "Contrôle environnemental strict pour recherche et analyse",
+      title: t("Laboratoires", "Laboratories"),
+      description: t("Contrôle environnemental strict pour recherche et analyse", "Strict environmental control for research and analysis"),
       image: "/images/qualites/laboratoire.jpg"
     },
     {
-      title: "Industries Sensibles",
-      description: "Solutions adaptées aux contraintes réglementaires",
+      title: t("Industries Sensibles", "Sensitive Industries"),
+      description: t("Solutions adaptées aux contraintes réglementaires", "Solutions adapted to stringent regulatory constraints"),
       image: "/images/qualites/industrie.jpg"
     },
     {
-      title: "Grandes Surfaces",
-      description: "Systèmes performants pour espaces commerciaux",
+      title: t("Grandes Surfaces", "Large Retail Sites"),
+      description: t("Systèmes performants pour espaces commerciaux", "High-performance systems for commercial spaces"),
       image: "/images/qualites/grande-surface.jpg"
     }
-  ]
+  ]), [isFrench])
 
   return (
     <div className="bg-[#181823]">
@@ -184,7 +203,7 @@ export default function QualitesSections() {
                 direction="fromLeft"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight max-w-[24ch] sm:max-w-[26ch] lg:max-w-[28ch] text-balance"
               >
-                Excellence & Conformité
+                {t("Excellence & Conformité", "Excellence & Compliance")}
               </ScrollSlideTitle>
             </div>
 
@@ -198,19 +217,21 @@ export default function QualitesSections() {
             >
               <p 
                 className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed"
-              >
-                Refrig'Air Systèmes, <strong>expert en climatisation professionnelle certifiée</strong> et 
-                <strong> froid industriel haut de gamme</strong>, garantit la conformité réglementaire et 
-                l'excellence technique pour vos installations critiques : data centers, laboratoires, 
-                industries agroalimentaires et grandes surfaces.
-              </p>
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    "Refrig'Air Systèmes, <strong>expert en climatisation professionnelle certifiée</strong> et <strong>froid industriel haut de gamme</strong>, garantit la conformité réglementaire et l'excellence technique pour vos installations critiques : data centers, laboratoires, industries agroalimentaires et grandes surfaces.",
+                    "Refrig'Air Systèmes, <strong>certified professional HVAC specialist</strong> and <strong>premium industrial refrigeration expert</strong>, ensures regulatory compliance and technical excellence for your mission-critical installations: data centres, laboratories, agri-food industries and large retail sites."
+                  )
+                }}
+              />
               <div 
                 className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm text-[#E9F8F9]/70"
               >
-                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Climatisation de précision</span>
-                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Froid industriel</span>
-                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Maintenance préventive</span>
-                <span className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">Efficacité énergétique</span>
+                {[t("Climatisation de précision", "Precision cooling"), t("Froid industriel", "Industrial refrigeration"), t("Maintenance préventive", "Preventive maintenance"), t("Efficacité énergétique", "Energy efficiency")].map((chip, index) => (
+                  <span key={`qualite-chip-${index}`} className="bg-[#E9F8F9]/10 px-3 py-1 rounded satoshi">
+                    {chip}
+                  </span>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -231,7 +252,7 @@ export default function QualitesSections() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
           >
-            Certifications
+            {t("Certifications", "Certifications")}
           </motion.h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
@@ -265,7 +286,7 @@ export default function QualitesSections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Nos Engagements
+            {t("Nos Engagements", "Our Commitments")}
           </motion.h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
@@ -300,30 +321,54 @@ export default function QualitesSections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Secteurs d'Excellence
+            {t("Secteurs d'Excellence", "Sectors of Excellence")}
           </motion.h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
             {[
               {
-                title: "Data Centers",
-                keywords: "Climatisation de précision, refroidissement serveurs, haute disponibilité 99.9%, systèmes redondants",
-                applications: "Salles serveurs, baies informatiques, centres de calcul"
+                title: t("Data Centers", "Data Centres"),
+                keywords: t(
+                  "Climatisation de précision, refroidissement serveurs, haute disponibilité 99.9%, systèmes redondants",
+                  "Precision cooling, server refrigeration, 99.9% uptime, redundant systems"
+                ),
+                applications: t(
+                  "Salles serveurs, baies informatiques, centres de calcul",
+                  "Server rooms, IT racks, compute centres"
+                )
               },
               {
-                title: "Laboratoires & Recherche",
-                keywords: "Contrôle hygrométrie, température stable ±0.5°C, salles blanches ISO 14644",
-                applications: "Laboratoires pharmaceutiques, recherche médicale, analyses"
+                title: t("Laboratoires & Recherche", "Laboratories & Research"),
+                keywords: t(
+                  "Contrôle hygrométrie, température stable ±0.5°C, salles blanches ISO 14644",
+                  "Humidity control, ±0.5 °C temperature stability, ISO 14644 cleanrooms"
+                ),
+                applications: t(
+                  "Laboratoires pharmaceutiques, recherche médicale, analyses",
+                  "Pharmaceutical labs, medical research, analytical facilities"
+                )
               },
               {
-                title: "Industrie Agroalimentaire", 
-                keywords: "Chaîne du froid HACCP, chambres froides, conservation produits frais",
-                applications: "Entrepôts frigorifiques, production alimentaire, logistique"
+                title: t("Industrie Agroalimentaire", "Agri-Food Industry"), 
+                keywords: t(
+                  "Chaîne du froid HACCP, chambres froides, conservation produits frais",
+                  "HACCP cold chain, cold rooms, fresh product preservation"
+                ),
+                applications: t(
+                  "Entrepôts frigorifiques, production alimentaire, logistique",
+                  "Refrigerated warehouses, food production, logistics"
+                )
               },
               {
-                title: "Grandes Surfaces",
-                keywords: "Froid commercial, meubles réfrigérés, efficacité énergétique, fluides écologiques",
-                applications: "Supermarchés, hypermarchés, magasins spécialisés"
+                title: t("Grandes Surfaces", "Large Retail Sites"),
+                keywords: t(
+                  "Froid commercial, meubles réfrigérés, efficacité énergétique, fluides écologiques",
+                  "Commercial refrigeration, refrigerated fixtures, energy efficiency, eco-friendly refrigerants"
+                ),
+                applications: t(
+                  "Supermarchés, hypermarchés, magasins spécialisés",
+                  "Supermarkets, hypermarkets, specialist stores"
+                )
               }
             ].map((secteur, index) => (
               <motion.div
@@ -348,15 +393,21 @@ export default function QualitesSections() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <h3 className="text-xl font-light mb-6 text-[#181823] satoshi">
-              Technologies & Conformités
+              {t("Technologies & Conformités", "Technologies & Compliance")}
             </h3>
             <div className="flex flex-wrap justify-center gap-3 text-sm text-[#181823]/60 satoshi">
-              <span className="bg-[#181823]/5 px-3 py-1 rounded">Fluides R-410A, R-32, CO2</span>
-              <span className="bg-[#181823]/5 px-3 py-1 rounded">Norme ISO 14644</span>
-              <span className="bg-[#181823]/5 px-3 py-1 rounded">Certification HACCP</span>
-              <span className="bg-[#181823]/5 px-3 py-1 rounded">Eurovent Certified</span>
-              <span className="bg-[#181823]/5 px-3 py-1 rounded">F-Gas Regulation</span>
-              <span className="bg-[#181823]/5 px-3 py-1 rounded">PED 2014/68/EU</span>
+              {[
+                t("Fluides R-410A, R-32, CO2", "Refrigerants R-410A, R-32, CO2"),
+                t("Norme ISO 14644", "ISO 14644 standard"),
+                t("Certification HACCP", "HACCP certification"),
+                "Eurovent Certified",
+                "F-Gas Regulation",
+                "PED 2014/68/EU"
+              ].map((item, idx) => (
+                <span key={`tech-item-${idx}`} className="bg-[#181823]/5 px-3 py-1 rounded">
+                  {item}
+                </span>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -371,17 +422,26 @@ export default function QualitesSections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Excellence Technique
+            {t("Excellence Technique", "Technical Excellence")}
           </motion.h2>
           <motion.p 
-            className="text-lg text-[#E9F8F9]/70 mb-12 leading-relaxed satoshi font-light"
+            className="text-lg text-[#E9F8F9]/70 mb-12 leading-relaxed satoshi font-light space-y-2"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Partenaire de confiance pour vos installations critiques haute performance.
-            <br />
-            <strong>Contactez-nous pour un accompagnement expert de vos projets frigorifiques et climatiques.</strong>
+            <span className="block">
+              {t(
+                "Partenaire de confiance pour vos installations critiques haute performance.",
+                "Trusted partner for your high-performance critical installations."
+              )}
+            </span>
+            <strong className="block">
+              {t(
+                "Contactez-nous pour un accompagnement expert de vos projets frigorifiques et climatiques.",
+                "Contact us for expert guidance on your refrigeration and HVAC projects."
+              )}
+            </strong>
           </motion.p>
           
           <motion.div 
@@ -397,7 +457,7 @@ export default function QualitesSections() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
-                Demander un Devis Certifié
+                {t("Demander un Devis Certifié", "Request a Certified Quote")}
               </motion.button>
             </a>
             <a href="#certifications" className="w-full sm:w-auto">
@@ -407,7 +467,7 @@ export default function QualitesSections() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
-                Nos Références Premium
+                {t("Nos Références Premium", "Our Premium References")}
               </motion.button>
             </a>
           </motion.div>

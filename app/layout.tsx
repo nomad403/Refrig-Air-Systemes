@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import Header from "@/components/header"
+import { LanguageProvider } from "@/contexts/language-context"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.refrigairsystemes.fr"),
@@ -22,9 +23,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "/favicon-ras.png",
-    shortcut: "/favicon-ras.png",
-    apple: "/favicon-ras.png",
+    icon: "/images/general/LOGO_FAV.svg",
+    shortcut: "/images/general/LOGO_FAV.svg",
+    apple: "/images/general/LOGO_FAV.svg",
   },
   openGraph: {
     type: "website",
@@ -61,6 +62,13 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="canonical" href="https://www.refrigairsystemes.fr/" />
+        <link rel="icon" href="/images/general/LOGO_FAV.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/images/general/LOGO_FAV.svg" type="image/svg+xml" sizes="512x512" />
+        <link rel="mask-icon" href="/images/general/LOGO_FAV.svg" color="#537FE7" />
+        <link rel="apple-touch-icon" href="/images/general/LOGO_FAV.svg" sizes="512x512" />
+        <link rel="preload" as="video" href="/images/home/home.webm" type="video/webm" />
+        <link rel="preload" as="video" href="/images/expertises/expertise.webm" type="video/webm" />
+        <link rel="preload" as="video" href="/images/maintenances_services/maintenance.webm" type="video/webm" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -148,8 +156,10 @@ export default function RootLayout({
         `}</style>
       </head>
       <body style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overflowX: 'hidden' }}>
-        <Header />
-        {children}
+        <LanguageProvider>
+          <Header />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   )

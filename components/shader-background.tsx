@@ -2,7 +2,10 @@
 
 import type React from "react"
 
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+
+const videoBlobCache = new Map<string, string>()
+const videoFetchPromises = new Map<string, Promise<string>>()
 
 declare global {
   interface Window {
@@ -14,35 +17,87 @@ declare global {
 interface ShaderBackgroundProps {
   children?: React.ReactNode
   videoId?: string // ID de la vidéo YouTube à afficher
+  videoUrl?: string // URL d'une vidéo locale
   backgroundType?: "video" | "image" // Type de fond : vidéo ou image
   imageUrl?: string // URL de l'image de fond (si backgroundType = "image")
+  videoStyle?: React.CSSProperties // Styles supplémentaires pour ajuster le cadrage de la vidéo
 }
 
 export default function ShaderBackground({ 
   children, 
   videoId = "voQricfn750", 
+  videoUrl,
   backgroundType = "video",
-  imageUrl 
+  imageUrl,
+  videoStyle
 }: ShaderBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
   const [isActive, setIsActive] = useState(false)
-  const [isPlayerReady, setIsPlayerReady] = useState(false)
+  const [isBackgroundReady, setIsBackgroundReady] = useState(false)
   const [isInView, setIsInView] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const loopTimerRef = useRef<any>(null)
+  const localVideoRef = useRef<HTMLVideoElement | null>(null)
+  const [resolvedVideoUrl, setResolvedVideoUrl] = useState<string | null>(videoUrl ?? null)
+  const [videoAspectRatio, setVideoAspectRatio] = useState(16 / 9)
+  const [hasHydrated, setHasHydrated] = useState(false)
+  const defaultMediaStyle = useCallback((): React.CSSProperties => ({
+    width: "100vw",
+    height: "100vh",
+    minWidth: "100vw",
+    minHeight: "100vh",
+    marginLeft: "0px",
+    marginTop: "0px"
+  }), [])
+
+  const computeMediaStyle = useCallback((ratio: number): React.CSSProperties => {
+    if (typeof window === "undefined") {
+      return defaultMediaStyle()
+    }
+
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const targetWidth = Math.max(vw, vh * ratio)
+    const targetHeight = Math.max(vh, vw / ratio)
+    const marginLeft = (vw - targetWidth) / 2
+    const marginTop = (vh - targetHeight) / 2
+
+    return {
+      width: `${targetWidth}px`,
+      height: `${targetHeight}px`,
+      minWidth: `${targetWidth}px`,
+      minHeight: `${targetHeight}px`,
+      marginLeft: `${marginLeft}px`,
+      marginTop: `${marginTop}px`
+    }
+  }, [defaultMediaStyle])
+
+  const [mediaStyle, setMediaStyle] = useState<React.CSSProperties>(() => defaultMediaStyle())
+
+  useEffect(() => {
+    setHasHydrated(true)
+  }, [])
 
   // Détecter si on est sur mobile
   useEffect(() => {
-    const checkMobile = () => {
+    if (!hasHydrated) return
+
+    const updateLayout = () => {
       setIsMobile(window.innerWidth <= 768)
+      setMediaStyle(computeMediaStyle(videoAspectRatio))
     }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+
+    updateLayout()
+    window.addEventListener("resize", updateLayout)
+
+    return () => window.removeEventListener("resize", updateLayout)
+  }, [computeMediaStyle, videoAspectRatio, hasHydrated])
+
+  useEffect(() => {
+    setIsBackgroundReady(false)
+    setResolvedVideoUrl(videoUrl ?? null)
+  }, [backgroundType, videoId, videoUrl])
 
   useEffect(() => {
     // Observer d'apparition pour différer le chargement du player
@@ -57,7 +112,7 @@ export default function ShaderBackground({
 
   useEffect(() => {
     // Ne charger l'API YouTube que si la vidéo est visible
-    if (backgroundType === "video" && isInView) {
+    if (backgroundType === "video" && !videoUrl && isInView) {
       // Ne pas injecter plusieurs fois le script
       const existing = Array.from(document.getElementsByTagName('script')).some(s => s.src.includes('youtube.com/iframe_api'))
       if (!existing) {
@@ -96,7 +151,8 @@ export default function ShaderBackground({
                 event.target.setPlaybackQuality('hd1080')
                 event.target.mute()
                 event.target.playVideo()
-                setIsPlayerReady(true)
+                setIsBackgroundReady(true)
+                setMediaStyle(computeMediaStyle(videoAspectRatio))
                 // Boucle quasi-instantanée: surveiller la fin et "seek" juste avant END
                 if (loopTimerRef.current) clearInterval(loopTimerRef.current)
                 loopTimerRef.current = setInterval(() => {
@@ -137,49 +193,180 @@ export default function ShaderBackground({
         container.removeEventListener("mouseleave", handleMouseLeave)
       }
       if (loopTimerRef.current) clearInterval(loopTimerRef.current)
+      if (playerRef.current && playerRef.current.destroy) {
+        try {
+          playerRef.current.destroy()
+        } catch {}
+        playerRef.current = null
+      }
     }
-  }, [backgroundType, videoId, isInView])
+  }, [backgroundType, videoId, videoUrl, isInView])
+
+  useEffect(() => {
+    if (!videoUrl) return
+    let isActive = true
+
+    const getVideoBlobUrl = async () => {
+      if (videoBlobCache.has(videoUrl)) {
+        return videoBlobCache.get(videoUrl)!
+      }
+      let promise = videoFetchPromises.get(videoUrl)
+      if (!promise) {
+        promise = fetch(videoUrl, { cache: "force-cache" })
+          .then((response) => {
+            if (!response.ok) throw new Error(`Failed to preload video: ${response.status}`)
+            return response.blob()
+          })
+          .then((blob) => {
+            const objectUrl = URL.createObjectURL(blob)
+            videoBlobCache.set(videoUrl, objectUrl)
+            return objectUrl
+          })
+          .catch(() => videoUrl)
+        videoFetchPromises.set(videoUrl, promise)
+      }
+      return promise
+    }
+
+    getVideoBlobUrl().then((url) => {
+      if (isActive) {
+        setResolvedVideoUrl(url)
+      }
+    })
+
+    return () => {
+      isActive = false
+    }
+  }, [videoUrl])
+
+  useEffect(() => {
+    if (!videoUrl) return
+    const videoEl = localVideoRef.current
+    if (!videoEl) return
+
+    const ensurePlay = () => {
+      const startPlayback = () => {
+        const attempt = videoEl.play()
+        if (attempt && typeof attempt.then === "function") {
+          attempt.catch(() => {
+            setIsBackgroundReady(false)
+          })
+        }
+      }
+
+      const targetSrc = resolvedVideoUrl ?? videoUrl
+      const currentSrc = videoEl.dataset.loadedSrc
+
+      if (targetSrc && currentSrc !== targetSrc) {
+        setIsBackgroundReady(false)
+        const handleCanPlay = () => {
+          videoEl.removeEventListener("canplay", handleCanPlay)
+          setIsBackgroundReady(true)
+          startPlayback()
+        }
+        videoEl.addEventListener("canplay", handleCanPlay, { once: true })
+        videoEl.dataset.loadedSrc = targetSrc
+        videoEl.src = targetSrc
+        videoEl.load()
+      } else {
+        startPlayback()
+      }
+    }
+
+    if (isInView) {
+      ensurePlay()
+    }
+
+    const onVisibilityChange = () => {
+      if (!document.hidden) {
+        ensurePlay()
+      } else {
+        videoEl.pause()
+      }
+    }
+
+    document.addEventListener("visibilitychange", onVisibilityChange)
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange)
+      videoEl.pause()
+    }
+  }, [videoUrl, resolvedVideoUrl, isInView])
 
   return (
     <div ref={containerRef} className={`min-h-screen bg-black relative overflow-hidden ${isMobile ? 'shader-background-mobile' : ''}`}>
       {backgroundType === "video" ? (
-        // Video Background YouTube API
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <div 
-            id="youtube-player"
-            className="w-full h-full"
-            style={{
-              pointerEvents: "none",
-              // Desktop: format paysage (16:9)
-              width: isMobile ? "177.78vh" : "120vw", // 16/9 * 100vh pour couvrir toute la hauteur
-              height: isMobile ? "100vh" : "120vh", 
-              marginLeft: isMobile ? "calc((100vw - 177.78vh) / 2)" : "-10vw",
-              marginTop: isMobile ? "0" : "-10vh",
-              minWidth: isMobile ? "177.78vh" : "120vw",
-              minHeight: isMobile ? "100vh" : "120vh"
-            }}
-          />
-          {/* Masque anti-loader le temps du ready */}
-          {!isPlayerReady && (
-            <div className="absolute inset-0 bg-black" />
-          )}
-          
-          {/* Overlay pour donner du contraste sous le header */}
-          <div className="pointer-events-none absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
-        </div>
+        videoUrl ? (
+          <div
+            className="absolute inset-0 w-full h-full overflow-hidden"
+            suppressHydrationWarning
+          >
+            <video
+              ref={localVideoRef}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onLoadedData={() => setIsBackgroundReady(true)}
+              onCanPlay={() => setIsBackgroundReady(true)}
+              onLoadedMetadata={(event) => {
+                const el = event.currentTarget
+                if (el.videoWidth && el.videoHeight) {
+                  const ratio = el.videoWidth / el.videoHeight
+                  setVideoAspectRatio(ratio || 16 / 9)
+                  setMediaStyle(computeMediaStyle(ratio || 16 / 9))
+                }
+              }}
+              disablePictureInPicture
+              controls={false}
+              style={{
+                ...(hasHydrated ? mediaStyle : defaultMediaStyle()),
+                ...(videoStyle ?? {}),
+                pointerEvents: "none"
+              }}
+              suppressHydrationWarning
+            >
+              <source src={resolvedVideoUrl ?? videoUrl} type="video/webm" />
+            </video>
+            {!isBackgroundReady && (
+              <div className="absolute inset-0 bg-black" />
+            )}
+            <div className="pointer-events-none absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
+          </div>
+        ) : (
+          // Video Background YouTube API
+          <div
+            className="absolute inset-0 w-full h-full overflow-hidden"
+            suppressHydrationWarning
+          >
+            <div 
+              id="youtube-player"
+              className="w-full h-full"
+              style={{
+                ...(hasHydrated ? mediaStyle : defaultMediaStyle()),
+                ...(videoStyle ?? {}),
+                pointerEvents: "none"
+              }}
+              suppressHydrationWarning
+            />
+            {/* Masque anti-loader le temps du ready */}
+            {!isBackgroundReady && (
+              <div className="absolute inset-0 bg-black" />
+            )}
+            
+            {/* Overlay pour donner du contraste sous le header */}
+            <div className="pointer-events-none absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
+          </div>
+        )
       ) : (
         // Image Background
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div 
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: imageUrl ? `url(${imageUrl})` : undefined,
-              width: isMobile ? "177.78vh" : "120vw",
-              height: isMobile ? "100vh" : "120vh", 
-              marginLeft: isMobile ? "calc((100vw - 177.78vh) / 2)" : "-10vw",
-              marginTop: isMobile ? "0" : "-10vh",
-              minWidth: isMobile ? "177.78vh" : "120vw",
-              minHeight: isMobile ? "100vh" : "120vh"
+              ...mediaStyle,
+              backgroundImage: imageUrl ? `url(${imageUrl})` : undefined
             }}
           />
           

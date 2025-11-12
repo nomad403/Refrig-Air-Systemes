@@ -3,9 +3,12 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import ScrollSlideTitle from "./scroll-slide-title"
+import { useLanguage } from "@/contexts/language-context"
 
 // Composant formulaire minimaliste
 function ContactFormMinimal() {
+  const { isFrench } = useLanguage()
+  const t = (fr: string, en: string) => (isFrench ? fr : en)
   const [formData, setFormData] = useState({
     nom: "",
     entreprise: "",
@@ -50,15 +53,20 @@ function ContactFormMinimal() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-medium text-[#181823] mb-4">Message envoyé avec succès</h3>
+        <h3 className="text-2xl font-medium text-[#181823] mb-4">
+          {t("Message envoyé avec succès", "Message sent successfully")}
+        </h3>
         <p className="text-[#181823]/70 mb-6">
-          Nos experts vous contacteront sous 24h pour étudier votre projet de maintenance climatisation.
+          {t(
+            "Nos experts vous contacteront sous 24h pour étudier votre projet de maintenance climatisation.",
+            "Our experts will contact you within 24 hours to review your HVAC maintenance project."
+          )}
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
           className="px-6 py-3 bg-[#181823] text-[#E9F8F9] rounded-sm hover:bg-[#181823]/90 transition-colors"
         >
-          Nouveau message
+          {t("Nouveau message", "New message")}
         </button>
       </motion.div>
     )
@@ -69,7 +77,7 @@ function ContactFormMinimal() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         <div>
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
-          NOM
+          {t("NOM", "NAME")}
         </label>
           <input
             type="text"
@@ -83,7 +91,7 @@ function ContactFormMinimal() {
         </div>
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
-            EMAIL
+            {t("EMAIL", "EMAIL")}
           </label>
           <input
             type="email"
@@ -100,7 +108,7 @@ function ContactFormMinimal() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         <div>
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
-          TÉLÉPHONE
+          {t("TÉLÉPHONE", "PHONE")}
         </label>
           <input
             type="tel"
@@ -114,7 +122,7 @@ function ContactFormMinimal() {
         </div>
         <div>
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
-          ENTREPRISE
+          {t("ENTREPRISE", "COMPANY")}
         </label>
           <input
             type="text"
@@ -134,7 +142,7 @@ function ContactFormMinimal() {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
-          NIVEAU D'URGENCE
+          {t("NIVEAU D'URGENCE", "URGENCY LEVEL")}
         </label>
         <motion.select
           name="urgence"
@@ -151,7 +159,7 @@ function ContactFormMinimal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0 }}
           >
-            Sélectionner le niveau d'urgence
+            {t("Sélectionner le niveau d'urgence", "Select urgency level")}
           </motion.option>
           <motion.option 
             value="critique"
@@ -159,7 +167,7 @@ function ContactFormMinimal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
           >
-            CRITIQUE - Intervention immédiate
+            {t("CRITIQUE - Intervention immédiate", "CRITICAL – Immediate intervention")}
           </motion.option>
           <motion.option 
             value="urgent"
@@ -167,7 +175,7 @@ function ContactFormMinimal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            URGENT - Sous 24h
+            {t("URGENT - Sous 24h", "URGENT – Within 24h")}
           </motion.option>
           <motion.option 
             value="normal"
@@ -175,7 +183,7 @@ function ContactFormMinimal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.3 }}
           >
-            NORMAL - Planning standard
+            {t("NORMAL - Planning standard", "STANDARD – Scheduled timeline")}
           </motion.option>
           <motion.option 
             value="projet"
@@ -183,14 +191,14 @@ function ContactFormMinimal() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.4 }}
           >
-            PROJET - Étude préalable
+            {t("PROJET - Étude préalable", "PROJECT – Preliminary study")}
           </motion.option>
         </motion.select>
       </motion.div>
 
       <div>
         <label className="block text-sm font-medium text-[#181823] mb-3 uppercase tracking-wide">
-          MESSAGE
+          {t("MESSAGE", "MESSAGE")}
         </label>
         <textarea
           name="message"
@@ -211,7 +219,7 @@ function ContactFormMinimal() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-                 {isSubmitting ? "ENVOI EN COURS..." : "ENVOYER"}
+                 {isSubmitting ? t("ENVOI EN COURS...", "SENDING...") : t("ENVOYER", "SEND")}
         </motion.button>
       </div>
     </form>
@@ -220,6 +228,8 @@ function ContactFormMinimal() {
 
 // Composant formulaire de contact premium
 function ContactForm() {
+  const { isFrench } = useLanguage()
+  const t = (fr: string, en: string) => (isFrench ? fr : en)
   const [formData, setFormData] = useState({
     nom: "",
     entreprise: "",
@@ -264,15 +274,20 @@ function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-medium text-[#181823] mb-4">Message envoyé avec succès</h3>
+        <h3 className="text-2xl font-medium text-[#181823] mb-4">
+          {t("Message envoyé avec succès", "Message sent successfully")}
+        </h3>
         <p className="text-[#181823]/70 mb-6">
-          Nos experts vous contacteront sous 24h pour étudier votre projet de maintenance climatisation.
+          {t(
+            "Nos experts vous contacteront sous 24h pour étudier votre projet de maintenance climatisation.",
+            "Our experts will contact you within 24 hours to review your HVAC maintenance request."
+          )}
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
           className="px-6 py-3 bg-[#537FE7] text-white rounded-sm hover:bg-[#537FE7]/90 transition-colors"
         >
-          Nouveau message
+          {t("Nouveau message", "New message")}
         </button>
       </motion.div>
     )
@@ -283,7 +298,7 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
-            Nom et prénom *
+            {t("Nom et prénom *", "Full name *")}
           </label>
           <input
             type="text"
@@ -292,12 +307,12 @@ function ContactForm() {
             value={formData.nom}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors"
-            placeholder="Jean Dupont"
+            placeholder={t("Jean Dupont", "Jane Doe")}
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
-            Entreprise *
+            {t("Entreprise *", "Company *")}
           </label>
           <input
             type="text"
@@ -306,7 +321,7 @@ function ContactForm() {
             value={formData.entreprise}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors"
-            placeholder="Nom de votre société"
+            placeholder={t("Nom de votre société", "Your company name")}
           />
         </div>
       </div>
@@ -314,7 +329,7 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
-            Email *
+            {t("Email *", "Email *")}
           </label>
           <input
             type="email"
@@ -323,12 +338,12 @@ function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors"
-            placeholder="jean.dupont@entreprise.com"
+            placeholder={t("jean.dupont@entreprise.com", "jane.doe@company.com")}
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
-            Téléphone *
+            {t("Téléphone *", "Phone *")}
           </label>
           <input
             type="tel"
@@ -337,7 +352,7 @@ function ContactForm() {
             value={formData.telephone}
             onChange={handleChange}
             className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors"
-            placeholder="01 23 45 67 89"
+            placeholder={t("01 23 45 67 89", "+33 1 23 45 67 89")}
           />
         </div>
       </div>
@@ -345,7 +360,7 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
-            Secteur d'activité *
+            {t("Secteur d'activité *", "Industry *")}
           </label>
           <select
             name="secteur"
@@ -354,18 +369,18 @@ function ContactForm() {
             onChange={handleChange}
             className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors"
           >
-            <option value="">Sélectionnez votre secteur</option>
-            <option value="data-center">Data Center / IT</option>
-            <option value="laboratoire">Laboratoire / Pharmacie</option>
-            <option value="agroalimentaire">Agroalimentaire</option>
-            <option value="industrie">Industrie</option>
-            <option value="commercial">Commercial / Tertiaire</option>
-            <option value="autre">Autre</option>
+            <option value="">{t("Sélectionnez votre secteur", "Select your industry")}</option>
+            <option value="data-center">{t("Data Center / IT", "Data Centre / IT")}</option>
+            <option value="laboratoire">{t("Laboratoire / Pharmacie", "Laboratory / Pharmaceutical")}</option>
+            <option value="agroalimentaire">{t("Agroalimentaire", "Agri-food")}</option>
+            <option value="industrie">{t("Industrie", "Industry")}</option>
+            <option value="commercial">{t("Commercial / Tertiaire", "Commercial / Services")}</option>
+            <option value="autre">{t("Autre", "Other")}</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-[#181823] mb-2">
-            Urgence
+            {t("Urgence", "Urgency")}
           </label>
           <select
             name="urgence"
@@ -373,18 +388,18 @@ function ContactForm() {
             onChange={handleChange}
             className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors"
           >
-            <option value="">Niveau d'urgence</option>
-            <option value="critique">Critique - Intervention immédiate</option>
-            <option value="urgent">Urgent - Sous 24h</option>
-            <option value="normal">Normal - Planning standard</option>
-            <option value="projet">Projet - Étude préalable</option>
+            <option value="">{t("Niveau d'urgence", "Urgency level")}</option>
+            <option value="critique">{t("Critique - Intervention immédiate", "Critical – Immediate intervention")}</option>
+            <option value="urgent">{t("Urgent - Sous 24h", "Urgent – Within 24h")}</option>
+            <option value="normal">{t("Normal - Planning standard", "Standard – Scheduled timeline")}</option>
+            <option value="projet">{t("Projet - Étude préalable", "Project – Preliminary study")}</option>
           </select>
         </div>
       </div>
 
       <div>
         <label className="block text-sm font-medium text-[#181823] mb-2">
-          Description de votre besoin *
+          {t("Description de votre besoin *", "Describe your need *")}
         </label>
         <textarea
           name="message"
@@ -393,7 +408,10 @@ function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           className="w-full px-4 py-3 border border-[#181823]/20 rounded-sm focus:border-[#537FE7] focus:outline-none transition-colors resize-none"
-          placeholder="Décrivez votre installation, le type de maintenance souhaité, vos contraintes techniques..."
+          placeholder={t(
+            "Décrivez votre installation, le type de maintenance souhaité, vos contraintes techniques...",
+            "Describe your installation, the maintenance needed, your technical constraints..."
+          )}
         />
       </div>
 
@@ -404,13 +422,15 @@ function ContactForm() {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
-        {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
+        {isSubmitting ? t("Envoi en cours...", "Sending...") : t("Envoyer ma demande", "Submit my request")}
       </motion.button>
     </form>
   )
 }
 
 export default function ContactSections() {
+  const { isFrench } = useLanguage()
+  const t = (fr: string, en: string) => (isFrench ? fr : en)
   return (
     <div className="relative z-20 bg-[#181823]">
       {/* Introduction Premium */}
@@ -430,7 +450,14 @@ export default function ContactSections() {
                 direction="fromLeft"
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E9F8F9] orbit uppercase tracking-tight leading-tight max-w-[24ch] sm:max-w-[26ch] lg:max-w-[28ch] text-balance"
               >
-                CONTACTEZ NOS<br/>EXPERTS MAINTENANCE
+                {(isFrench
+                  ? ["Contactez nos", "experts maintenance"]
+                  : ["Talk to our", "maintenance experts"]
+                ).map((line, index) => (
+                  <span key={`intro-headline-${index}`} className="block">
+                    {line}
+                  </span>
+                ))}
               </ScrollSlideTitle>
             </div>
 
@@ -443,13 +470,19 @@ export default function ContactSections() {
               viewport={{ once: true }}
             >
               <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-[#537FE7] mb-6 sm:mb-8 lg:mb-10">
-                Pour vos installations climatisation et froid critiques
+                {t(
+                  "Pour vos installations climatisation et froid critiques",
+                  "Supporting your mission-critical HVAC and refrigeration assets"
+                )}
               </div>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#E9F8F9]/80 leading-relaxed mb-6 sm:mb-8">
-                Nos ingénieurs frigoristes habilités aux fluides frigorigènes vous accompagnent dans la maintenance de vos installations critiques. Data centers, laboratoires pharmaceutiques, industrie agroalimentaire : expertise reconnue et interventions garanties.
+                {t(
+                  "Nos ingénieurs frigoristes habilités aux fluides frigorigènes vous accompagnent dans la maintenance de vos installations critiques. Data centers, laboratoires pharmaceutiques, industrie agroalimentaire : expertise reconnue et interventions garanties.",
+                  "Our certified refrigeration engineers maintain your critical infrastructure. Data centres, pharmaceutical labs, agri-food facilities—proven expertise with guaranteed response times."
+                )}
               </p>
               <p className="text-[#537FE7] text-sm sm:text-base lg:text-lg">
-                —Réponse garantie sous 24h pour vos projets premium.
+                {t("—Réponse garantie sous 24h pour vos projets premium.", "—Guaranteed response within 24 hours for premium projects.")}
               </p>
             </motion.div>
           </div>
@@ -477,19 +510,22 @@ export default function ContactSections() {
             >
               <div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#181823] mb-4 sm:mb-6 satoshi uppercase tracking-tight">
-                  Contact
+                  {t("Contact", "Contact")}
                 </h2>
                 <p className="text-base sm:text-lg text-[#181823]/70 leading-relaxed">
-                  Nos experts maintenance climatisation vous accompagnent dans vos projets critiques. 
-                  Data centers, laboratoires, industrie : expertise reconnue et interventions garanties.
+                  {t(
+                    "Nos experts maintenance climatisation vous accompagnent dans vos projets critiques. Data centers, laboratoires, industrie : expertise reconnue et interventions garanties.",
+                    "Our HVAC maintenance specialists support your critical projects. Data centres, laboratories, industry: recognised expertise with guaranteed interventions."
+                  )}
                 </p>
               </div>
 
               <div className="text-xs sm:text-sm text-[#181823]/60 leading-relaxed">
                 <p>
-                  Maintenance préventive et corrective pour installations climatisation critiques. 
-                  Interventions 24h/24 et 7j/7, garanties sous 4h en Île-de-France. 
-                  Opérations éligibles C2E et conformité réglementaire assurées.
+                  {t(
+                    "Maintenance préventive et corrective pour installations climatisation critiques. Interventions 24h/24 et 7j/7, garanties sous 4h en Île-de-France. Opérations éligibles C2E et conformité réglementaire assurées.",
+                    "Preventive and corrective maintenance for critical HVAC systems. 24/7 interventions with response times under 4 hours across Île-de-France. C2E eligible work with full regulatory compliance."
+                  )}
                 </p>
               </div>
             </motion.div>
@@ -538,7 +574,9 @@ export default function ContactSections() {
               viewport={{ once: true }}
             >
               <div>
-                <h2 className="text-xs sm:text-sm font-medium text-[#E9F8F9] mb-6 sm:mb-8 uppercase tracking-wider">—Nos bureaux</h2>
+                <h2 className="text-xs sm:text-sm font-medium text-[#E9F8F9] mb-6 sm:mb-8 uppercase tracking-wider">
+                  {t("—Nos bureaux", "—Our offices")}
+                </h2>
               </div>
             </motion.div>
 
@@ -553,22 +591,32 @@ export default function ContactSections() {
               {/* Nom de l'entreprise */}
               <div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#E9F8F9] uppercase tracking-tight satoshi">
-                  REFRIG'AIR<br/>SYSTEMES
+                  {"REFRIG'AIR"}
+                  <span className="block">SYSTEMES</span>
                 </h1>
               </div>
 
               {/* Informations de contact */}
               <div className="space-y-6 sm:space-y-8">
                 <div>
-                  <p className="text-base sm:text-lg text-[#E9F8F9] mb-1">149 Avenue du Maine</p>
-                  <p className="text-base sm:text-lg text-[#E9F8F9] mb-3 sm:mb-4">75014 Paris</p>
-                  <p className="text-xs sm:text-sm text-[#E9F8F9]/80 mb-2">tel: 06 67 80 90 74</p>
+                  <p className="text-base sm:text-lg text-[#E9F8F9] mb-1">
+                    {t("149 Avenue du Maine", "149 Avenue du Maine")}
+                  </p>
+                  <p className="text-base sm:text-lg text-[#E9F8F9] mb-3 sm:mb-4">
+                    {t("75014 Paris", "75014 Paris")}
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#E9F8F9]/80 mb-2">
+                    {t("tel: 06 67 80 90 74", "tel: +33 6 67 80 90 74")}
+                  </p>
                   <p className="text-xs sm:text-sm text-[#E9F8F9]/80">contact@refrigairsystemes.com</p>
                 </div>
 
                 <div className="pt-6 sm:pt-8">
                   <p className="text-xs sm:text-sm text-[#E9F8F9]/70">
-                    Ou envoyez-nous un email à contact@refrigairsystemes.com
+                    {t(
+                      "Ou envoyez-nous un email à contact@refrigairsystemes.com",
+                      "Or email us at contact@refrigairsystemes.com"
+                    )}
                   </p>
                 </div>
               </div>
@@ -594,7 +642,7 @@ export default function ContactSections() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Prêt à Optimiser vos Installations ?
+            {t("Prêt à Optimiser vos Installations ?", "Ready to optimise your assets?")}
           </motion.h2>
           <motion.p
             className="text-base sm:text-lg text-[#E9F8F9]/80 mb-6 sm:mb-8 leading-relaxed"
@@ -603,7 +651,10 @@ export default function ContactSections() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Rejoignez nos clients premium qui font confiance à notre expertise pour la maintenance de leurs installations climatisation et froid critiques. Contrats sur mesure, interventions garanties et optimisation énergétique.
+            {t(
+              "Rejoignez nos clients premium qui font confiance à notre expertise pour la maintenance de leurs installations climatisation et froid critiques. Contrats sur mesure, interventions garanties et optimisation énergétique.",
+              "Join our premium clients who trust our expertise for maintaining their critical HVAC and refrigeration systems. Bespoke contracts, guaranteed interventions and energy optimisation."
+            )}
           </motion.p>
           <motion.div 
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
@@ -619,7 +670,7 @@ export default function ContactSections() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
-                Demander un Audit Gratuit
+                {t("Demander un Audit Gratuit", "Request a Complimentary Audit")}
               </motion.button>
             </a>
             <a href="/contact" className="w-full sm:w-auto">
@@ -629,7 +680,7 @@ export default function ContactSections() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
               >
-                Contrat de Maintenance
+                {t("Contrat de Maintenance", "Maintenance Contract")}
               </motion.button>
             </a>
           </motion.div>

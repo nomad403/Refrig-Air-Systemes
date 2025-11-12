@@ -13,7 +13,7 @@ const partnerLogos = [
   { 
     name: "Mitsubishi Electric", 
     logoPath: "/images/home/gallery/mitsubishi-electric-cooling-heating-logo-i17iwys3nweuzmyg-2.png",
-    website: "https://www.mitsubishielectric.fr/",
+    website: "https://fr.mitsubishielectric.com/fr/",
     scale: 1.4
   },
   { 
@@ -25,13 +25,13 @@ const partnerLogos = [
   { 
     name: "Trane", 
     logoPath: "/images/home/gallery/trane.png",
-    website: "https://www.trane.com/fr-fr/",
+    website: "https://trane.eu/fr/",
     scale: 1.3
   },
   { 
     name: "Johnson Controls", 
     logoPath: "/images/home/gallery/johnson-controls-2.png",
-    website: "https://www.johnsoncontrols.com/fr-fr",
+    website: "https://www.johnsoncontrols.fr/",
     scale: 1.3
   },
   { 
@@ -246,10 +246,10 @@ export default function LogoGallery() {
   const tripleLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos]
 
   return (
-    <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2">
+    <div className="relative w-screen overflow-hidden -ml-[50vw] left-1/2 mix-blend-difference">
       <div 
         ref={scrollRef}
-        className="flex items-center py-4 sm:py-6 lg:py-8 space-x-12 sm:space-x-16 lg:space-x-20"
+        className="flex items-center py-4 sm:py-6 lg:py-8 space-x-12 sm:space-x-16 lg:space-x-20 mix-blend-difference"
         style={{
           alignItems: 'center',
           justifyContent: 'flex-start',
@@ -282,7 +282,7 @@ export default function LogoGallery() {
               aria-label={`Visiter le site officiel de ${partner.name}`}
             >
               <div 
-                className={`transition-all duration-300 flex items-center justify-center w-full h-full ${
+                className={`transition-all duration-300 flex items-center justify-center w-full h-full mix-blend-difference ${
                   selectedLogo === index 
                     ? 'scale-110 brightness-125 drop-shadow-lg' 
                     : 'scale-100 brightness-75 hover:scale-105 hover:brightness-90'
@@ -293,7 +293,7 @@ export default function LogoGallery() {
                   alt={`Logo ${partner.name} - Constructeur de systèmes de climatisation et réfrigération`}
                   width={400}
                   height={200}
-                  className="max-w-[90%] max-h-[90%] object-contain"
+                  className="max-w-[90%] max-h-[90%] object-contain mix-blend-difference"
                   style={{ 
                     objectFit: 'contain',
                     objectPosition: 'center',

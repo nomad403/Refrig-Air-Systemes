@@ -22,7 +22,10 @@ export default function ShaderShowcase() {
       <div className="relative isolate min-h-[100dvh]">
         {/* Fond en arrière-plan — même scope que le header */}
         <div className="absolute inset-0 -z-10">
-          <ShaderBackground />
+          <ShaderBackground 
+            videoUrl="/images/home/home.webm" 
+            videoStyle={{ transform: "scale(1.12) translateY(-4%)", transformOrigin: "center center" }}
+          />
         </div>
 
         {/* Contenu par-dessus */}

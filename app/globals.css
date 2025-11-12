@@ -327,6 +327,17 @@
   }
 }
 
+.btn-compact {
+  min-width: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .btn-compact {
+    padding-inline: 1.5rem;
+  }
+}
+
 /* Styles pour la vidéo responsive */
 @media (max-width: 768px) {
   #youtube-player {
