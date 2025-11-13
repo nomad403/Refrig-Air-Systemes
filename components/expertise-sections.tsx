@@ -935,14 +935,14 @@ export default function ExpertiseSections() {
                   <h3 className="text-2xl lg:text-3xl font-light text-[#E9F8F9] mb-4 orbit">
                     {t("Installation par Équipes Certifiées", "Installation by Certified Teams")}
                   </h3>
-                <p className="text-[#181823] text-lg mb-6" suppressHydrationWarning>
+                <p className="text-[#181823] text-lg mb-6">
                   {t(
                     "Réalisation par des techniciens habilités aux fluides frigorigènes avec équipements de pointe.",
                     "Delivered by refrigerant-certified technicians equipped with the latest tools."
                   )}
                 </p>
                 <div className="space-y-4">
-                  <p className="text-[#E9F8F9]/80 leading-relaxed" suppressHydrationWarning>
+                  <p className="text-[#E9F8F9]/80 leading-relaxed">
                     {t(
                       "Nos équipes habilitées aux fluides frigorigènes réalisent l'installation selon les règles de l'art. Nous utilisons exclusivement des équipements de marques reconnues et respectons scrupuleusement les normes de sécurité et environnementales.",
                       "Our refrigerant-certified teams install to the highest standards, using equipment from trusted brands and complying rigorously with safety and environmental regulations."

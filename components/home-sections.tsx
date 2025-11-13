@@ -75,7 +75,6 @@ export default function HomeSections() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
                   viewport={{ once: true }}
-                  suppressHydrationWarning
                 >
                   {t(
                     "Conformité et traçabilité : HACCP, ISO 14644/22000, GxP. Supervision et télésurveillance 24/7, contrats de maintenance premium et interventions rapides ; Refrig'Air Systèmes réalise des opérations éligibles C2E et est certifié RGE pour des environnements critiques fiables et durables.",

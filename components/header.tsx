@@ -39,15 +39,21 @@ export default function Header() {
 
   // Fermer le menu mobile au scroll
   useEffect(() => {
+    if (typeof window === "undefined") return
     const handleScroll = () => {
       setIsMobileMenuOpen(false)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
   }, [])
 
   // Détection du fond sous le header: image/vidéo → transparent, couleur → héritée
   useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") return
     let scheduled = false
     let rafId: number | null = null
     let timeouts: number[] = []
@@ -81,6 +87,7 @@ export default function Header() {
           return null
         }
       } else {
+        if (typeof document === "undefined") return null
         const temp = document.createElement("span")
         temp.style.display = "none"
         temp.style.color = value

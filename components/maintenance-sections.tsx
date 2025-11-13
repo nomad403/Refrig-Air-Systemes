@@ -284,13 +284,13 @@ export default function MaintenanceSections() {
                   )}
                 </p>
                 <div className="space-y-4">
-                  <p className="text-[#181823]/80 leading-relaxed" suppressHydrationWarning>
+                  <p className="text-[#181823]/80 leading-relaxed">
                     {t(
                       "Inspections systématiques selon un planning optimisé, contrôles de performance énergétique, nettoyage approfondi des échangeurs et vérification des points critiques. Remplacement préventif des pièces d'usure avant défaillance pour garantir une disponibilité maximale.",
                       "Systematic inspections on an optimised schedule, energy performance checks, deep cleaning of heat exchangers and critical point verification. Preventive replacement of wear parts before failure to guarantee maximum availability."
                     )}
                   </p>
-                  <p className="text-[#181823]/80 leading-relaxed" suppressHydrationWarning>
+                  <p className="text-[#181823]/80 leading-relaxed">
                     {t(
                       "Nos techniciens habilités aux fluides frigorigènes interviennent avec des protocoles stricts adaptés à chaque secteur : traçabilité pharmaceutique, normes HACCP agroalimentaire, uptime data center.",
                       "Our refrigerant-certified technicians intervene under stringent protocols adapted to each sector: pharmaceutical traceability, HACCP food standards, data centre uptime."
