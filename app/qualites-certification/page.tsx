@@ -15,11 +15,20 @@ export const metadata = {
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "https://ras-energies.com/images/home/hvac.png",
+        width: 1200,
+        height: 630,
+        alt: "Refrig'Air Systèmes — Qualités & Certifications",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Qualités & Certifications",
     description: "C2E, RGE, HACCP, Qualifelec. Partenaire certifié des leaders mondiaux.",
+    images: ["https://ras-energies.com/images/home/hvac.png"],
   }
 }
 import QualitesHeroContent from "@/components/qualites-hero-content"

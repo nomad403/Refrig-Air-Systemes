@@ -34,13 +34,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "/",
+    url: "https://ras-energies.com/",
     siteName: "Refrig'Air Systèmes",
     title: "Climatisation & Froid industriel | Paris - Partenaire des leaders mondiaux",
     description: "Solutions premium pour environnements critiques: data centers, laboratoires, industrie, retail, installations très haute technicité, très basse température, salles blanches, froid commercial, vitrines réfrigérées. Partenaire certifié Daikin, Carrier, Trane, Johnson Controls, Mitsubishi Electric.",
     images: [
       {
-        url: "/images/home/hvac.png",
+        url: "https://ras-energies.com/images/home/hvac.png",
         width: 1200,
         height: 630,
         alt: "Refrig'Air Systèmes — Climatisation & Froid industriel",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Refrig'Air Systèmes — Climatisation & Froid industriel",
     description: "Solutions premium pour environnements critiques en Île‑de‑France.",
-    images: ["/images/home/hvac.png"],
+    images: ["https://ras-energies.com/images/home/hvac.png"],
   },
 }
 

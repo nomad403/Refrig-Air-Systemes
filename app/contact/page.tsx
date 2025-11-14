@@ -14,11 +14,20 @@ export const metadata = {
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "https://ras-energies.com/images/home/hvac.png",
+        width: 1200,
+        height: 630,
+        alt: "Refrig'Air Systèmes — Contact & Devis Gratuit",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact & Devis Gratuit",
     description: "Devis gratuit, audit technique, accompagnement HVAC (Paris/IDF).",
+    images: ["https://ras-energies.com/images/home/hvac.png"],
   }
 }
 import ShaderBackground from "../../components/shader-background"
