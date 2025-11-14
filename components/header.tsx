@@ -6,37 +6,49 @@ import { motion, AnimatePresence } from "framer-motion"
 import { usePerformance } from "@/contexts/performance-context"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useLanguage } from "@/contexts/language-context"
+import { useHeaderToneDynamic } from "@/hooks/use-header-tone-dynamic"
 
 export default function Header() {
   // Header global
   const headerRef = useRef<HTMLElement | null>(null)
-  const [isTransparent, setIsTransparent] = useState<boolean>(true)
-  const [bgColor, setBgColor] = useState<string>("rgba(0,0,0,0.4)")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [logoTone, setLogoTone] = useState<"light" | "dark">("light")
   const { isFrench, toggleLanguage } = useLanguage()
+  
+  // Hook robuste pour détecter le tone et si on est sur le Hero
+  const { tone, isOverHero } = useHeaderToneDynamic()
 
-  const computeIsLight = (rgb: string) => {
-    const m = rgb.match(/rgba?\(([^)]+)\)/)
-    if (!m) return false
-    const [r, g, b] = m[1].split(",").map((p) => parseFloat(p.trim()))
-    const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
-    return luminance > 0.6
-  }
-
-  const [shouldBlendDifference, setShouldBlendDifference] = useState(false)
-
+  // Classes dynamiques basées sur le hook
   const linkClass = useMemo(() => {
-    const blend = shouldBlendDifference ? "mix-blend-difference" : ""
-    if (isTransparent) {
-      return ["text-white", blend].filter(Boolean).join(" ")
+    if (isOverHero) {
+      // Sur Hero : mix-blend-difference actif, texte blanc
+      return "text-white mix-blend-difference"
     }
-    const toneClass = computeIsLight(bgColor) ? "text-[#181823]" : "text-white"
-    return [toneClass, blend].filter(Boolean).join(" ")
-  }, [isTransparent, bgColor, shouldBlendDifference])
-  const mixBlendClass = shouldBlendDifference ? "mix-blend-difference" : ""
+    // Hors Hero : couleur adaptée au fond
+    return tone === "dark" ? "text-[#181823]" : "text-white"
+  }, [tone, isOverHero])
+  
+  const mixBlendClass = isOverHero ? "mix-blend-difference" : ""
+  
+  // Tone du logo : dark = noir (brightness(0)), light = blanc (pas de filtre)
+  const logoFilter = useMemo(() => {
+    if (isOverHero) {
+      // Sur Hero avec mix-blend, pas besoin de filtre
+      return "none"
+    }
+    // Hors Hero : adapter selon le fond
+    return tone === "dark" ? "brightness(0)" : "none"
+  }, [tone, isOverHero])
+  
+  // Background du header : transparent sur Hero, léger sur les autres sections
+  const headerBg = useMemo(() => {
+    if (isOverHero) {
+      return "rgba(0,0,0,0)"
+    }
+    // Sur fond clair, ajouter un léger fond pour le contraste
+    return tone === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.4)"
+  }, [tone, isOverHero])
 
   // Fermer le menu mobile au scroll
   useEffect(() => {
@@ -51,362 +63,6 @@ export default function Header() {
       }
     }
   }, [])
-
-  const { simplifiedHeader, reducedObservers } = usePerformance()
-
-  // Détection du fond sous le header: image/vidéo → transparent, couleur → héritée
-  useEffect(() => {
-    if (typeof window === "undefined" || typeof document === "undefined") return
-    
-    // Sur mobile avec header simplifié, utiliser une détection basique
-    if (simplifiedHeader) {
-      setIsTransparent(true)
-      setBgColor("rgba(0,0,0,0.4)")
-      setShouldBlendDifference(false)
-      return
-    }
-    
-    let scheduled = false
-    let rafId: number | null = null
-    let timeouts: number[] = []
-
-    // Fonction parseCssColor optimisée avec protection contre la récursion infinie
-    const parseCssColor = (input?: string | null, depth: number = 0): number | null => {
-      // Protection contre la récursion infinie (max 2 niveaux)
-      if (depth > 2) return null
-      
-      if (!input) return null
-      const value = input.trim()
-      if (!value || value === "transparent" || value === "none") return null
-
-      // Parser RGB/RGBA
-      const rgbMatch = value.match(/^rgba?\(([^)]+)\)$/)
-      let r: number, g: number, b: number
-
-      if (rgbMatch) {
-        const parts = rgbMatch[1].split(",").map((p) => parseFloat(p.trim()))
-        if (parts.length >= 3) {
-          r = parts[0]
-          g = parts[1]
-          b = parts[2]
-          // Vérifier l'alpha pour rgba
-          if (rgbMatch[0].startsWith("rgba") && parts.length === 4) {
-            const alpha = parts[3]
-            if (alpha === 0) return null
-          }
-        } else {
-          return null
-        }
-      } else if (value.startsWith("#")) {
-        // Parser hex
-        let hex = value.slice(1)
-        if (hex.length === 3) {
-          hex = hex.split("").map((c) => c + c).join("")
-        }
-        if (hex.length === 6) {
-          r = parseInt(hex.slice(0, 2), 16)
-          g = parseInt(hex.slice(2, 4), 16)
-          b = parseInt(hex.slice(4, 6), 16)
-        } else {
-          return null
-        }
-      } else {
-        // Pour les noms de couleurs CSS, utiliser getComputedStyle avec protection récursive
-        if (typeof document === "undefined" || depth > 0) return null
-        
-        try {
-          const temp = document.createElement("span")
-          temp.style.display = "none"
-          temp.style.color = value
-          document.body.appendChild(temp)
-          const computed = window.getComputedStyle(temp).color
-          document.body.removeChild(temp)
-          
-          // Si la valeur calculée est identique, éviter la récursion infinie
-          if (computed === value || !computed) return null
-          
-          return parseCssColor(computed, depth + 1)
-        } catch {
-          return null
-        }
-      }
-
-      // Calculer la luminance
-      if (typeof r === "undefined" || typeof g === "undefined" || typeof b === "undefined") {
-        return null
-      }
-      
-      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
-      return isNaN(luminance) ? null : luminance
-    }
-
-    // Cache pour éviter les recalculs inutiles
-    let lastDetection: { transparent: boolean; color?: string; blend: boolean } | null = null
-    
-    // Fonction pour vérifier si un élément avec data-hero-blend est visible dans la zone du header
-    const checkHeroBlendInArea = (): boolean => {
-      const headerEl = headerRef.current
-      if (!headerEl) return false
-      
-      const rect = headerEl.getBoundingClientRect()
-      const sampleY = (rect.bottom ?? 64) + 1
-      const sampleX = Math.round(window.innerWidth / 2)
-      
-      // Utiliser elementsFromPoint pour obtenir tous les éléments à ce point
-      const elements = (document as any).elementsFromPoint 
-        ? (document as any).elementsFromPoint(sampleX, sampleY)
-        : [document.elementFromPoint(sampleX, sampleY)].filter(Boolean)
-      
-      // Chercher si un élément avec data-hero-blend est présent
-      for (const el of elements) {
-        if (headerEl.contains(el)) continue
-        const heroBlend = (el as HTMLElement).closest?.("[data-hero-blend='true']")
-        if (heroBlend) return true
-        // Vérifier aussi si l'élément lui-même a l'attribut
-        if ((el as HTMLElement).getAttribute?.("data-hero-blend") === "true") return true
-      }
-      
-      return false
-    }
-    
-    const detect = () => {
-      scheduled = false
-      const headerEl = headerRef.current
-      if (!headerEl) return
-      
-      const rect = headerEl.getBoundingClientRect()
-      const sampleY = (rect.bottom ?? 64) + 1
-      const sampleX = Math.round(window.innerWidth / 2)
-      
-      // Utiliser elementFromPoint (plus performant que elementsFromPoint)
-      const base = document.elementFromPoint(sampleX, sampleY) as HTMLElement | null
-      if (!base || headerEl.contains(base)) {
-        // Si pas d'élément ou élément dans le header, utiliser transparent par défaut
-        if (lastDetection?.transparent !== true || lastDetection?.blend !== false) {
-          setIsTransparent(true)
-          setShouldBlendDifference(false)
-          lastDetection = { transparent: true, blend: false }
-        }
-        return
-      }
-      
-      // Vérifier si un élément avec data-hero-blend est présent dans la zone
-      const hasHeroBlend = checkHeroBlendInArea()
-      
-      // Vérifier rapidement si c'est un élément média
-      const tag = base.tagName
-      if (tag === 'IFRAME' || tag === 'VIDEO' || tag === 'IMG' || tag === 'CANVAS') {
-        const blend = hasHeroBlend
-        if (lastDetection?.transparent !== true || lastDetection?.blend !== blend) {
-          setIsTransparent(true)
-          setShouldBlendDifference(blend)
-          lastDetection = { transparent: true, blend }
-        }
-        return
-      }
-      
-      // Analyser le style de manière optimisée (limiter à 3 niveaux max)
-      let node: HTMLElement | null = base
-      let depth = 0
-      const maxDepth = 3
-      
-      while (node && node !== document.body && depth < maxDepth) {
-        const cs = window.getComputedStyle(node)
-        
-        // Vérifier background-image en premier (plus rapide)
-        if (cs.backgroundImage && cs.backgroundImage !== 'none') {
-          const blend = hasHeroBlend
-          if (lastDetection?.transparent !== true || lastDetection?.blend !== blend) {
-            setIsTransparent(true)
-            setShouldBlendDifference(blend)
-            lastDetection = { transparent: true, blend }
-          }
-          return
-        }
-        
-        // Vérifier background-color
-        const bgColor = cs.backgroundColor
-        if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
-          const luminance = parseCssColor(bgColor)
-          const newTone = luminance !== null ? (luminance > 0.6 ? "dark" : "light") : "light"
-          
-          if (lastDetection?.transparent !== false || lastDetection?.color !== bgColor) {
-            setIsTransparent(false)
-            setShouldBlendDifference(false)
-            setBgColor(bgColor)
-            setLogoTone(newTone)
-            lastDetection = { transparent: false, color: bgColor, blend: false }
-          }
-          return
-        }
-        
-        node = node.parentElement
-        depth++
-      }
-      
-      // Par défaut, transparent
-      const blend = hasHeroBlend
-      if (lastDetection?.transparent !== true || lastDetection?.blend !== blend) {
-        setIsTransparent(true)
-        setShouldBlendDifference(blend)
-        lastDetection = { transparent: true, blend }
-      }
-    }
-
-    // Détecter si on est sur mobile
-    const isMobileDevice = typeof window !== "undefined" && window.innerWidth <= 768
-
-    const scheduleDetect = () => {
-      if (scheduled) return
-      scheduled = true
-      rafId = requestAnimationFrame(detect)
-    }
-
-    // Throttler optimisé : plus agressif sur mobile
-    let lastScheduleTime = 0
-    const throttledScheduleDetect = () => {
-      const now = Date.now()
-      const throttleDelay = isMobileDevice ? 300 : 100 // Augmenté pour réduire la charge
-      if (now - lastScheduleTime < throttleDelay) return
-      lastScheduleTime = now
-      scheduleDetect()
-    }
-
-    // Initialisation
-    setIsTransparent(true)
-    setBgColor("rgba(0,0,0,0.4)")
-    setShouldBlendDifference(false)
-
-    // Détection initiale avec délais réduits
-    scheduleDetect()
-    timeouts.push(window.setTimeout(scheduleDetect, 100))
-    timeouts.push(window.setTimeout(scheduleDetect, 500))
-
-    // Event listeners optimisés
-    window.addEventListener('scroll', throttledScheduleDetect, { passive: true })
-    
-    // Resize avec throttling agressif
-    let resizeTimeout: NodeJS.Timeout | null = null
-    const throttledResize = () => {
-      if (resizeTimeout) return
-      resizeTimeout = setTimeout(() => {
-        scheduleDetect()
-        resizeTimeout = null
-      }, isMobileDevice ? 500 : 200) // Délai augmenté
-    }
-    window.addEventListener('resize', throttledResize, { passive: true })
-    
-    // Load event (une seule fois)
-    const onLoad = () => {
-      scheduleDetect()
-    }
-    if (document.readyState === 'complete') {
-      scheduleDetect()
-    } else {
-      window.addEventListener('load', onLoad, { once: true })
-    }
-
-    // MutationObserver simplifié et optimisé
-    let mutationObserver: MutationObserver | null = null
-    
-    if (!reducedObservers) {
-      // Debounce pour MutationObserver
-      let mutationTimeout: NodeJS.Timeout | null = null
-      const handleMutation = () => {
-        if (mutationTimeout) return
-        mutationTimeout = setTimeout(() => {
-          throttledScheduleDetect()
-          mutationTimeout = null
-        }, isMobileDevice ? 500 : 200)
-      }
-      
-      mutationObserver = new MutationObserver(handleMutation)
-      
-      // Observer seulement les changements critiques
-      if (isMobileDevice) {
-        // Sur mobile, observer seulement le main
-        const mainContent = document.querySelector('main')
-        if (mainContent) {
-          mutationObserver.observe(mainContent, {
-            childList: true,
-            subtree: false,
-            attributes: false // Désactiver sur mobile pour réduire la charge
-          })
-        }
-      } else {
-        // Sur desktop, observer avec subtree mais limité
-        mutationObserver.observe(document.body, {
-          childList: true,
-          subtree: false, // Désactiver subtree pour réduire la charge
-          attributes: true,
-          attributeFilter: ['style', 'class']
-        })
-      }
-    }
-
-    // Image load (seulement si nécessaire)
-    const onImageLoad = (event: Event) => {
-      const target = event.target as HTMLElement | null
-      if (target && headerRef.current && !headerRef.current.contains(target)) {
-        // Seulement pour les images dans la zone du header
-        const rect = target.getBoundingClientRect()
-        const headerRect = headerRef.current.getBoundingClientRect()
-        if (rect.top < headerRect.bottom + 100) {
-          throttledScheduleDetect()
-        }
-      }
-    }
-    document.addEventListener('load', onImageLoad, true)
-
-    return () => {
-      if (rafId) cancelAnimationFrame(rafId)
-      timeouts.forEach((t) => clearTimeout(t))
-      window.removeEventListener('scroll', throttledScheduleDetect)
-      window.removeEventListener('resize', throttledResize)
-      window.removeEventListener('load', onLoad)
-      document.removeEventListener('load', onImageLoad, true)
-      if (mutationObserver) {
-        mutationObserver.disconnect()
-      }
-      if (resizeTimeout) {
-        clearTimeout(resizeTimeout)
-      }
-    }
-  }, [pathname, simplifiedHeader, reducedObservers])
-
-  // Forcer la détection lors des changements de route ou de page
-  useEffect(() => {
-    // Utiliser un timeout pour laisser le DOM se mettre à jour
-    const timer = window.setTimeout(() => {
-      // Déclencher un événement scroll pour forcer la détection
-      window.dispatchEvent(new Event('scroll'))
-    }, 100)
-    return () => window.clearTimeout(timer)
-  }, [pathname, searchParams])
-
-  // Forcer la détection lors du pageshow (retour arrière)
-  useEffect(() => {
-    const handler = () => {
-      window.setTimeout(() => {
-        window.dispatchEvent(new Event('scroll'))
-      }, 50)
-    }
-    window.addEventListener('pageshow', handler)
-    return () => window.removeEventListener('pageshow', handler)
-  }, [])
-
-  const isLightBackground = !isTransparent && computeIsLight(bgColor)
-  const logoFilter = useMemo(() => {
-    const forceLight = isTransparent && linkClass.includes("text-white")
-    const tone = forceLight ? "light" : logoTone
-    return tone === "dark" ? "brightness(0)" : "none"
-  }, [isTransparent, linkClass, logoTone])
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
-      console.log("🧠 Logo tone:", logoTone, "isTransparent:", isTransparent, "bgColor:", bgColor)
-    }
-  }, [logoTone, isTransparent, bgColor])
 
   const navLinks = useMemo(() => (
     isFrench
@@ -434,13 +90,15 @@ export default function Header() {
     <>
       <motion.header 
         ref={headerRef as any}
-        className={`fixed top-0 left-0 right-0 z-[99999] px-2 lg:px-4 pt-4 pb-1 min-h-[3.25rem] sm:min-h-[3.75rem] lg:min-h-[4.25rem] overflow-visible ${mixBlendClass} ${isTransparent ? '' : 'bg-opacity-90'}`}
+        role="banner"
+        aria-label="En-tête principal"
+        className={`fixed top-0 left-0 right-0 z-[99999] px-2 lg:px-4 pt-4 pb-1 min-h-[3.25rem] sm:min-h-[3.75rem] lg:min-h-[4.25rem] overflow-visible ${mixBlendClass} transition-all duration-500`}
         initial={false}
         animate={{ 
-          backgroundColor: isTransparent ? "rgba(0,0,0,0)" : bgColor 
+          backgroundColor: headerBg
         }}
         transition={{ 
-          duration: 0.3, 
+          duration: 0.5, 
           ease: [0.22, 1, 0.36, 1] 
         }}
       >
@@ -469,7 +127,7 @@ export default function Header() {
           </div>
 
           {/* Navigation Desktop */}
-          <nav className={`hidden lg:flex items-center space-x-1 ${mixBlendClass}`}>
+          <nav role="navigation" aria-label="Navigation principale" className={`hidden lg:flex items-center space-x-1 ${mixBlendClass}`}>
             {navLinks.map((link) => (
               <a
                 key={link.href}

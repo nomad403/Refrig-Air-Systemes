@@ -182,6 +182,7 @@ export default function ShaderBackground({
   }, [backgroundType, videoId, videoUrl, shouldUseImage])
 
   // Observer d'apparition pour différer le chargement
+  // Utiliser un threshold bas pour être tolérant au scroll
   useEffect(() => {
     const container = containerRef.current
     if (!container || typeof window === "undefined" || !window.IntersectionObserver) {
@@ -190,7 +191,10 @@ export default function ShaderBackground({
     }
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => setIsInView(entry.isIntersecting))
-    }, { threshold: 0.2 })
+    }, { 
+      threshold: 0.1 // Plus tolérant : déclenche même si seulement 10% visible
+      // Pas de rootMargin négatif pour éviter d'empêcher la détection initiale
+    })
     io.observe(container)
     return () => io.disconnect()
   }, [])
@@ -311,17 +315,21 @@ export default function ShaderBackground({
   useEffect(() => {
     if (shouldUseImage || !videoUrl || typeof document === "undefined") return
     
-    if (!isInView) {
-      // Pauser si pas visible mais garder la source pour le cache HTTP
-      const videoEl = localVideoRef.current
-      if (videoEl) {
-        videoEl.pause()
-      }
-      return
-    }
-    
     const videoEl = localVideoRef.current
     if (!videoEl) return
+    
+    // Si la vidéo n'est pas en vue mais qu'elle joue déjà, la laisser continuer
+    // Cela améliore l'UX en évitant les écrans noirs lors du scroll
+    if (!isInView) {
+      // Si la vidéo joue déjà, ne pas la pauser (l'IntersectionObserver avec rootMargin gère déjà ça)
+      if (videoCanPlay && !videoEl.paused && videoEl.readyState >= 2) {
+        // La vidéo joue déjà, la laisser continuer
+        return
+      }
+      // Si la vidéo n'a pas encore commencé, ne pas charger (lazy loading strict)
+      // Mais si elle est déjà chargée et prête, on peut la laisser en pause sans problème
+      return
+    }
 
     const targetSrc = resolvedVideoUrl ?? videoUrl
     
@@ -544,7 +552,7 @@ export default function ShaderBackground({
   const posterImageUrl = imageUrl || null // Ne pas utiliser de poster automatique si l'image n'existe pas
 
   return (
-    <div ref={containerRef} className={`min-h-screen bg-black relative overflow-hidden ${isMobile ? 'shader-background-mobile' : ''}`}>
+    <div ref={containerRef} className={`w-full h-full bg-black relative overflow-hidden ${isMobile ? 'shader-background-mobile' : ''}`}>
       {backgroundType === "video" && !shouldUseImage ? (
         videoUrl ? (
           <div

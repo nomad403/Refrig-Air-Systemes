@@ -239,13 +239,24 @@ export default function QualitesSections() {
       </section>
 
       {/* Certifications - Format épuré avec vidéo en fond */}
-      <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 bg-[#E9F8F9] relative overflow-hidden">
-        {/* Vidéo en arrière-plan (fichiers locaux, optimisés pour mobile) */}
-        <div className="absolute inset-0 w-full h-full">
-          <ShaderBackground videoUrl="/images/qualites/qualite.webm" />
+      <section ref={sectionRef} className="min-h-screen h-auto sm:h-screen bg-black relative overflow-hidden">
+        {/* Vidéo en arrière-plan (fichiers locaux, optimisés pour mobile) - fullscreen qui s'étend */}
+        <div className="absolute inset-0 w-full min-h-full">
+          <ShaderBackground 
+            videoUrl="/images/qualites/qualite.webm" 
+            videoStyle={{ 
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
+              minHeight: "100%",
+              position: "absolute",
+              top: 0,
+              left: 0
+            }}
+          />
         </div>
         
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 min-h-screen sm:h-full flex flex-col justify-center py-20 sm:py-20 lg:py-24">
           <motion.h2 
             className="text-2xl sm:text-3xl md:text-4xl font-light text-center mb-12 sm:mb-16 text-[#E9F8F9] orbit"
             initial={{ opacity: 0, y: 30 }}

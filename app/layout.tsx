@@ -208,12 +208,45 @@ export default function RootLayout({
         `}</style>
       </head>
       <body style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', overflowX: 'hidden' }}>
+        {/* Skip links pour accessibilité - invisibles mais accessibles au clavier et aux lecteurs d'écran */}
+        <a 
+          href="#main-content" 
+          className="sr-only focus:static focus:w-auto focus:h-auto focus:p-4 focus:absolute focus:top-4 focus:left-4 focus:z-[999999] focus:bg-[#537FE7] focus:text-white focus:rounded-sm focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Aller au contenu principal"
+        >
+          Aller au contenu principal
+        </a>
+        <a 
+          href="#footer" 
+          className="sr-only focus:static focus:w-auto focus:h-auto focus:p-4 focus:absolute focus:top-4 focus:left-4 focus:z-[999999] focus:bg-[#537FE7] focus:text-white focus:rounded-sm focus:outline-none focus:ring-2 focus:ring-white"
+          aria-label="Aller au pied de page"
+        >
+          Aller au pied de page
+        </a>
+        
+        {/* Description SEO cachée pour enrichir le contexte */}
+        <div className="sr-only" aria-hidden="false">
+          <h1>Refrig'Air Systèmes — Expert en climatisation de précision et froid industriel à Paris et Île-de-France</h1>
+          <p>
+            Spécialiste des installations HVAC critiques pour data centers, laboratoires, industrie agroalimentaire et retail. 
+            Services de climatisation de précision, froid industriel, installations très haute technicité, très basse température, 
+            salles blanches, vitrines réfrigérées, meubles froids. Maintenance préventive et dépannage d'urgence 24/7 avec SLA d'intervention ≤ 4h. 
+            Partenaire certifié des leaders mondiaux : Daikin, Carrier, Trane, Johnson Controls, Mitsubishi Electric, Danfoss, Panasonic, Liebherr, STULZ.
+          </p>
+          <p>
+            Certifications : C2E, RGE, Qualifelec, Attestation Capacité Fluides Frigorigènes. 
+            Zones d'intervention : Paris, Île-de-France, région parisienne.
+          </p>
+        </div>
+        
         <PerformanceWrapper>
           <LanguageProvider>
             <Suspense fallback={null}>
               <Header />
             </Suspense>
-            {children}
+            <main id="main-content" role="main" aria-label="Contenu principal">
+              {children}
+            </main>
             <Footer />
           </LanguageProvider>
         </PerformanceWrapper>
