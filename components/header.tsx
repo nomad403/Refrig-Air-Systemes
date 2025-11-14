@@ -62,6 +62,7 @@ export default function Header() {
     if (simplifiedHeader) {
       setIsTransparent(true)
       setBgColor("rgba(0,0,0,0.4)")
+      setShouldBlendDifference(false)
       return
     }
     
@@ -69,23 +70,35 @@ export default function Header() {
     let rafId: number | null = null
     let timeouts: number[] = []
 
-    const parseCssColor = (input?: string | null): number | null => {
+    // Fonction parseCssColor optimisée avec protection contre la récursion infinie
+    const parseCssColor = (input?: string | null, depth: number = 0): number | null => {
+      // Protection contre la récursion infinie (max 2 niveaux)
+      if (depth > 2) return null
+      
       if (!input) return null
       const value = input.trim()
       if (!value || value === "transparent" || value === "none") return null
 
+      // Parser RGB/RGBA
       const rgbMatch = value.match(/^rgba?\(([^)]+)\)$/)
       let r: number, g: number, b: number
 
       if (rgbMatch) {
-        ;[r, g, b] = rgbMatch[1]
-          .split(",")
-          .map((part) => parseFloat(part.trim()))
-        if (rgbMatch[0].startsWith("rgba")) {
-          const alpha = parseFloat(rgbMatch[1].split(",").pop()!.trim())
-          if (alpha === 0) return null
+        const parts = rgbMatch[1].split(",").map((p) => parseFloat(p.trim()))
+        if (parts.length >= 3) {
+          r = parts[0]
+          g = parts[1]
+          b = parts[2]
+          // Vérifier l'alpha pour rgba
+          if (rgbMatch[0].startsWith("rgba") && parts.length === 4) {
+            const alpha = parts[3]
+            if (alpha === 0) return null
+          }
+        } else {
+          return null
         }
       } else if (value.startsWith("#")) {
+        // Parser hex
         let hex = value.slice(1)
         if (hex.length === 3) {
           hex = hex.split("").map((c) => c + c).join("")
@@ -98,86 +111,145 @@ export default function Header() {
           return null
         }
       } else {
-        if (typeof document === "undefined") return null
-        const temp = document.createElement("span")
-        temp.style.display = "none"
-        temp.style.color = value
-        document.body.appendChild(temp)
-        const computed = window.getComputedStyle(temp).color
-        document.body.removeChild(temp)
-        return parseCssColor(computed)
+        // Pour les noms de couleurs CSS, utiliser getComputedStyle avec protection récursive
+        if (typeof document === "undefined" || depth > 0) return null
+        
+        try {
+          const temp = document.createElement("span")
+          temp.style.display = "none"
+          temp.style.color = value
+          document.body.appendChild(temp)
+          const computed = window.getComputedStyle(temp).color
+          document.body.removeChild(temp)
+          
+          // Si la valeur calculée est identique, éviter la récursion infinie
+          if (computed === value || !computed) return null
+          
+          return parseCssColor(computed, depth + 1)
+        } catch {
+          return null
+        }
       }
 
+      // Calculer la luminance
+      if (typeof r === "undefined" || typeof g === "undefined" || typeof b === "undefined") {
+        return null
+      }
+      
       const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
       return isNaN(luminance) ? null : luminance
     }
 
+    // Cache pour éviter les recalculs inutiles
+    let lastDetection: { transparent: boolean; color?: string; blend: boolean } | null = null
+    
+    // Fonction pour vérifier si un élément avec data-hero-blend est visible dans la zone du header
+    const checkHeroBlendInArea = (): boolean => {
+      const headerEl = headerRef.current
+      if (!headerEl) return false
+      
+      const rect = headerEl.getBoundingClientRect()
+      const sampleY = (rect.bottom ?? 64) + 1
+      const sampleX = Math.round(window.innerWidth / 2)
+      
+      // Utiliser elementsFromPoint pour obtenir tous les éléments à ce point
+      const elements = (document as any).elementsFromPoint 
+        ? (document as any).elementsFromPoint(sampleX, sampleY)
+        : [document.elementFromPoint(sampleX, sampleY)].filter(Boolean)
+      
+      // Chercher si un élément avec data-hero-blend est présent
+      for (const el of elements) {
+        if (headerEl.contains(el)) continue
+        const heroBlend = (el as HTMLElement).closest?.("[data-hero-blend='true']")
+        if (heroBlend) return true
+        // Vérifier aussi si l'élément lui-même a l'attribut
+        if ((el as HTMLElement).getAttribute?.("data-hero-blend") === "true") return true
+      }
+      
+      return false
+    }
+    
     const detect = () => {
       scheduled = false
       const headerEl = headerRef.current
       if (!headerEl) return
+      
       const rect = headerEl.getBoundingClientRect()
       const sampleY = (rect.bottom ?? 64) + 1
       const sampleX = Math.round(window.innerWidth / 2)
-      const list: Element[] = (document as any).elementsFromPoint
-        ? (document as any).elementsFromPoint(sampleX, sampleY)
-        : [document.elementFromPoint(sampleX, sampleY)].filter(Boolean) as Element[]
-      const base = list.find((el) => !headerEl.contains(el)) as HTMLElement | undefined
-      const pickBackground = (el: HTMLElement | null): { transparent: boolean; color?: string } => {
-        let node: HTMLElement | null = el
-        while (node && node !== document.body) {
-          const tag = node.tagName
-          if (tag === 'IFRAME' || tag === 'VIDEO' || tag === 'IMG' || tag === 'CANVAS') {
-            return { transparent: true }
-          }
-          const cs = window.getComputedStyle(node)
-          if (cs.backgroundImage && cs.backgroundImage !== 'none') {
-            return { transparent: true }
-          }
-          if (cs.backgroundColor && cs.backgroundColor !== 'transparent' && cs.backgroundColor !== 'rgba(0, 0, 0, 0)') {
-            return { transparent: false, color: cs.backgroundColor }
-          }
-          node = node.parentElement
+      
+      // Utiliser elementFromPoint (plus performant que elementsFromPoint)
+      const base = document.elementFromPoint(sampleX, sampleY) as HTMLElement | null
+      if (!base || headerEl.contains(base)) {
+        // Si pas d'élément ou élément dans le header, utiliser transparent par défaut
+        if (lastDetection?.transparent !== true || lastDetection?.blend !== false) {
+          setIsTransparent(true)
+          setShouldBlendDifference(false)
+          lastDetection = { transparent: true, blend: false }
         }
-        return { transparent: true }
+        return
       }
-      const res = pickBackground(base || null)
-      const withinHeroBlend = base
-        ? (base as HTMLElement).closest?.("[data-hero-blend='true']")
-        : null
-      const updateLogoTone = (luminance: number | null) => {
-        if (luminance === null) return
-        setLogoTone(luminance > 0.6 ? "dark" : "light")
+      
+      // Vérifier si un élément avec data-hero-blend est présent dans la zone
+      const hasHeroBlend = checkHeroBlendInArea()
+      
+      // Vérifier rapidement si c'est un élément média
+      const tag = base.tagName
+      if (tag === 'IFRAME' || tag === 'VIDEO' || tag === 'IMG' || tag === 'CANVAS') {
+        const blend = hasHeroBlend
+        if (lastDetection?.transparent !== true || lastDetection?.blend !== blend) {
+          setIsTransparent(true)
+          setShouldBlendDifference(blend)
+          lastDetection = { transparent: true, blend }
+        }
+        return
       }
-      if (res.transparent) {
+      
+      // Analyser le style de manière optimisée (limiter à 3 niveaux max)
+      let node: HTMLElement | null = base
+      let depth = 0
+      const maxDepth = 3
+      
+      while (node && node !== document.body && depth < maxDepth) {
+        const cs = window.getComputedStyle(node)
+        
+        // Vérifier background-image en premier (plus rapide)
+        if (cs.backgroundImage && cs.backgroundImage !== 'none') {
+          const blend = hasHeroBlend
+          if (lastDetection?.transparent !== true || lastDetection?.blend !== blend) {
+            setIsTransparent(true)
+            setShouldBlendDifference(blend)
+            lastDetection = { transparent: true, blend }
+          }
+          return
+        }
+        
+        // Vérifier background-color
+        const bgColor = cs.backgroundColor
+        if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
+          const luminance = parseCssColor(bgColor)
+          const newTone = luminance !== null ? (luminance > 0.6 ? "dark" : "light") : "light"
+          
+          if (lastDetection?.transparent !== false || lastDetection?.color !== bgColor) {
+            setIsTransparent(false)
+            setShouldBlendDifference(false)
+            setBgColor(bgColor)
+            setLogoTone(newTone)
+            lastDetection = { transparent: false, color: bgColor, blend: false }
+          }
+          return
+        }
+        
+        node = node.parentElement
+        depth++
+      }
+      
+      // Par défaut, transparent
+      const blend = hasHeroBlend
+      if (lastDetection?.transparent !== true || lastDetection?.blend !== blend) {
         setIsTransparent(true)
-        setShouldBlendDifference(Boolean(withinHeroBlend))
-        if (base) {
-          const cs = window.getComputedStyle(base)
-          const candidates = [
-            cs.getPropertyValue("background-color"),
-            cs.getPropertyValue("color"),
-            cs.getPropertyValue("border-top-color"),
-            cs.getPropertyValue("border-right-color"),
-            cs.getPropertyValue("border-bottom-color"),
-            cs.getPropertyValue("border-left-color")
-          ]
-          for (const candidate of candidates) {
-            const luminance = parseCssColor(candidate)
-            if (luminance !== null) {
-              updateLogoTone(luminance)
-              break
-            }
-          }
-        }
-      } else if (res.color) {
-        setIsTransparent(false)
-        setShouldBlendDifference(false)
-        setBgColor(res.color)
-        const luminance = parseCssColor(res.color)
-        updateLogoTone(luminance)
-      } else {
-        setShouldBlendDifference(false)
+        setShouldBlendDifference(blend)
+        lastDetection = { transparent: true, blend }
       }
     }
 
@@ -190,76 +262,98 @@ export default function Header() {
       rafId = requestAnimationFrame(detect)
     }
 
-    // Throttler scheduleDetect sur mobile pour réduire la charge
+    // Throttler optimisé : plus agressif sur mobile
     let lastScheduleTime = 0
     const throttledScheduleDetect = () => {
       const now = Date.now()
-      const throttleDelay = isMobileDevice ? 200 : 50
+      const throttleDelay = isMobileDevice ? 300 : 100 // Augmenté pour réduire la charge
       if (now - lastScheduleTime < throttleDelay) return
       lastScheduleTime = now
       scheduleDetect()
     }
 
+    // Initialisation
     setIsTransparent(true)
     setBgColor("rgba(0,0,0,0.4)")
+    setShouldBlendDifference(false)
 
+    // Détection initiale avec délais réduits
     scheduleDetect()
-    timeouts.push(window.setTimeout(scheduleDetect, 50))
-    timeouts.push(window.setTimeout(scheduleDetect, 200))
+    timeouts.push(window.setTimeout(scheduleDetect, 100))
     timeouts.push(window.setTimeout(scheduleDetect, 500))
 
+    // Event listeners optimisés
     window.addEventListener('scroll', throttledScheduleDetect, { passive: true })
     
-    // Throttler aussi le resize
+    // Resize avec throttling agressif
     let resizeTimeout: NodeJS.Timeout | null = null
     const throttledResize = () => {
       if (resizeTimeout) return
       resizeTimeout = setTimeout(() => {
         scheduleDetect()
         resizeTimeout = null
-      }, isMobileDevice ? 300 : 100)
+      }, isMobileDevice ? 500 : 200) // Délai augmenté
     }
     window.addEventListener('resize', throttledResize, { passive: true })
-    window.addEventListener('load', scheduleDetect)
+    
+    // Load event (une seule fois)
+    const onLoad = () => {
+      scheduleDetect()
+    }
+    if (document.readyState === 'complete') {
+      scheduleDetect()
+    } else {
+      window.addEventListener('load', onLoad, { once: true })
+    }
 
-    const onReadyStateChange = () => scheduleDetect()
-    document.addEventListener('readystatechange', onReadyStateChange)
-
-    // Sur mobile avec reducedObservers, désactiver complètement le MutationObserver
+    // MutationObserver simplifié et optimisé
     let mutationObserver: MutationObserver | null = null
     
     if (!reducedObservers) {
-      mutationObserver = new MutationObserver(() => {
-        if (isMobileDevice) {
+      // Debounce pour MutationObserver
+      let mutationTimeout: NodeJS.Timeout | null = null
+      const handleMutation = () => {
+        if (mutationTimeout) return
+        mutationTimeout = setTimeout(() => {
           throttledScheduleDetect()
-        } else {
-          scheduleDetect()
-        }
-      })
+          mutationTimeout = null
+        }, isMobileDevice ? 500 : 200)
+      }
       
-      // Sur mobile, observer seulement le header et les sections principales
-      if (isMobileDevice && headerRef.current) {
-        const mainContent = document.querySelector('main') || document.body
-        mutationObserver.observe(mainContent, {
-          childList: true,
-          subtree: false, // Ne pas observer récursivement sur mobile
-          attributes: true,
-          attributeFilter: ['style', 'class']
-        })
+      mutationObserver = new MutationObserver(handleMutation)
+      
+      // Observer seulement les changements critiques
+      if (isMobileDevice) {
+        // Sur mobile, observer seulement le main
+        const mainContent = document.querySelector('main')
+        if (mainContent) {
+          mutationObserver.observe(mainContent, {
+            childList: true,
+            subtree: false,
+            attributes: false // Désactiver sur mobile pour réduire la charge
+          })
+        }
       } else {
+        // Sur desktop, observer avec subtree mais limité
         mutationObserver.observe(document.body, {
           childList: true,
-          subtree: true,
+          subtree: false, // Désactiver subtree pour réduire la charge
           attributes: true,
           attributeFilter: ['style', 'class']
         })
       }
     }
 
+    // Image load (seulement si nécessaire)
     const onImageLoad = (event: Event) => {
       const target = event.target as HTMLElement | null
       if (target && headerRef.current && !headerRef.current.contains(target)) {
-        scheduleDetect()
+        // Seulement pour les images dans la zone du header
+        const rect = target.getBoundingClientRect()
+        const headerRect = headerRef.current.getBoundingClientRect()
+        if (rect.top < headerRect.bottom + 100) {
+          throttledScheduleDetect()
+        }
       }
     }
     document.addEventListener('load', onImageLoad, true)
@@ -269,8 +363,7 @@ export default function Header() {
       timeouts.forEach((t) => clearTimeout(t))
       window.removeEventListener('scroll', throttledScheduleDetect)
       window.removeEventListener('resize', throttledResize)
-      window.removeEventListener('load', scheduleDetect)
-      document.removeEventListener('readystatechange', onReadyStateChange)
+      window.removeEventListener('load', onLoad)
       document.removeEventListener('load', onImageLoad, true)
       if (mutationObserver) {
         mutationObserver.disconnect()
@@ -281,36 +374,25 @@ export default function Header() {
     }
   }, [pathname, simplifiedHeader, reducedObservers])
 
+  // Forcer la détection lors des changements de route ou de page
   useEffect(() => {
+    // Utiliser un timeout pour laisser le DOM se mettre à jour
     const timer = window.setTimeout(() => {
-      const headerEl = headerRef.current
-      if (!headerEl) return
-      const event = new Event('force-header-detect')
-      headerEl.dispatchEvent(event)
-    }, 50)
+      // Déclencher un événement scroll pour forcer la détection
+      window.dispatchEvent(new Event('scroll'))
+    }, 100)
     return () => window.clearTimeout(timer)
   }, [pathname, searchParams])
 
+  // Forcer la détection lors du pageshow (retour arrière)
   useEffect(() => {
-    const headerEl = headerRef.current
-    if (!headerEl) return
     const handler = () => {
-      const event = new Event('force-header-detect')
-      headerEl.dispatchEvent(event)
+      window.setTimeout(() => {
+        window.dispatchEvent(new Event('scroll'))
+      }, 50)
     }
     window.addEventListener('pageshow', handler)
     return () => window.removeEventListener('pageshow', handler)
-  }, [])
-
-  useEffect(() => {
-    const headerEl = headerRef.current
-    if (!headerEl) return
-    const onForceDetect = () => {
-      const event = new Event('scroll')
-      window.dispatchEvent(event)
-    }
-    headerEl.addEventListener('force-header-detect', onForceDetect)
-    return () => headerEl.removeEventListener('force-header-detect', onForceDetect)
   }, [])
 
   const isLightBackground = !isTransparent && computeIsLight(bgColor)
