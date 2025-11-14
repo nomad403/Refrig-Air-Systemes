@@ -55,7 +55,7 @@ export default function Breadcrumbs() {
       }
 
       // Créer ou mettre à jour le script breadcrumb
-      let script = document.getElementById("breadcrumb-structured-data")
+      let script = document.getElementById("breadcrumb-structured-data") as HTMLScriptElement | null
       if (!script) {
         script = document.createElement("script")
         script.id = "breadcrumb-structured-data"
