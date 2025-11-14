@@ -92,14 +92,14 @@ export default function Header() {
         ref={headerRef as any}
         role="banner"
         aria-label="En-tête principal"
-        className={`fixed top-0 left-0 right-0 z-[99999] px-2 lg:px-4 pt-4 pb-1 min-h-[3.25rem] sm:min-h-[3.75rem] lg:min-h-[4.25rem] overflow-visible ${mixBlendClass} transition-all duration-500`}
+        className={`fixed top-0 left-0 right-0 z-[99999] px-2 lg:px-4 pt-4 pb-1 min-h-[3.25rem] sm:min-h-[3.75rem] lg:min-h-[4.25rem] overflow-visible ${mixBlendClass} transition-all duration-200`}
         initial={false}
         animate={{ 
           backgroundColor: headerBg
         }}
         transition={{ 
-          duration: 0.5, 
-          ease: [0.22, 1, 0.36, 1] 
+          duration: 0.2, 
+          ease: [0.4, 0, 0.2, 1] 
         }}
       >
         <div className="w-full flex items-center justify-between">

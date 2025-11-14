@@ -61,6 +61,10 @@ export function useHeaderToneDynamic() {
       return
     }
 
+    // Cache simple pour éviter les recalculs inutiles
+    let lastDetectedColor = ""
+    let rafId: number | null = null
+
     // Détecter la couleur réelle du fond derrière le header
     const detectBackgroundColor = () => {
       const headerEl = document.querySelector("header")
@@ -73,14 +77,19 @@ export function useHeaderToneDynamic() {
       // Utiliser elementFromPoint pour trouver l'élément sous le header
       const element = document.elementFromPoint(sampleX, sampleY) as HTMLElement | null
       if (!element || headerEl.contains(element)) {
-        setTone("light") // Par défaut clair si pas de détection
+        const defaultColor = "rgb(24, 24, 35)"
+        if (lastDetectedColor !== defaultColor) {
+          setTone("light")
+          setBackgroundColor(defaultColor)
+          lastDetectedColor = defaultColor
+        }
         return
       }
 
       // Remonter dans la hiérarchie pour trouver la couleur de fond
       let node: HTMLElement | null = element
       let depth = 0
-      const maxDepth = 5
+      const maxDepth = 4 // Réduit pour plus de rapidité
 
       while (node && node !== document.body && depth < maxDepth) {
         const cs = window.getComputedStyle(node)
@@ -104,12 +113,19 @@ export function useHeaderToneDynamic() {
               continue
             }
             
+            // Construire la couleur RGB
+            const newColor = `rgb(${r}, ${g}, ${b})`
+            
+            // Éviter les mises à jour inutiles
+            if (lastDetectedColor === newColor) {
+              return
+            }
+            
             // Calculer la luminance (formule standard)
             const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
             setTone(luminance > 0.6 ? "dark" : "light")
-            
-            // Stocker la couleur exacte (sans opacité)
-            setBackgroundColor(`rgb(${r}, ${g}, ${b})`)
+            setBackgroundColor(newColor)
+            lastDetectedColor = newColor
             return
           }
         }
@@ -126,27 +142,38 @@ export function useHeaderToneDynamic() {
       }
 
       // Par défaut, fond sombre → texte clair
-      setTone("light")
-      setBackgroundColor("rgb(24, 24, 35)") // #181823 par défaut
+      const defaultColor = "rgb(24, 24, 35)"
+      if (lastDetectedColor !== defaultColor) {
+        setTone("light")
+        setBackgroundColor(defaultColor)
+        lastDetectedColor = defaultColor
+      }
     }
 
-    // Détecter au chargement et au scroll (throttlé)
+    // Détecter immédiatement au chargement
     detectBackgroundColor()
     
-    let lastCheck = 0
-    const throttledCheck = () => {
-      const now = Date.now()
-      if (now - lastCheck < 150) return // Throttle à 150ms
-      lastCheck = now
-      detectBackgroundColor()
+    // Utiliser requestAnimationFrame pour une réactivité maximale (synchronisé avec le rendu)
+    const scheduleCheck = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+      rafId = requestAnimationFrame(() => {
+        detectBackgroundColor()
+        rafId = null
+      })
     }
 
-    window.addEventListener('scroll', throttledCheck, { passive: true })
-    window.addEventListener('resize', throttledCheck, { passive: true })
+    // Écouter scroll et resize avec RAF pour une réactivité instantanée
+    window.addEventListener('scroll', scheduleCheck, { passive: true })
+    window.addEventListener('resize', scheduleCheck, { passive: true })
 
     return () => {
-      window.removeEventListener('scroll', throttledCheck)
-      window.removeEventListener('resize', throttledCheck)
+      window.removeEventListener('scroll', scheduleCheck)
+      window.removeEventListener('resize', scheduleCheck)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
     }
   }, [isOverHero])
 
