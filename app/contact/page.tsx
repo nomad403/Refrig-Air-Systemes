@@ -22,7 +22,7 @@ export default function ContactPage() {
       <div className="relative isolate min-h-[100dvh]">
         {/* Fond en arrière-plan — même scope que le header */}
         <div className="absolute inset-0 -z-10">
-          <ShaderBackground videoId="c_qmsj_hqJs" />
+          <ShaderBackground videoUrl="/images/contact/contact.webm" />
         </div>
 
         {/* Contenu par-dessus */}

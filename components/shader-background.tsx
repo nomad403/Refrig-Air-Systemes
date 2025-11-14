@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useCallback, useEffect, useRef, useState } from "react"
+import { usePerformance } from "@/contexts/performance-context"
 
 const videoBlobCache = new Map<string, string>()
 const videoFetchPromises = new Map<string, Promise<string>>()
@@ -31,6 +32,7 @@ export default function ShaderBackground({
   imageUrl,
   videoStyle
 }: ShaderBackgroundProps) {
+  const { forceImageFallback, isMobile: perfIsMobile } = usePerformance()
   const containerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
   const [isActive, setIsActive] = useState(false)
@@ -39,6 +41,9 @@ export default function ShaderBackground({
   const [isMobile, setIsMobile] = useState(false)
   const [videoError, setVideoError] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
+  
+  // Sur mobile, forcer l'utilisation d'images au lieu de vidéos
+  const shouldUseImage = forceImageFallback || (perfIsMobile && videoUrl)
   const loopTimerRef = useRef<any>(null)
   const localVideoRef = useRef<HTMLVideoElement | null>(null)
   const [resolvedVideoUrl, setResolvedVideoUrl] = useState<string | null>(videoUrl ?? null)
@@ -92,20 +97,44 @@ export default function ShaderBackground({
     }
 
     updateLayout()
-    window.addEventListener("resize", updateLayout)
+    
+    // Throttler le resize pour éviter trop d'événements sur mobile
+    let resizeTimeout: NodeJS.Timeout | null = null
+    const throttledResize = () => {
+      if (resizeTimeout) return
+      resizeTimeout = setTimeout(() => {
+        updateLayout()
+        resizeTimeout = null
+      }, isMobile ? 300 : 100)
+    }
+    
+    window.addEventListener("resize", throttledResize, { passive: true })
 
     return () => {
       if (typeof window !== "undefined") {
-        window.removeEventListener("resize", updateLayout)
+        window.removeEventListener("resize", throttledResize)
+      }
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout)
       }
     }
-  }, [computeMediaStyle, videoAspectRatio])
+  }, [computeMediaStyle, videoAspectRatio, isMobile])
 
   useEffect(() => {
+    // Nettoyer la vidéo précédente avant de charger une nouvelle
+    const videoEl = localVideoRef.current
+    if (videoEl) {
+      videoEl.pause()
+      if (isMobile) {
+        videoEl.src = ''
+        videoEl.load()
+      }
+    }
+    
     setIsBackgroundReady(false)
     setVideoError(false)
     setResolvedVideoUrl(videoUrl ?? null)
-  }, [backgroundType, videoId, videoUrl])
+  }, [backgroundType, videoId, videoUrl, isMobile, shouldUseImage])
 
   useEffect(() => {
     // Observer d'apparition pour différer le chargement du player
@@ -220,20 +249,24 @@ export default function ShaderBackground({
   }, [backgroundType, videoId, videoUrl, isInView])
 
   useEffect(() => {
-    if (!videoUrl) return
+    // Si on doit utiliser une image, ne pas charger la vidéo du tout
+    if (shouldUseImage || !videoUrl) return
+    
     let isActive = true
+    let currentBlobUrl: string | null = null
 
-    // Sur iOS, utiliser directement le MP4 au lieu du WebM
-    if (isIOS && videoUrl.endsWith('.webm')) {
-      const mp4Url = videoUrl.replace('.webm', '.mp4')
-      setResolvedVideoUrl(mp4Url)
-      return
-    }
-
-    // Sur iOS avec MP4, éviter le blob cache pour économiser la mémoire
-    if (isIOS) {
-      setResolvedVideoUrl(videoUrl)
-      return
+    // Sur mobile (iOS et Android), éviter le blob cache pour économiser la mémoire
+    // Utiliser directement l'URL pour éviter les problèmes de mémoire
+    if (isMobile || isIOS) {
+      if (isIOS && videoUrl.endsWith('.webm')) {
+        const mp4Url = videoUrl.replace('.webm', '.mp4')
+        setResolvedVideoUrl(mp4Url)
+      } else {
+        setResolvedVideoUrl(videoUrl)
+      }
+      return () => {
+        isActive = false
+      }
     }
 
     const getVideoBlobUrl = async () => {
@@ -263,6 +296,7 @@ export default function ShaderBackground({
 
     getVideoBlobUrl().then((url) => {
       if (isActive) {
+        currentBlobUrl = url.startsWith('blob:') ? url : null
         setResolvedVideoUrl(url)
       }
     }).catch(() => {
@@ -274,11 +308,19 @@ export default function ShaderBackground({
 
     return () => {
       isActive = false
+      // Révoquer le blob URL pour libérer la mémoire
+      if (currentBlobUrl && currentBlobUrl.startsWith('blob:')) {
+        try {
+          URL.revokeObjectURL(currentBlobUrl)
+        } catch {}
+      }
     }
-  }, [videoUrl, isIOS])
+  }, [videoUrl, isIOS, isMobile, shouldUseImage])
 
   useEffect(() => {
-    if (!videoUrl || typeof document === "undefined") return
+    // Si on doit utiliser une image, ne pas charger la vidéo du tout
+    if (shouldUseImage || !videoUrl || typeof document === "undefined") return
+    
     const videoEl = localVideoRef.current
     if (!videoEl) return
 
@@ -290,14 +332,20 @@ export default function ShaderBackground({
     videoEl.addEventListener("error", handleError)
 
     const ensurePlay = () => {
+      // Sur mobile, pauser si la vidéo n'est plus visible
+      if (isMobile && !isInView) {
+        videoEl.pause()
+        return
+      }
+
       const startPlayback = () => {
         const attempt = videoEl.play()
         if (attempt && typeof attempt.then === "function") {
           attempt.catch((err) => {
             console.warn("Video playback failed:", err)
             setIsBackgroundReady(false)
-            // Sur iOS, si autoplay échoue, on ne force pas
-            if (isIOS) {
+            // Sur mobile, si autoplay échoue, on ne force pas
+            if (isMobile || isIOS) {
               setVideoError(true)
             }
           })
@@ -326,27 +374,59 @@ export default function ShaderBackground({
 
     if (isInView) {
       ensurePlay()
+    } else if (isMobile) {
+      // Sur mobile, pauser immédiatement si pas visible
+      videoEl.pause()
     }
 
     const onVisibilityChange = () => {
-      if (!document.hidden) {
+      if (!document.hidden && isInView) {
         ensurePlay()
       } else {
         videoEl.pause()
       }
     }
 
+    // Sur mobile, aussi écouter les changements de page
+    const onPageHide = () => {
+      videoEl.pause()
+      videoEl.src = ''
+      videoEl.load()
+    }
+
     document.addEventListener("visibilitychange", onVisibilityChange)
+    if (isMobile) {
+      window.addEventListener("pagehide", onPageHide)
+    }
+
     return () => {
       videoEl.removeEventListener("error", handleError)
       document.removeEventListener("visibilitychange", onVisibilityChange)
+      if (isMobile) {
+        window.removeEventListener("pagehide", onPageHide)
+      }
       videoEl.pause()
+      // Nettoyer la source vidéo pour libérer la mémoire
+      if (isMobile) {
+        videoEl.src = ''
+        videoEl.load()
+      }
     }
-  }, [videoUrl, resolvedVideoUrl, isInView, isIOS])
+  }, [videoUrl, resolvedVideoUrl, isInView, isIOS, isMobile, shouldUseImage])
+
+  // Générer l'URL de l'image de fallback à partir de l'URL vidéo
+  const getFallbackImageUrl = useCallback((videoUrl: string | undefined): string | null => {
+    if (!videoUrl) return null
+    // Remplacer .webm ou .mp4 par .jpg (on essaiera .jpg d'abord, puis gradient si ça échoue)
+    const imageUrl = videoUrl.replace(/\.(webm|mp4)$/i, '.jpg')
+    return imageUrl
+  }, [])
+
+  const fallbackImageUrl = videoUrl ? getFallbackImageUrl(videoUrl) : imageUrl
 
   return (
     <div ref={containerRef} className={`min-h-screen bg-black relative overflow-hidden ${isMobile ? 'shader-background-mobile' : ''}`}>
-      {backgroundType === "video" ? (
+      {backgroundType === "video" && !shouldUseImage ? (
         videoUrl ? (
           <div
             className="absolute inset-0 w-full h-full overflow-hidden"
@@ -434,13 +514,17 @@ export default function ShaderBackground({
           </div>
         )
       ) : (
-        // Image Background
+        // Image Background (utilisé sur mobile ou si forceImageFallback)
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div 
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{
               ...mediaStyle,
-              backgroundImage: imageUrl ? `url(${imageUrl})` : undefined
+              backgroundImage: fallbackImageUrl 
+                ? `url(${fallbackImageUrl})` 
+                : imageUrl 
+                  ? `url(${imageUrl})` 
+                  : 'linear-gradient(135deg, #1e1e1e 0%, #000000 100%)'
             }}
           />
           

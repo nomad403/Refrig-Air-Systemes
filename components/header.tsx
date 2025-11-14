@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { usePathname, useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import { usePerformance } from "@/contexts/performance-context"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useLanguage } from "@/contexts/language-context"
 
@@ -51,9 +52,19 @@ export default function Header() {
     }
   }, [])
 
+  const { simplifiedHeader, reducedObservers } = usePerformance()
+
   // Détection du fond sous le header: image/vidéo → transparent, couleur → héritée
   useEffect(() => {
     if (typeof window === "undefined" || typeof document === "undefined") return
+    
+    // Sur mobile avec header simplifié, utiliser une détection basique
+    if (simplifiedHeader) {
+      setIsTransparent(true)
+      setBgColor("rgba(0,0,0,0.4)")
+      return
+    }
+    
     let scheduled = false
     let rafId: number | null = null
     let timeouts: number[] = []
@@ -170,10 +181,23 @@ export default function Header() {
       }
     }
 
+    // Détecter si on est sur mobile
+    const isMobileDevice = typeof window !== "undefined" && window.innerWidth <= 768
+
     const scheduleDetect = () => {
       if (scheduled) return
       scheduled = true
       rafId = requestAnimationFrame(detect)
+    }
+
+    // Throttler scheduleDetect sur mobile pour réduire la charge
+    let lastScheduleTime = 0
+    const throttledScheduleDetect = () => {
+      const now = Date.now()
+      const throttleDelay = isMobileDevice ? 200 : 50
+      if (now - lastScheduleTime < throttleDelay) return
+      lastScheduleTime = now
+      scheduleDetect()
     }
 
     setIsTransparent(true)
@@ -184,20 +208,53 @@ export default function Header() {
     timeouts.push(window.setTimeout(scheduleDetect, 200))
     timeouts.push(window.setTimeout(scheduleDetect, 500))
 
-    window.addEventListener('scroll', scheduleDetect, { passive: true })
-    window.addEventListener('resize', scheduleDetect)
+    window.addEventListener('scroll', throttledScheduleDetect, { passive: true })
+    
+    // Throttler aussi le resize
+    let resizeTimeout: NodeJS.Timeout | null = null
+    const throttledResize = () => {
+      if (resizeTimeout) return
+      resizeTimeout = setTimeout(() => {
+        scheduleDetect()
+        resizeTimeout = null
+      }, isMobileDevice ? 300 : 100)
+    }
+    window.addEventListener('resize', throttledResize, { passive: true })
     window.addEventListener('load', scheduleDetect)
 
     const onReadyStateChange = () => scheduleDetect()
     document.addEventListener('readystatechange', onReadyStateChange)
 
-    const mutationObserver = new MutationObserver(() => scheduleDetect())
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['style', 'class']
-    })
+    // Sur mobile avec reducedObservers, désactiver complètement le MutationObserver
+    let mutationObserver: MutationObserver | null = null
+    
+    if (!reducedObservers) {
+      mutationObserver = new MutationObserver(() => {
+        if (isMobileDevice) {
+          throttledScheduleDetect()
+        } else {
+          scheduleDetect()
+        }
+      })
+      
+      // Sur mobile, observer seulement le header et les sections principales
+      if (isMobileDevice && headerRef.current) {
+        const mainContent = document.querySelector('main') || document.body
+        mutationObserver.observe(mainContent, {
+          childList: true,
+          subtree: false, // Ne pas observer récursivement sur mobile
+          attributes: true,
+          attributeFilter: ['style', 'class']
+        })
+      } else {
+        mutationObserver.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['style', 'class']
+        })
+      }
+    }
 
     const onImageLoad = (event: Event) => {
       const target = event.target as HTMLElement | null
@@ -210,14 +267,19 @@ export default function Header() {
     return () => {
       if (rafId) cancelAnimationFrame(rafId)
       timeouts.forEach((t) => clearTimeout(t))
-      window.removeEventListener('scroll', scheduleDetect)
-      window.removeEventListener('resize', scheduleDetect)
+      window.removeEventListener('scroll', throttledScheduleDetect)
+      window.removeEventListener('resize', throttledResize)
       window.removeEventListener('load', scheduleDetect)
       document.removeEventListener('readystatechange', onReadyStateChange)
       document.removeEventListener('load', onImageLoad, true)
-      mutationObserver.disconnect()
+      if (mutationObserver) {
+        mutationObserver.disconnect()
+      }
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout)
+      }
     }
-  }, [pathname])
+  }, [pathname, simplifiedHeader, reducedObservers])
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
