@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import type { Metadata } from "next"
 import "./globals.css"
 import Header from "@/components/header"
+import Footer from "@/components/footer"
 import { LanguageProvider } from "@/contexts/language-context"
 import { PerformanceWrapper } from "@/components/performance-wrapper"
 
@@ -63,7 +64,12 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://www.nomad403.com" />
         <link rel="canonical" href="https://www.refrigairsystemes.fr/" />
+        {/* SEO discret pour développeur web mobile freelance */}
+        <link rel="author" href="https://www.nomad403.com" />
+        <meta name="web_author" content="Nomad403 - Développeur Web Mobile IA Freelance Paris" />
+        <meta name="developer" content="nomad403" />
         <link rel="icon" href="/images/general/LOGO_FAV.svg" type="image/svg+xml" sizes="any" />
         <link rel="icon" href="/images/general/LOGO_FAV.svg" type="image/svg+xml" sizes="512x512" />
         <link rel="mask-icon" href="/images/general/LOGO_FAV.svg" color="#537FE7" />
@@ -141,7 +147,53 @@ export default function RootLayout({
               "@type": "SearchAction",
               "target": "https://www.refrigairsystemes.fr/recherche?q={search_term_string}",
               "query-input": "required name=search_term_string"
+            },
+            "creator": {
+              "@type": "Person",
+              "@id": "https://www.nomad403.com",
+              "name": "Nomad403",
+              "url": "https://www.nomad403.com",
+              "jobTitle": "Développeur Web Mobile IA Freelance",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Paris",
+                "addressCountry": "FR"
+              },
+              "sameAs": [
+                "https://www.nomad403.com"
+              ]
             }
+          }) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "@id": "https://www.nomad403.com",
+            "name": "Nomad403",
+            "url": "https://www.nomad403.com",
+            "jobTitle": "Développeur Web Mobile IA Freelance",
+            "description": "Développeur web mobile freelance basé à Paris. Spécialisé dans React Next.js, applications mobiles iOS Android Kotlin Swift, et intégration IA Azure OpenAI.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Paris",
+              "addressCountry": "FR"
+            },
+            "knowsAbout": [
+              "React",
+              "Next.js",
+              "TypeScript",
+              "Kotlin",
+              "Swift",
+              "iOS",
+              "Android",
+              "Intelligence Artificielle",
+              "Azure OpenAI"
+            ],
+            "sameAs": [
+              "https://www.nomad403.com"
+            ]
           }) }}
         />
         <style>{`
@@ -162,6 +214,7 @@ export default function RootLayout({
               <Header />
             </Suspense>
             {children}
+            <Footer />
           </LanguageProvider>
         </PerformanceWrapper>
       </body>

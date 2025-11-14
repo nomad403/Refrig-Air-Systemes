@@ -7,6 +7,8 @@ import { usePerformance } from "@/contexts/performance-context"
 
 const videoBlobCache = new Map<string, string>()
 const videoFetchPromises = new Map<string, Promise<string>>()
+// Cache des vidéos chargées : garde la référence de l'élément vidéo une fois chargé
+const videoLoadedCache = new Map<string, { element: HTMLVideoElement, loaded: boolean, readyState: number }>()
 
 declare global {
   interface Window {
@@ -379,8 +381,14 @@ export default function ShaderBackground({
 
       const targetSrc = resolvedVideoUrl ?? videoUrl
       const currentSrc = videoEl.dataset.loadedSrc
+      // Vérifier si la vidéo est déjà en cache et prête
+      const cachedVideo = targetSrc ? videoLoadedCache.get(targetSrc) : null
+      const isCachedAndReady = cachedVideo && cachedVideo.loaded && cachedVideo.readyState >= 2
+      
+      // Ne recharger que si nécessaire : nouvelle source, pas de source, ou vidéo pas encore chargée
+      const needsReload = !currentSrc || currentSrc !== targetSrc || !videoEl.src || (videoEl.readyState === 0 && !isCachedAndReady)
 
-      if (targetSrc && currentSrc !== targetSrc) {
+      if (targetSrc && needsReload) {
         setIsBackgroundReady(false)
         setShowPoster(true) // Réafficher le poster pendant le chargement
         setVideoCanPlay(false)
@@ -396,6 +404,16 @@ export default function ShaderBackground({
         const handleCanPlay = () => {
           videoEl.removeEventListener("canplay", handleCanPlay)
           setIsBackgroundReady(true)
+          
+          // Mettre en cache la vidéo une fois qu'elle peut jouer
+          if (targetSrc) {
+            videoLoadedCache.set(targetSrc, {
+              element: videoEl,
+              loaded: true,
+              readyState: videoEl.readyState
+            })
+          }
+          
           // Sur mobile, utiliser canplay pour démarrer plus tôt (streaming progressif)
           // canplaythrough attend le téléchargement complet, ce qui est trop long
           if (isMobile || isIOS) {
@@ -406,7 +424,14 @@ export default function ShaderBackground({
             
             // Optionnel : améliorer la fluidité si la connexion est bonne
             videoEl.addEventListener("canplaythrough", () => {
-              // Vidéo entièrement chargée, lecture devrait être fluide
+              // Vidéo entièrement chargée, mettre à jour le cache
+              if (targetSrc) {
+                videoLoadedCache.set(targetSrc, {
+                  element: videoEl,
+                  loaded: true,
+                  readyState: videoEl.readyState
+                })
+              }
             }, { once: true })
           } else {
             setVideoCanPlay(true)
@@ -418,39 +443,89 @@ export default function ShaderBackground({
         videoEl.addEventListener("error", handleError, { once: true })
         videoEl.dataset.loadedSrc = targetSrc
         videoEl.src = targetSrc
-        // Sur mobile, commencer avec preload="none" pour ne rien charger
-        // Puis passer à "metadata" seulement quand visible (géré dans le useEffect suivant)
-        videoEl.preload = isMobile || isIOS ? (isInView ? "metadata" : "none") : "auto"
+        
+        // Si la vidéo est déjà en cache, utiliser preload="auto" pour précharger
+        // Sinon, utiliser preload="metadata" sur mobile pour économiser la bande passante
+        const shouldPreloadAuto = isCachedAndReady || (!isMobile && !isIOS)
+        videoEl.preload = shouldPreloadAuto ? "auto" : (isMobile || isIOS ? "metadata" : "auto")
+        
         videoEl.load()
       } else {
-        if (videoCanPlay) {
+        // Si la vidéo est déjà chargée (en cache ou readyState >= 2), la relancer directement
+        if (isCachedAndReady || videoCanPlay || videoEl.readyState >= 2) {
+          // Vidéo en cache, démarrer immédiatement sans rechargement
+          setVideoCanPlay(true)
+          setIsBackgroundReady(true)
+          setShowPoster(false) // Pas besoin du poster si déjà chargé
           startPlayback()
+        } else if (videoEl.readyState >= 1) {
+          // Vidéo a au moins les métadonnées, peut démarrer
+          setVideoCanPlay(true)
+          setIsBackgroundReady(true)
+          startPlayback()
+        } else {
+          // Si la vidéo n'est pas encore prête, attendre canplay
+          const handleCanPlayRetry = () => {
+            videoEl.removeEventListener("canplay", handleCanPlayRetry)
+            // Mettre en cache une fois prête
+            if (targetSrc) {
+              videoLoadedCache.set(targetSrc, {
+                element: videoEl,
+                loaded: true,
+                readyState: videoEl.readyState
+              })
+            }
+            setVideoCanPlay(true)
+            setIsBackgroundReady(true)
+            startPlayback()
+          }
+          videoEl.addEventListener("canplay", handleCanPlayRetry, { once: true })
         }
       }
     }
 
     // Charger la vidéo seulement quand elle est visible (lazy loading strict)
     if (isInView) {
-      // Mettre à jour le preload quand la vidéo devient visible
-      // Sur mobile, passer de "none" à "metadata" pour charger seulement les métadonnées
+      // Vérifier si la vidéo est déjà en cache
+      const targetSrc = resolvedVideoUrl ?? videoUrl
+      const cachedVideo = targetSrc ? videoLoadedCache.get(targetSrc) : null
+      const isCachedAndReady = cachedVideo && cachedVideo.loaded && cachedVideo.readyState >= 2
+      
+      // Si la vidéo est en cache et prête, utiliser preload="auto" pour précharger
+      // Sinon, utiliser preload="metadata" sur mobile pour économiser la bande passante
       if (videoEl.preload === "none" && (isMobile || isIOS)) {
-        videoEl.preload = "metadata"
-        // Si la source est déjà définie, recharger avec le nouveau preload
-        if (videoEl.dataset.loadedSrc) {
+        videoEl.preload = isCachedAndReady ? "auto" : "metadata"
+        // Si la source est déjà définie et en cache, ne pas recharger
+        if (videoEl.dataset.loadedSrc && videoEl.src && !isCachedAndReady) {
           videoEl.load()
         }
+      } else if (isCachedAndReady && videoEl.preload !== "auto") {
+        // Si en cache, passer à preload="auto" pour précharger
+        videoEl.preload = "auto"
       }
+      
       ensurePlay()
     } else {
-      // Sur mobile, pauser immédiatement si pas visible et mettre preload à "none"
-      // Cela libère la mémoire et arrête le téléchargement
+      // Sur mobile, pauser immédiatement si pas visible
+      // MAIS garder la source et le preload pour éviter le rechargement
       videoEl.pause()
-      if (isMobile || isIOS) {
-        videoEl.preload = "none"
-        // Optionnel : vider la source pour libérer complètement la mémoire
-        // Mais attention, cela nécessitera un rechargement complet
-        // On garde juste preload="none" pour l'instant
+      // Ne PAS réinitialiser l'état si la vidéo est en cache
+      const targetSrc = resolvedVideoUrl ?? videoUrl
+      const cachedVideo = targetSrc ? videoLoadedCache.get(targetSrc) : null
+      const isCachedAndReady = cachedVideo && cachedVideo.loaded && cachedVideo.readyState >= 2
+      
+      if (!isCachedAndReady) {
+        // Seulement réinitialiser si pas en cache
+        setVideoCanPlay(false)
+        setIsBackgroundReady(false)
+        setShowPoster(true)
       }
+      
+      // Sur mobile, réduire le preload mais ne pas le mettre à "none" si en cache
+      if ((isMobile || isIOS) && !isCachedAndReady) {
+        videoEl.preload = "metadata" // Garder metadata au lieu de "none" pour le cache HTTP
+      }
+      // Ne pas vider la source pour garder le cache
     }
 
     const onVisibilityChange = () => {
