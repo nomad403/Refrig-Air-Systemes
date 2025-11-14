@@ -1,18 +1,24 @@
 export const metadata = {
   title: "Expertises HVAC - Climatisation & Froid industriel | Paris",
-  description: "Expertises HVAC: climatisation de précision, froid industriel, installations très haute technicité, très basse température, salles blanches, froid commercial, vitrines réfrigérées. Solutions pour data centers, laboratoires, agroalimentaire et tertiaire. Partenaire certifié des leaders mondiaux.",
+  description: "Expertises HVAC: climatisation de précision, froid industriel, installations très haute technicité, très basse température, salles blanches, froid commercial, vitrines réfrigérées. Solutions pour data centers, laboratoires, agroalimentaire et tertiaire. Partenaire certifié des leaders mondiaux : Daikin, Carrier, Trane, Johnson Controls, Mitsubishi Electric.",
   keywords: [
     'expertise HVAC', 'climatisation de précision', 'froid industriel', 'installations très haute technicité', 
     'très basse température', 'salles blanches', 'froid commercial', 'vitrines réfrigérées', 'data center', 
-    'laboratoire', 'agroalimentaire', 'maintenance HVAC', 'Paris', 'Île-de-France'
+    'laboratoire', 'agroalimentaire', 'maintenance HVAC', 'Paris', 'Île-de-France',
+    'climatisation data center Paris', 'climatisation laboratoire', 'froid industriel agroalimentaire',
+    'installation VRV', 'groupe eau glacée', 'CTA', 'ventilation industrielle', 'salle blanche climatisation'
   ],
   alternates: { canonical: "/expertises" },
   openGraph: {
     title: "Expertises HVAC - Climatisation & Froid industriel | Paris",
     description: "Domaines: data centers, laboratoires, agroalimentaire, tertiaire. Installations très haute technicité, très basse température, salles blanches. Partenaire certifié des leaders mondiaux.",
-    url: "/expertises",
+    url: "https://www.ras-energies.com/expertises",
+    siteName: "Refrig'Air Systèmes",
+    locale: "fr_FR",
+    type: "website",
   },
   twitter: {
+    card: "summary_large_image",
     title: "Expertises HVAC - Climatisation & Froid industriel",
     description: "Climatisation de précision, froid industriel, installations très haute technicité, maintenance prédictive.",
   }
@@ -32,9 +38,22 @@ export default function ExpertisesPage() {
           "@type": "Service",
           "serviceType": "Climatisation & Froid industriel",
           "provider": {
-            "@type": "Organization",
+            "@type": "LocalBusiness",
             "name": "Refrig'Air Systèmes",
-            "areaServed": "Île-de-France"
+            "url": "https://www.ras-energies.com/",
+            "telephone": "+33667809074",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "149 Avenue du Maine",
+              "addressLocality": "Paris",
+              "postalCode": "75014",
+              "addressRegion": "Île-de-France",
+              "addressCountry": "FR"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Paris"
+            }
           },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",

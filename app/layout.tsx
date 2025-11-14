@@ -6,9 +6,10 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { LanguageProvider } from "@/contexts/language-context"
 import { PerformanceWrapper } from "@/components/performance-wrapper"
+import Breadcrumbs from "@/components/breadcrumbs"
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.refrigairsystemes.fr"),
+  metadataBase: new URL("https://www.ras-energies.com"),
   title: {
     default: "Refrig'Air Systèmes — Climatisation & Froid industriel à Paris",
     template: "%s | Refrig'Air Systèmes",
@@ -65,7 +66,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://www.nomad403.com" />
-        <link rel="canonical" href="https://www.refrigairsystemes.fr/" />
+        <link rel="canonical" href="https://www.ras-energies.com/" />
         {/* SEO discret pour développeur web mobile freelance */}
         <link rel="author" href="https://www.nomad403.com" />
         <meta name="web_author" content="Nomad403 - Développeur Web Mobile IA Freelance Paris" />
@@ -81,13 +82,18 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Refrig'Air Systèmes",
-            "url": "https://www.refrigairsystemes.fr/",
-            "logo": "https://www.refrigairsystemes.fr/logo.png",
+            "url": "https://www.ras-energies.com/",
+            "logo": "https://www.ras-energies.com/logo.png",
             "sameAs": [],
             "address": {
               "@type": "PostalAddress",
+              "streetAddress": "149 Avenue du Maine",
+              "addressLocality": "Paris",
+              "postalCode": "75014",
+              "addressRegion": "Île-de-France",
               "addressCountry": "FR"
             },
+            "telephone": "+33667809074",
             "areaServed": "Île-de-France",
             "description": "Climatisation de précision et froid industriel pour data centers, laboratoires, industrie, retail et froid commercial. Installations très haute technicité, très basse température, salles blanches. Partenaire certifié des leaders mondiaux.",
             "serviceArea": [
@@ -141,11 +147,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "url": "https://www.refrigairsystemes.fr/",
+            "url": "https://www.ras-energies.com/",
             "name": "Refrig'Air Systèmes",
             "potentialAction": {
               "@type": "SearchAction",
-              "target": "https://www.refrigairsystemes.fr/recherche?q={search_term_string}",
+              "target": "https://www.ras-energies.com/recherche?q={search_term_string}",
               "query-input": "required name=search_term_string"
             },
             "creator": {
@@ -239,17 +245,18 @@ export default function RootLayout({
           </p>
         </div>
         
-        <PerformanceWrapper>
-          <LanguageProvider>
-            <Suspense fallback={null}>
-              <Header />
-            </Suspense>
-            <main id="main-content" role="main" aria-label="Contenu principal">
-              {children}
-            </main>
-            <Footer />
-          </LanguageProvider>
-        </PerformanceWrapper>
+               <PerformanceWrapper>
+                 <LanguageProvider>
+                   <Breadcrumbs />
+                   <Suspense fallback={null}>
+                     <Header />
+                   </Suspense>
+                   <main id="main-content" role="main" aria-label="Contenu principal">
+                     {children}
+                   </main>
+                   <Footer />
+                 </LanguageProvider>
+               </PerformanceWrapper>
       </body>
     </html>
   )
