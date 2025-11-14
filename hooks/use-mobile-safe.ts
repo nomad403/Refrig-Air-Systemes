@@ -54,10 +54,10 @@ export function useMobileSafe(): MobileSafeConfig {
 
     const perf = checkPerformance()
     
-    // Configuration pour mobile : désactiver tout ce qui est coûteux
+    // Configuration pour mobile : optimisations strictes mais permettre les vidéos
     if (isMobileDevice) {
       setConfig({
-        disableVideos: true, // Toujours désactiver les vidéos sur mobile
+        disableVideos: false, // Permettre les vidéos sur mobile mais avec optimisations strictes
         disableAnimations: perf.hasLowPower || perf.isSlowConnection,
         simplifiedHeader: true, // Toujours simplifier le header sur mobile
         reducedObservers: true, // Toujours réduire les observers sur mobile

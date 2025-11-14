@@ -2,7 +2,7 @@
 
 import React, { useMemo, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import LiteYouTubeBackground from "./LiteYouTubeBackground"
+import ShaderBackground from "./shader-background"
 import ScrollSlideTitle from "./scroll-slide-title"
 import { useLanguage } from "@/contexts/language-context"
 
@@ -240,9 +240,9 @@ export default function QualitesSections() {
 
       {/* Certifications - Format épuré avec vidéo en fond */}
       <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 bg-[#E9F8F9] relative overflow-hidden">
-        {/* Vidéo en arrière-plan (lite embed, chargée à l'apparition) */}
+        {/* Vidéo en arrière-plan (fichiers locaux, optimisés pour mobile) */}
         <div className="absolute inset-0 w-full h-full">
-          <LiteYouTubeBackground id="zMQxGxaE5xM" title="Certifications Background Video" />
+          <ShaderBackground videoUrl="/images/qualites/qualite.webm" />
         </div>
         
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">

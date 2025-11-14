@@ -36,7 +36,9 @@ export function PerformanceProvider({ children }: { children: ReactNode }) {
     disableAnimations: mobileSafe.disableAnimations,
     simplifiedHeader: mobileSafe.simplifiedHeader,
     reducedObservers: mobileSafe.reducedObservers,
-    forceImageFallback: mobileSafe.disableVideos || isMobile,
+    // Ne forcer l'image que si les vidéos sont explicitement désactivées
+    // Sinon, on essaie la vidéo avec fallback automatique
+    forceImageFallback: mobileSafe.disableVideos,
   }
 
   return (

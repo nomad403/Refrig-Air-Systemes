@@ -73,11 +73,13 @@ export default function RootLayout({
         <link rel="preload" as="video" href="/images/expertises/expertise.webm" type="video/webm" />
         <link rel="preload" as="video" href="/images/maintenances_services/maintenance.webm" type="video/webm" />
         <link rel="preload" as="video" href="/images/contact/contact.webm" type="video/webm" />
+        <link rel="preload" as="video" href="/images/qualites/qualite.webm" type="video/webm" />
         {/* Preload MP4 pour iOS et navigateurs qui ne supportent pas WebM */}
         <link rel="preload" as="video" href="/images/home/home.mp4" type="video/mp4" />
         <link rel="preload" as="video" href="/images/expertises/expertise.mp4" type="video/mp4" />
         <link rel="preload" as="video" href="/images/maintenances_services/maintenance.mp4" type="video/mp4" />
         <link rel="preload" as="video" href="/images/contact/contact.mp4" type="video/mp4" />
+        <link rel="preload" as="video" href="/images/qualites/qualite.mp4" type="video/mp4" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({

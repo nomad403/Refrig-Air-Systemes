@@ -42,8 +42,8 @@ export default function ShaderBackground({
   const [videoError, setVideoError] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
   
-  // Sur mobile, forcer l'utilisation d'images au lieu de vidéos
-  const shouldUseImage = forceImageFallback || (perfIsMobile && videoUrl)
+  // Utiliser une image seulement si explicitement demandé ou si erreur vidéo
+  const shouldUseImage = forceImageFallback || videoError
   const loopTimerRef = useRef<any>(null)
   const localVideoRef = useRef<HTMLVideoElement | null>(null)
   const [resolvedVideoUrl, setResolvedVideoUrl] = useState<string | null>(videoUrl ?? null)
@@ -81,11 +81,11 @@ export default function ShaderBackground({
 
   const [mediaStyle, setMediaStyle] = useState<React.CSSProperties>(defaultMediaStyle)
 
-  // Détecter si on est sur mobile et iOS
+  // Détecter si on est sur mobile, iOS et Android
   useEffect(() => {
     if (typeof window === "undefined") return
     
-    // Détecter iOS
+    // Détecter iOS (iPhone, iPad, iPod)
     const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     setIsIOS(isIOSDevice)
@@ -437,7 +437,11 @@ export default function ShaderBackground({
                 className="w-full h-full bg-cover bg-center bg-no-repeat"
                 style={{
                   ...mediaStyle,
-                  backgroundImage: imageUrl ? `url(${imageUrl})` : 'linear-gradient(135deg, #1e1e1e 0%, #000000 100%)',
+                  backgroundImage: fallbackImageUrl 
+                    ? `url(${fallbackImageUrl})` 
+                    : imageUrl 
+                      ? `url(${imageUrl})` 
+                      : 'linear-gradient(135deg, #1e1e1e 0%, #000000 100%)',
                 }}
               />
             ) : (
@@ -448,7 +452,10 @@ export default function ShaderBackground({
                 muted
                 loop
                 playsInline
-                preload={isIOS ? "metadata" : "auto"}
+                preload={isMobile || isIOS ? "metadata" : "auto"}
+                // Attributs HTML personnalisés pour compatibilité iPhone/Android
+                {...(isIOS && { 'webkit-playsinline': 'true' })}
+                {...(isMobile && { 'x5-playsinline': 'true' })}
                 onLoadedData={() => setIsBackgroundReady(true)}
                 onCanPlay={() => setIsBackgroundReady(true)}
                 onError={() => {
