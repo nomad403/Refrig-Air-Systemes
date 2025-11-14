@@ -17,7 +17,7 @@ export default function Header() {
   const { isFrench, toggleLanguage } = useLanguage()
   
   // Hook robuste pour détecter le tone et si on est sur le Hero
-  const { tone, isOverHero } = useHeaderToneDynamic()
+  const { tone, isOverHero, backgroundColor } = useHeaderToneDynamic()
 
   // Classes dynamiques basées sur le hook
   const linkClass = useMemo(() => {
@@ -41,14 +41,14 @@ export default function Header() {
     return tone === "dark" ? "brightness(0)" : "none"
   }, [tone, isOverHero])
   
-  // Background du header : transparent sur Hero, léger sur les autres sections
+  // Background du header : transparent sur Hero, couleur exacte du fond sur les autres sections
   const headerBg = useMemo(() => {
     if (isOverHero) {
       return "rgba(0,0,0,0)"
     }
-    // Sur fond clair, ajouter un léger fond pour le contraste
-    return tone === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.4)"
-  }, [tone, isOverHero])
+    // Utiliser la couleur exacte du fond (sans opacité)
+    return backgroundColor
+  }, [isOverHero, backgroundColor])
 
   // Fermer le menu mobile au scroll
   useEffect(() => {

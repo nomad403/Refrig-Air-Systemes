@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 export function useHeaderToneDynamic() {
   const [tone, setTone] = useState<"light" | "dark">("light")
   const [isOverHero, setIsOverHero] = useState(false)
+  const [backgroundColor, setBackgroundColor] = useState<string>("rgba(0,0,0,0)")
 
   useEffect(() => {
     // Observer la zone vidéo Hero (sections avec data-hero-blend="true")
@@ -56,6 +57,7 @@ export function useHeaderToneDynamic() {
     // Tant qu'on est sur le hero, on ne touche pas au tone (mix-blend gère)
     if (isOverHero) {
       setTone("light") // Valeur par défaut, mais mix-blend rendra visible
+      setBackgroundColor("rgba(0,0,0,0)") // Transparent sur hero
       return
     }
 
@@ -86,16 +88,28 @@ export function useHeaderToneDynamic() {
         // Vérifier background-color
         const bgColor = cs.backgroundColor
         if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
-          // Parser RGB
-          const rgbMatch = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+          // Parser RGB/RGBA
+          const rgbMatch = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/)
           if (rgbMatch) {
             const r = parseInt(rgbMatch[1], 10)
             const g = parseInt(rgbMatch[2], 10)
             const b = parseInt(rgbMatch[3], 10)
+            const alpha = rgbMatch[4] ? parseFloat(rgbMatch[4]) : 1
+            
+            // Si l'alpha est < 1, on doit remonter pour trouver la couleur finale
+            if (alpha < 1) {
+              // Continuer à chercher une couleur opaque
+              node = node.parentElement
+              depth++
+              continue
+            }
             
             // Calculer la luminance (formule standard)
             const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
             setTone(luminance > 0.6 ? "dark" : "light")
+            
+            // Stocker la couleur exacte (sans opacité)
+            setBackgroundColor(`rgb(${r}, ${g}, ${b})`)
             return
           }
         }
@@ -113,6 +127,7 @@ export function useHeaderToneDynamic() {
 
       // Par défaut, fond sombre → texte clair
       setTone("light")
+      setBackgroundColor("rgb(24, 24, 35)") // #181823 par défaut
     }
 
     // Détecter au chargement et au scroll (throttlé)
@@ -135,6 +150,6 @@ export function useHeaderToneDynamic() {
     }
   }, [isOverHero])
 
-  return { tone, isOverHero }
+  return { tone, isOverHero, backgroundColor }
 }
 
