@@ -9,7 +9,7 @@ import { PerformanceWrapper } from "@/components/performance-wrapper"
 import Breadcrumbs from "@/components/breadcrumbs"
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ras-energies.com"),
+  metadataBase: new URL("https://ras-energies.com"),
   title: {
     default: "Refrig'Air Systèmes — Climatisation & Froid industriel à Paris",
     template: "%s | Refrig'Air Systèmes",
@@ -66,7 +66,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://www.nomad403.com" />
-        <link rel="canonical" href="https://www.ras-energies.com/" />
+        <link rel="canonical" href="https://ras-energies.com/" />
         {/* SEO discret pour développeur web mobile freelance */}
         <link rel="author" href="https://www.nomad403.com" />
         <meta name="web_author" content="Nomad403 - Développeur Web Mobile IA Freelance Paris" />
@@ -82,8 +82,8 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Refrig'Air Systèmes",
-            "url": "https://www.ras-energies.com/",
-            "logo": "https://www.ras-energies.com/logo.png",
+            "url": "https://ras-energies.com/",
+            "logo": "https://ras-energies.com/logo.png",
             "sameAs": [],
             "address": {
               "@type": "PostalAddress",
@@ -147,11 +147,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "url": "https://www.ras-energies.com/",
+            "url": "https://ras-energies.com/",
             "name": "Refrig'Air Systèmes",
             "potentialAction": {
               "@type": "SearchAction",
-              "target": "https://www.ras-energies.com/recherche?q={search_term_string}",
+              "target": "https://ras-energies.com/recherche?q={search_term_string}",
               "query-input": "required name=search_term_string"
             },
             "creator": {

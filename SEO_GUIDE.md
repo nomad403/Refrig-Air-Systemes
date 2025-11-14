@@ -3,7 +3,7 @@
 ## 📋 Fichiers SEO configurés
 
 ### ✅ Sitemap
-- **URL**: `https://www.ras-energies.com/sitemap.xml`
+- **URL**: `https://ras-energies.com/sitemap.xml`
 - **Fichier**: `app/sitemap.ts`
 - **Pages incluses**:
   - Accueil (priorité 1.0, fréquence: weekly)
@@ -13,7 +13,7 @@
   - Contact (priorité 0.8, fréquence: monthly)
 
 ### ✅ Robots.txt
-- **URL**: `https://www.ras-energies.com/robots.txt`
+- **URL**: `https://ras-energies.com/robots.txt`
 - **Fichier**: `app/robots.ts`
 - **Configuration**:
   - Autorise tous les crawlers sur les pages publiques
@@ -29,21 +29,21 @@
 
 ### 1. Ajouter la propriété
 1. Aller sur [Google Search Console](https://search.google.com/search-console)
-2. Ajouter la propriété: `https://www.ras-energies.com`
+2. Ajouter la propriété: `https://ras-energies.com`
 3. Vérifier la propriété (méthode recommandée: balise HTML dans `<head>`)
 
 ### 2. Soumettre le sitemap
 1. Dans GSC, aller dans **Sitemaps**
-2. Ajouter: `https://www.ras-energies.com/sitemap.xml`
+2. Ajouter: `https://ras-energies.com/sitemap.xml`
 3. Vérifier qu'il est accepté (peut prendre quelques heures)
 
 ### 3. Vérifier l'indexation
 1. Utiliser l'outil **Inspection d'URL** pour vérifier chaque page:
-   - `https://www.ras-energies.com/`
-   - `https://www.ras-energies.com/expertises`
-   - `https://www.ras-energies.com/maintenances-services`
-   - `https://www.ras-energies.com/qualites-certification`
-   - `https://www.ras-energies.com/contact`
+   - `https://ras-energies.com/`
+   - `https://ras-energies.com/expertises`
+   - `https://ras-energies.com/maintenances-services`
+   - `https://ras-energies.com/qualites-certification`
+   - `https://ras-energies.com/contact`
 2. Demander l'indexation pour chaque page
 
 ### 4. Vérifier les données structurées

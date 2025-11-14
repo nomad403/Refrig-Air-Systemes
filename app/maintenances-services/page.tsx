@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Maintenance HVAC & Services 24/7 | Paris - SLA ≤ 4h",
     description: "Interventions 24/7, SLA ≤ 4h, optimisation énergétique, traçabilité. Maintenance préventive, corrective, prédictive pour installations critiques.",
-    url: "https://www.ras-energies.com/maintenances-services",
+    url: "https://ras-energies.com/maintenances-services",
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
@@ -35,7 +35,7 @@ export default function MaintenanceServicesPage() {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Refrig'Air Systèmes",
-      "url": "https://www.ras-energies.com/",
+      "url": "https://ras-energies.com/",
       "telephone": "+33667809074",
       "address": {
         "@type": "PostalAddress",

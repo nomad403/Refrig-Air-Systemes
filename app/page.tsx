@@ -13,13 +13,13 @@ export const metadata = {
   openGraph: {
     title: "Climatisation & Froid industriel à Paris | Refrig'Air Systèmes",
     description: "Solutions HVAC premium: climatisation de précision, froid industriel, installations très haute technicité, très basse température, salles blanches, froid commercial, vitrines réfrigérées, maintenance 24/7, conformité HACCP. Partenaire certifié des leaders mondiaux.",
-    url: "https://www.ras-energies.com/",
+    url: "https://ras-energies.com/",
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
     images: [
       {
-        url: "https://www.ras-energies.com/images/home/hvac.png",
+        url: "https://ras-energies.com/images/home/hvac.png",
         width: 1200,
         height: 630,
         alt: "Refrig'Air Systèmes — Climatisation & Froid industriel à Paris",
@@ -30,7 +30,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Climatisation & Froid industriel à Paris",
     description: "HVAC premium, installations très haute technicité, très basse température, salles blanches, froid commercial, vitrines réfrigérées, maintenance 24/7, conformité HACCP.",
-    images: ["https://www.ras-energies.com/images/home/hvac.png"],
+    images: ["https://ras-energies.com/images/home/hvac.png"],
   },
 }
 import HeroContent from "@/components/hero-content"
@@ -42,10 +42,10 @@ export default function ShaderShowcase() {
   const homepageStructuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://www.ras-energies.com/#organization",
+    "@id": "https://ras-energies.com/#organization",
     "name": "Refrig'Air Systèmes",
-    "image": "https://www.ras-energies.com/images/home/hvac.png",
-    "url": "https://www.ras-energies.com/",
+    "image": "https://ras-energies.com/images/home/hvac.png",
+    "url": "https://ras-energies.com/",
     "telephone": "+33667809074",
     "priceRange": "$$$",
     "address": {

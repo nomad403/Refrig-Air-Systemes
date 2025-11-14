@@ -13,7 +13,7 @@ export default function Breadcrumbs() {
         "@type": "ListItem",
         "position": 1,
         "name": "Accueil",
-        "item": "https://www.ras-energies.com/"
+        "item": "https://ras-energies.com/"
       }
     ]
 
@@ -22,28 +22,28 @@ export default function Breadcrumbs() {
         "@type": "ListItem",
         "position": 2,
         "name": "Expertises",
-        "item": "https://www.ras-energies.com/expertises"
+        "item": "https://ras-energies.com/expertises"
       })
     } else if (pathname === "/maintenances-services") {
       breadcrumbItems.push({
         "@type": "ListItem",
         "position": 2,
         "name": "Maintenances & Services",
-        "item": "https://www.ras-energies.com/maintenances-services"
+        "item": "https://ras-energies.com/maintenances-services"
       })
     } else if (pathname === "/qualites-certification") {
       breadcrumbItems.push({
         "@type": "ListItem",
         "position": 2,
         "name": "Qualités & Certifications",
-        "item": "https://www.ras-energies.com/qualites-certification"
+        "item": "https://ras-energies.com/qualites-certification"
       })
     } else if (pathname === "/contact") {
       breadcrumbItems.push({
         "@type": "ListItem",
         "position": 2,
         "name": "Contact",
-        "item": "https://www.ras-energies.com/contact"
+        "item": "https://ras-energies.com/contact"
       })
     }
 

@@ -3,17 +3,17 @@
 ## 📋 Configuration de base
 
 - [x] **Sitemap XML** configuré (`app/sitemap.ts`)
-  - URL: `https://www.ras-energies.com/sitemap.xml`
+  - URL: `https://ras-energies.com/sitemap.xml`
   - 5 pages avec priorités et fréquences
   - Dernière modification: date actuelle
 
 - [x] **Robots.txt** configuré (`app/robots.ts`)
-  - URL: `https://www.ras-energies.com/robots.txt`
+  - URL: `https://ras-energies.com/robots.txt`
   - Règles pour Googlebot et Bingbot
   - Référence au sitemap
 
 - [x] **Domaine** mis à jour partout
-  - Toutes les URLs utilisent `https://www.ras-energies.com`
+  - Toutes les URLs utilisent `https://ras-energies.com`
   - Pas de références à l'ancien domaine
 
 ## 🏷️ Métadonnées par page
@@ -132,9 +132,9 @@
 
 ## 🚀 Actions à effectuer dans Google Search Console
 
-1. [ ] Ajouter la propriété: `https://www.ras-energies.com`
+1. [ ] Ajouter la propriété: `https://ras-energies.com`
 2. [ ] Vérifier la propriété (balise HTML dans `<head>`)
-3. [ ] Soumettre le sitemap: `https://www.ras-energies.com/sitemap.xml`
+3. [ ] Soumettre le sitemap: `https://ras-energies.com/sitemap.xml`
 4. [ ] Vérifier l'indexation de chaque page avec l'outil Inspection d'URL
 5. [ ] Demander l'indexation pour chaque page
 6. [ ] Vérifier les données structurées dans "Améliorations" > "Données structurées"

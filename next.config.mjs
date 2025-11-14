@@ -9,7 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Redirections pour SEO : rediriger vers www.ras-energies.com
+  // Redirections pour SEO : rediriger www.ras-energies.com vers ras-energies.com (domaine canonique)
   async redirects() {
     return [
       {
@@ -17,10 +17,10 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'ras-energies.com',
+            value: 'www.ras-energies.com',
           },
         ],
-        destination: 'https://www.ras-energies.com/:path*',
+        destination: 'https://ras-energies.com/:path*',
         permanent: true,
       },
     ]

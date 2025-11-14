@@ -26,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/', '/admin/', '/private/'],
       },
     ],
-    sitemap: 'https://www.ras-energies.com/sitemap.xml',
-    host: 'https://www.ras-energies.com',
+    sitemap: 'https://ras-energies.com/sitemap.xml',
+    host: 'https://ras-energies.com',
   }
 }

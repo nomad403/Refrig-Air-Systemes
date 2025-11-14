@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Qualités & Certifications HVAC | C2E, RGE, HACCP, Qualifelec",
     description: "Excellence et conformité pour installations critiques. Certifications C2E, RGE, HACCP, Qualifelec. Partenaire certifié des leaders mondiaux.",
-    url: "https://www.ras-energies.com/qualites-certification",
+    url: "https://ras-energies.com/qualites-certification",
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
@@ -32,7 +32,7 @@ export default function QualitesCertificationPage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Refrig'Air Systèmes",
-    "url": "https://www.ras-energies.com/",
+    "url": "https://ras-energies.com/",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "149 Avenue du Maine",

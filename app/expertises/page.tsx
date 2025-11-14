@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     title: "Expertises HVAC - Climatisation & Froid industriel | Paris",
     description: "Domaines: data centers, laboratoires, agroalimentaire, tertiaire. Installations très haute technicité, très basse température, salles blanches. Partenaire certifié des leaders mondiaux.",
-    url: "https://www.ras-energies.com/expertises",
+    url: "https://ras-energies.com/expertises",
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
@@ -40,7 +40,7 @@ export default function ExpertisesPage() {
           "provider": {
             "@type": "LocalBusiness",
             "name": "Refrig'Air Systèmes",
-            "url": "https://www.ras-energies.com/",
+            "url": "https://ras-energies.com/",
             "telephone": "+33667809074",
             "address": {
               "@type": "PostalAddress",

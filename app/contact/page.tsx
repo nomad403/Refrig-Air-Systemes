@@ -10,7 +10,7 @@ export const metadata = {
   openGraph: {
     title: "Contact & Devis Gratuit | Climatisation & Froid industriel Paris",
     description: "Devis gratuit, audit technique, accompagnement pour climatisation de précision et froid industriel à Paris et en Île‑de‑France.",
-    url: "https://www.ras-energies.com/contact",
+    url: "https://ras-energies.com/contact",
     siteName: "Refrig'Air Systèmes",
     locale: "fr_FR",
     type: "website",
@@ -33,7 +33,7 @@ export default function ContactPage() {
     "mainEntity": {
       "@type": "Organization",
       "name": "Refrig'Air Systèmes",
-      "url": "https://www.ras-energies.com/",
+      "url": "https://ras-energies.com/",
       "telephone": "+33667809074",
       "email": "contact@refrigairsystemes.com",
       "address": {
