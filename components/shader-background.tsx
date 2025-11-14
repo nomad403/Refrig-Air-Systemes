@@ -41,6 +41,8 @@ export default function ShaderBackground({
   const [isMobile, setIsMobile] = useState(false)
   const [videoError, setVideoError] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
+  const [showPoster, setShowPoster] = useState(true) // Afficher l'image poster immédiatement
+  const [videoCanPlay, setVideoCanPlay] = useState(false) // Vidéo prête à jouer
   
   // Utiliser une image seulement si explicitement demandé ou si erreur vidéo
   const shouldUseImage = forceImageFallback || videoError
@@ -133,6 +135,8 @@ export default function ShaderBackground({
     
     setIsBackgroundReady(false)
     setVideoError(false)
+    setShowPoster(true) // Réafficher le poster pour la nouvelle vidéo
+    setVideoCanPlay(false)
     setResolvedVideoUrl(videoUrl ?? null)
   }, [backgroundType, videoId, videoUrl, isMobile, shouldUseImage])
 
@@ -252,11 +256,19 @@ export default function ShaderBackground({
     // Si on doit utiliser une image, ne pas charger la vidéo du tout
     if (shouldUseImage || !videoUrl) return
     
+    // LAZY LOADING STRICT : ne résoudre l'URL que si la vidéo est visible
+    // Cela évite de charger quoi que ce soit si la vidéo n'est pas visible
+    if (!isInView) {
+      // Si pas visible, ne pas résoudre l'URL (économie de ressources)
+      return
+    }
+    
     let isActive = true
     let currentBlobUrl: string | null = null
 
     // Sur mobile (iOS et Android), éviter le blob cache pour économiser la mémoire
     // Utiliser directement l'URL pour éviter les problèmes de mémoire
+    // iOS préfère MP4 (H.264) pour le décodage matériel, WebM est décodé en software
     if (isMobile || isIOS) {
       if (isIOS && videoUrl.endsWith('.webm')) {
         const mp4Url = videoUrl.replace('.webm', '.mp4')
@@ -315,11 +327,18 @@ export default function ShaderBackground({
         } catch {}
       }
     }
-  }, [videoUrl, isIOS, isMobile, shouldUseImage])
+  }, [videoUrl, isIOS, isMobile, shouldUseImage, isInView])
 
   useEffect(() => {
     // Si on doit utiliser une image, ne pas charger la vidéo du tout
     if (shouldUseImage || !videoUrl || typeof document === "undefined") return
+    
+    // LAZY LOADING STRICT : ne charger la vidéo QUE si elle est visible
+    // C'est critique pour mobile pour économiser la bande passante et la mémoire
+    if (!isInView) {
+      // Si pas visible, ne rien charger du tout
+      return
+    }
     
     const videoEl = localVideoRef.current
     if (!videoEl) return
@@ -341,7 +360,13 @@ export default function ShaderBackground({
       const startPlayback = () => {
         const attempt = videoEl.play()
         if (attempt && typeof attempt.then === "function") {
-          attempt.catch((err) => {
+          attempt.then(() => {
+            // Vidéo en cours de lecture, masquer le poster après un court délai pour transition fluide
+            setTimeout(() => {
+              setShowPoster(false)
+              setVideoCanPlay(true)
+            }, 300)
+          }).catch((err) => {
             console.warn("Video playback failed:", err)
             setIsBackgroundReady(false)
             // Sur mobile, si autoplay échoue, on ne force pas
@@ -357,26 +382,75 @@ export default function ShaderBackground({
 
       if (targetSrc && currentSrc !== targetSrc) {
         setIsBackgroundReady(false)
+        setShowPoster(true) // Réafficher le poster pendant le chargement
+        setVideoCanPlay(false)
+        
+        // Gérer le chargement progressif
+        const handleCanPlayThrough = () => {
+          videoEl.removeEventListener("canplaythrough", handleCanPlayThrough)
+          setIsBackgroundReady(true)
+          setVideoCanPlay(true)
+          startPlayback()
+        }
+        
         const handleCanPlay = () => {
           videoEl.removeEventListener("canplay", handleCanPlay)
           setIsBackgroundReady(true)
-          startPlayback()
+          // Sur mobile, utiliser canplay pour démarrer plus tôt (streaming progressif)
+          // canplaythrough attend le téléchargement complet, ce qui est trop long
+          if (isMobile || isIOS) {
+            // Démarrer dès que possible avec canplay, mais surveiller canplaythrough en arrière-plan
+            // pour une transition plus fluide si la connexion le permet
+            setVideoCanPlay(true)
+            startPlayback()
+            
+            // Optionnel : améliorer la fluidité si la connexion est bonne
+            videoEl.addEventListener("canplaythrough", () => {
+              // Vidéo entièrement chargée, lecture devrait être fluide
+            }, { once: true })
+          } else {
+            setVideoCanPlay(true)
+            startPlayback()
+          }
         }
+        
         videoEl.addEventListener("canplay", handleCanPlay, { once: true })
         videoEl.addEventListener("error", handleError, { once: true })
         videoEl.dataset.loadedSrc = targetSrc
         videoEl.src = targetSrc
+        // Sur mobile, commencer avec preload="none" pour ne rien charger
+        // Puis passer à "metadata" seulement quand visible (géré dans le useEffect suivant)
+        videoEl.preload = isMobile || isIOS ? (isInView ? "metadata" : "none") : "auto"
         videoEl.load()
       } else {
-        startPlayback()
+        if (videoCanPlay) {
+          startPlayback()
+        }
       }
     }
 
+    // Charger la vidéo seulement quand elle est visible (lazy loading strict)
     if (isInView) {
+      // Mettre à jour le preload quand la vidéo devient visible
+      // Sur mobile, passer de "none" à "metadata" pour charger seulement les métadonnées
+      if (videoEl.preload === "none" && (isMobile || isIOS)) {
+        videoEl.preload = "metadata"
+        // Si la source est déjà définie, recharger avec le nouveau preload
+        if (videoEl.dataset.loadedSrc) {
+          videoEl.load()
+        }
+      }
       ensurePlay()
-    } else if (isMobile) {
-      // Sur mobile, pauser immédiatement si pas visible
+    } else {
+      // Sur mobile, pauser immédiatement si pas visible et mettre preload à "none"
+      // Cela libère la mémoire et arrête le téléchargement
       videoEl.pause()
+      if (isMobile || isIOS) {
+        videoEl.preload = "none"
+        // Optionnel : vider la source pour libérer complètement la mémoire
+        // Mais attention, cela nécessitera un rechargement complet
+        // On garde juste preload="none" pour l'instant
+      }
     }
 
     const onVisibilityChange = () => {
@@ -414,7 +488,7 @@ export default function ShaderBackground({
     }
   }, [videoUrl, resolvedVideoUrl, isInView, isIOS, isMobile, shouldUseImage])
 
-  // Générer l'URL de l'image de fallback à partir de l'URL vidéo
+  // Générer l'URL de l'image de fallback/poster à partir de l'URL vidéo
   const getFallbackImageUrl = useCallback((videoUrl: string | undefined): string | null => {
     if (!videoUrl) return null
     // Remplacer .webm ou .mp4 par .jpg (on essaiera .jpg d'abord, puis gradient si ça échoue)
@@ -423,6 +497,7 @@ export default function ShaderBackground({
   }, [])
 
   const fallbackImageUrl = videoUrl ? getFallbackImageUrl(videoUrl) : imageUrl
+  const posterImageUrl = fallbackImageUrl || imageUrl
 
   return (
     <div ref={containerRef} className={`min-h-screen bg-black relative overflow-hidden ${isMobile ? 'shader-background-mobile' : ''}`}>
@@ -431,8 +506,33 @@ export default function ShaderBackground({
           <div
             className="absolute inset-0 w-full h-full overflow-hidden"
           >
+            {/* Image poster qui s'affiche immédiatement pendant le chargement de la vidéo */}
+            {showPoster && !videoCanPlay && (
+              <div 
+                className="w-full h-full bg-cover bg-center bg-no-repeat transition-opacity duration-500"
+                style={{
+                  ...mediaStyle,
+                  backgroundImage: posterImageUrl 
+                    ? `url(${posterImageUrl})` 
+                    : 'linear-gradient(135deg, #1e1e1e 0%, #000000 100%)',
+                  opacity: videoCanPlay ? 0 : 1,
+                  zIndex: videoCanPlay ? 0 : 2,
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                }}
+                onError={(e) => {
+                  // Si l'image poster échoue, utiliser un gradient
+                  const target = e.target as HTMLDivElement
+                  if (target) {
+                    target.style.backgroundImage = 'linear-gradient(135deg, #1e1e1e 0%, #000000 100%)'
+                  }
+                }}
+              />
+            )}
+            
+            {/* Fallback image si la vidéo échoue */}
             {videoError ? (
-              // Fallback image si la vidéo échoue
               <div 
                 className="w-full h-full bg-cover bg-center bg-no-repeat"
                 style={{
@@ -447,20 +547,30 @@ export default function ShaderBackground({
             ) : (
               <video
                 ref={localVideoRef}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-opacity duration-500"
                 autoPlay
                 muted
                 loop
                 playsInline
-                preload={isMobile || isIOS ? "metadata" : "auto"}
+                poster={posterImageUrl || undefined}
+                preload={isMobile || isIOS ? (isInView ? "metadata" : "none") : (isInView ? "auto" : "metadata")}
                 // Attributs HTML personnalisés pour compatibilité iPhone/Android
                 {...(isIOS && { 'webkit-playsinline': 'true' })}
                 {...(isMobile && { 'x5-playsinline': 'true' })}
-                onLoadedData={() => setIsBackgroundReady(true)}
-                onCanPlay={() => setIsBackgroundReady(true)}
+                onLoadedData={() => {
+                  setIsBackgroundReady(true)
+                }}
+                onCanPlay={() => {
+                  setIsBackgroundReady(true)
+                }}
+                onCanPlayThrough={() => {
+                  setVideoCanPlay(true)
+                  setIsBackgroundReady(true)
+                }}
                 onError={() => {
                   setVideoError(true)
                   setIsBackgroundReady(false)
+                  setShowPoster(true) // Réafficher le poster en cas d'erreur
                 }}
                 onLoadedMetadata={(event) => {
                   const el = event.currentTarget
@@ -475,7 +585,9 @@ export default function ShaderBackground({
                 style={{
                   ...mediaStyle,
                   ...(videoStyle ?? {}),
-                  pointerEvents: "none"
+                  pointerEvents: "none",
+                  opacity: videoCanPlay ? 1 : 0,
+                  zIndex: videoCanPlay ? 1 : 0,
                 }}
               >
                 {/* Support MP4 pour iOS - priorité au MP4 si disponible */}
@@ -491,9 +603,6 @@ export default function ShaderBackground({
                   </>
                 )}
               </video>
-            )}
-            {!isBackgroundReady && !videoError && (
-              <div className="absolute inset-0 bg-black" />
             )}
             <div className="pointer-events-none absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
           </div>

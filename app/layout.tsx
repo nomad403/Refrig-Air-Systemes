@@ -68,18 +68,7 @@ export default function RootLayout({
         <link rel="icon" href="/images/general/LOGO_FAV.svg" type="image/svg+xml" sizes="512x512" />
         <link rel="mask-icon" href="/images/general/LOGO_FAV.svg" color="#537FE7" />
         <link rel="apple-touch-icon" href="/images/general/LOGO_FAV.svg" sizes="512x512" />
-        {/* Preload WebM pour navigateurs modernes */}
-        <link rel="preload" as="video" href="/images/home/home.webm" type="video/webm" />
-        <link rel="preload" as="video" href="/images/expertises/expertise.webm" type="video/webm" />
-        <link rel="preload" as="video" href="/images/maintenances_services/maintenance.webm" type="video/webm" />
-        <link rel="preload" as="video" href="/images/contact/contact.webm" type="video/webm" />
-        <link rel="preload" as="video" href="/images/qualites/qualite.webm" type="video/webm" />
-        {/* Preload MP4 pour iOS et navigateurs qui ne supportent pas WebM */}
-        <link rel="preload" as="video" href="/images/home/home.mp4" type="video/mp4" />
-        <link rel="preload" as="video" href="/images/expertises/expertise.mp4" type="video/mp4" />
-        <link rel="preload" as="video" href="/images/maintenances_services/maintenance.mp4" type="video/mp4" />
-        <link rel="preload" as="video" href="/images/contact/contact.mp4" type="video/mp4" />
-        <link rel="preload" as="video" href="/images/qualites/qualite.mp4" type="video/mp4" />
+        {/* Preloads vidéo retirés : chargement lazy uniquement quand visible pour économiser la bande passante mobile */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
