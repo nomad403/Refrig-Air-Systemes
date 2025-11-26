@@ -127,7 +127,7 @@
 ## 📝 Informations de contact
 
 - [x] Téléphone: `+33667809074` (dans structured data et footer)
-- [x] Email: `contact@refrigairsystemes.com` (dans structured data et footer)
+- [x] Email: `rasenergies@gmail.com` (dans structured data et footer)
 - [x] Adresse: 149 Avenue du Maine, 75014 Paris (dans structured data et footer)
 
 ## 🚀 Actions à effectuer dans Google Search Console

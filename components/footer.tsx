@@ -33,10 +33,10 @@ export default function Footer() {
               </p>
               <p>
                 <a 
-                  href="mailto:contact@refrigairsystemes.com" 
+                  href="mailto:rasenergies@gmail.com" 
                   className="hover:text-[#E9F8F9] transition-colors"
                 >
-                  contact@refrigairsystemes.com
+                  rasenergies@gmail.com
                 </a>
               </p>
             </div>

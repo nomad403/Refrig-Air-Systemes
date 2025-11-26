@@ -608,14 +608,14 @@ export default function ContactSections() {
                   <p className="text-xs sm:text-sm text-[#E9F8F9]/80 mb-2">
                     {t("tel: 06 67 80 90 74", "tel: +33 6 67 80 90 74")}
                   </p>
-                  <p className="text-xs sm:text-sm text-[#E9F8F9]/80">contact@refrigairsystemes.com</p>
+                  <p className="text-xs sm:text-sm text-[#E9F8F9]/80">rasenergies@gmail.com</p>
                 </div>
 
                 <div className="pt-6 sm:pt-8">
                   <p className="text-xs sm:text-sm text-[#E9F8F9]/70">
                     {t(
-                      "Ou envoyez-nous un email à contact@refrigairsystemes.com",
-                      "Or email us at contact@refrigairsystemes.com"
+                      "Ou envoyez-nous un email à rasenergies@gmail.com",
+                      "Or email us at rasenergies@gmail.com"
                     )}
                   </p>
                 </div>

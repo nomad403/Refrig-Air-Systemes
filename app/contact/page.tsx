@@ -44,7 +44,7 @@ export default function ContactPage() {
       "name": "Refrig'Air Systèmes",
       "url": "https://ras-energies.com/",
       "telephone": "+33667809074",
-      "email": "contact@refrigairsystemes.com",
+      "email": "rasenergies@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "149 Avenue du Maine",
