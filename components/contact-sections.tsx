@@ -33,11 +33,33 @@ function ContactFormMinimal() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulation d'envoi
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erreur lors de l'envoi")
+      }
+
+      setIsSubmitted(true)
+    } catch (error) {
+      console.error("Erreur:", error)
+      alert(
+        t(
+          "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement.",
+          "An error occurred while sending. Please try again or contact us directly."
+        )
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -254,11 +276,33 @@ function ContactForm() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulation d'envoi
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erreur lors de l'envoi")
+      }
+
+      setIsSubmitted(true)
+    } catch (error) {
+      console.error("Erreur:", error)
+      alert(
+        t(
+          "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement.",
+          "An error occurred while sending. Please try again or contact us directly."
+        )
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
