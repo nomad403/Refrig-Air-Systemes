@@ -1,11 +1,21 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 
-// Initialiser Resend avec la clé API depuis les variables d'environnement
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(request: NextRequest) {
   try {
+    // Vérifier que la clé API est disponible
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error("RESEND_API_KEY n'est pas configurée")
+      return NextResponse.json(
+        { error: "Configuration serveur manquante. Veuillez contacter l'administrateur." },
+        { status: 500 }
+      )
+    }
+
+    // Initialiser Resend uniquement au moment de l'exécution
+    const resend = new Resend(apiKey)
+
     const body = await request.json()
     const { nom, entreprise, email, telephone, secteur, urgence, message } = body
 
