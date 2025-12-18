@@ -3,10 +3,29 @@ import { Resend } from "resend"
 
 export async function POST(request: NextRequest) {
   try {
-    // Vérifier que la clé API est disponible
+    // Vérifier que toutes les variables d'environnement sont disponibles
     const apiKey = process.env.RESEND_API_KEY
+    const fromEmail = process.env.RESEND_FROM
+    const toEmail = process.env.RESEND_TO
+
     if (!apiKey) {
       console.error("RESEND_API_KEY n'est pas configurée")
+      return NextResponse.json(
+        { error: "Configuration serveur manquante. Veuillez contacter l'administrateur." },
+        { status: 500 }
+      )
+    }
+
+    if (!fromEmail) {
+      console.error("RESEND_FROM n'est pas configurée")
+      return NextResponse.json(
+        { error: "Configuration serveur manquante. Veuillez contacter l'administrateur." },
+        { status: 500 }
+      )
+    }
+
+    if (!toEmail) {
+      console.error("RESEND_TO n'est pas configurée")
       return NextResponse.json(
         { error: "Configuration serveur manquante. Veuillez contacter l'administrateur." },
         { status: 500 }
@@ -57,11 +76,10 @@ export async function POST(request: NextRequest) {
     const sectorText = secteur ? sectorLabels[secteur]?.fr || secteur : "Non spécifié"
 
     // Envoyer l'email avec Resend
-    // Note: Utilisez votre domaine vérifié dans Resend pour remplacer "onboarding@resend.dev"
-    // Une fois le domaine ras-energies.com vérifié, changez pour: "Refrig'Air Systèmes <contact@ras-energies.com>"
+    // Utilise les variables d'environnement configurées dans Vercel
     const { data, error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "Refrig'Air Systèmes <onboarding@resend.dev>",
-      to: ["rasenergies@gmail.com"],
+      from: fromEmail,
+      to: [toEmail],
       replyTo: email,
       subject: `Nouveau contact depuis le site web - ${entreprise}`,
       html: `
