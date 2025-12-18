@@ -36,18 +36,23 @@ Le formulaire de contact utilise **Resend** pour envoyer les emails à `rasenerg
    - Ajoutez `RESEND_API_KEY` avec votre clé API
    - Sélectionnez tous les environnements (Production, Preview, Development)
 
-### Note importante
+### ⚠️ Note importante : Vérification du domaine
 
-Si vous n'avez pas encore vérifié votre domaine dans Resend, vous devrez utiliser l'adresse email fournie par Resend (format `onboarding@resend.dev`). Dans ce cas, modifiez la ligne suivante dans `app/api/contact/route.ts` :
+**Si vous obtenez une erreur 500 lors de l'envoi du formulaire**, c'est probablement parce que le domaine `ras-energies.com` n'est pas encore vérifié dans Resend.
 
-```typescript
-from: "Refrig'Air Systèmes <onboarding@resend.dev>", // Utilisez l'email fourni par Resend
-```
+**Solution temporaire :**
+1. Dans Vercel, modifiez la variable d'environnement `RESEND_FROM` :
+   - Remplacez `contact@ras-energies.com` par `onboarding@resend.dev`
+   - Ou utilisez : `Refrig'Air Systèmes <onboarding@resend.dev>`
+2. Redéployez votre application sur Vercel
 
-Une fois votre domaine vérifié, vous pourrez utiliser :
-```typescript
-from: "Refrig'Air Systèmes <contact@ras-energies.com>",
-```
+**Solution permanente (recommandée) :**
+1. Connectez-vous à votre compte Resend
+2. Allez dans **Domains** > **Add Domain**
+3. Entrez `ras-energies.com`
+4. Ajoutez les records DNS demandés dans votre hébergeur de domaine
+5. Attendez la vérification (quelques minutes)
+6. Une fois vérifié, utilisez `contact@ras-energies.com` dans `RESEND_FROM`
 
 ### Test
 
@@ -60,4 +65,8 @@ Pour tester le formulaire :
 
 - Documentation Resend : [https://resend.com/docs](https://resend.com/docs)
 - Support Resend : support@resend.com
+
+
+
+
 

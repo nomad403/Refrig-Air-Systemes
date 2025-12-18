@@ -75,13 +75,42 @@ export async function POST(request: NextRequest) {
     const urgencyText = urgence ? urgencyLabels[urgence]?.fr || urgence : "Non spécifié"
     const sectorText = secteur ? sectorLabels[secteur]?.fr || secteur : "Non spécifié"
 
+    // Fonction pour échapper les caractères HTML
+    const escapeHtml = (text: string): string => {
+      const map: Record<string, string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;',
+      }
+      return text.replace(/[&<>"']/g, (m) => map[m])
+    }
+
+    // Échapper toutes les valeurs utilisées dans le HTML
+    const safeNom = escapeHtml(nom)
+    const safeEntreprise = escapeHtml(entreprise)
+    const safeEmail = escapeHtml(email)
+    const safeTelephone = escapeHtml(telephone)
+    const safeSectorText = escapeHtml(sectorText)
+    const safeUrgencyText = escapeHtml(urgencyText)
+    const safeMessage = escapeHtml(message).replace(/\n/g, '<br>')
+
     // Envoyer l'email avec Resend
     // Utilise les variables d'environnement configurées dans Vercel
+    // Note: Si le domaine n'est pas vérifié dans Resend, utilisez temporairement "onboarding@resend.dev"
+    console.log("Tentative d'envoi d'email:", {
+      from: fromEmail,
+      to: toEmail,
+      replyTo: email,
+      hasApiKey: !!apiKey
+    })
+
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
       replyTo: email,
-      subject: `Nouveau contact depuis le site web - ${entreprise}`,
+      subject: `Nouveau contact depuis le site web - ${safeEntreprise}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -107,42 +136,42 @@ export async function POST(request: NextRequest) {
               <div class="content">
                 <div class="field">
                   <span class="label">Nom et prénom :</span>
-                  <span class="value">${nom}</span>
+                  <span class="value">${safeNom}</span>
                 </div>
                 <div class="field">
                   <span class="label">Entreprise :</span>
-                  <span class="value">${entreprise}</span>
+                  <span class="value">${safeEntreprise}</span>
                 </div>
                 <div class="field">
                   <span class="label">Email :</span>
-                  <span class="value"><a href="mailto:${email}">${email}</a></span>
+                  <span class="value"><a href="mailto:${safeEmail}">${safeEmail}</a></span>
                 </div>
                 <div class="field">
                   <span class="label">Téléphone :</span>
-                  <span class="value"><a href="tel:${telephone}">${telephone}</a></span>
+                  <span class="value"><a href="tel:${safeTelephone}">${safeTelephone}</a></span>
                 </div>
                 ${secteur ? `
                 <div class="field">
                   <span class="label">Secteur d'activité :</span>
-                  <span class="value">${sectorText}</span>
+                  <span class="value">${safeSectorText}</span>
                 </div>
                 ` : ''}
                 ${urgence ? `
                 <div class="field">
                   <span class="label">Niveau d'urgence :</span>
-                  <span class="value">${urgencyText}</span>
+                  <span class="value">${safeUrgencyText}</span>
                 </div>
                 ` : ''}
                 <div class="field">
                   <span class="label">Message :</span>
                   <div class="message-box">
-                    ${message.replace(/\n/g, '<br>')}
+                    ${safeMessage}
                   </div>
                 </div>
               </div>
               <div class="footer">
                 <p>Ce message a été envoyé depuis le formulaire de contact du site web.</p>
-                <p>Vous pouvez répondre directement à cet email pour contacter ${nom}.</p>
+                <p>Vous pouvez répondre directement à cet email pour contacter ${safeNom}.</p>
               </div>
             </div>
           </body>
@@ -162,9 +191,33 @@ ${message}
     })
 
     if (error) {
-      console.error("Erreur Resend:", error)
+      console.error("Erreur Resend complète:", JSON.stringify(error, null, 2))
+      console.error("Type d'erreur:", typeof error)
+      console.error("Message d'erreur:", error?.message || error)
+      
+      // Messages d'erreur plus spécifiques selon le type d'erreur Resend
+      let errorMessage = "Erreur lors de l'envoi de l'email."
+      if (error && typeof error === 'object' && 'message' in error) {
+        const resendError = error as { message?: string; name?: string }
+        if (resendError.message?.includes('domain') || resendError.message?.includes('Domain')) {
+          errorMessage = "Le domaine email n'est pas vérifié dans Resend. Veuillez vérifier votre configuration."
+        } else if (resendError.message?.includes('API key') || resendError.message?.includes('Unauthorized')) {
+          errorMessage = "Clé API Resend invalide ou manquante."
+        } else {
+          errorMessage = resendError.message || errorMessage
+        }
+      }
+      
       return NextResponse.json(
-        { error: "Erreur lors de l'envoi de l'email." },
+        { 
+          error: errorMessage,
+          details: process.env.NODE_ENV === 'development' ? {
+            resendError: error,
+            fromEmail,
+            toEmail,
+            hasApiKey: !!apiKey
+          } : undefined
+        },
         { status: 500 }
       )
     }
@@ -179,8 +232,17 @@ ${message}
     )
   } catch (error) {
     console.error("Erreur serveur:", error)
+    const errorMessage = error instanceof Error ? error.message : "Erreur inconnue"
+    const errorStack = error instanceof Error ? error.stack : undefined
+    
     return NextResponse.json(
-      { error: "Une erreur est survenue lors du traitement de votre demande." },
+      { 
+        error: "Une erreur est survenue lors du traitement de votre demande.",
+        details: process.env.NODE_ENV === 'development' ? {
+          message: errorMessage,
+          stack: errorStack
+        } : undefined
+      },
       { status: 500 }
     )
   }
